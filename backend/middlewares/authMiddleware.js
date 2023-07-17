@@ -1,6 +1,7 @@
 const User = require("../models/userModel")
 const jwt = require("jsonwebtoken")
 const asyncHandler = require("express-async-handler")
+const validateMongoDbId = require("../utils/validateMongodbId")
 
 const authMiddleware = asyncHandler(async (req, res, next) => {
     let token
@@ -35,6 +36,8 @@ const isAdmin = asyncHandler(async (req, res, next) => {
 
 const blockUser = asyncHandler(async (req, res) => {
     const { id } = req.params
+    validateMongoDbId(id)
+
     try {
         const blockUser = await User.findByIdAndUpdate(
             id, 
@@ -53,6 +56,7 @@ const blockUser = asyncHandler(async (req, res) => {
 
 const unBlockUser = asyncHandler(async (req, res) => {
     const { id } = req.params
+    validateMongoDbId(id)
     try {
         const unblockUser = await User.findByIdAndUpdate(
             id, 
@@ -75,3 +79,5 @@ module.exports = {
     blockUser,
     unBlockUser
 }
+
+
