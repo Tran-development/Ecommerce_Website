@@ -1,6 +1,6 @@
 // express is a server-side framework for Nodejs
 const express = require("express")
-const {
+const { 
     createUser,
     loginUserCtrl,
     getAllUser,
