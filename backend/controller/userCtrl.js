@@ -1,5 +1,7 @@
 const { generateToken } = require("../config/jwtToken")
 const User = require("../models/userModel")
+const Product = require("../models/productModel")
+const Cart = require("../models/cardModel")
 const asyncHandler = require('express-async-handler')
 const validateMongoDbId = require("../utils/validateMongodbId")
 const { generateRefreshToken } = require("../config/refreshToken")
@@ -7,6 +9,7 @@ const jwt = require("jsonwebtoken")
 const { trusted } = require("mongoose")
 const { sendEmail } = require("./emailCtrl")
 const crypto = require('crypto')
+const { log } = require("console")
 
 // middleware asyncHandler func
 const createUser = asyncHandler(
@@ -25,6 +28,7 @@ const createUser = asyncHandler(
     }
 )
 
+// login a user
 const loginUserCtrl = asyncHandler(async (req, res) => {
     const { email, password } = req.body
     // console.log("email, passowrd : ", email, password);
@@ -61,6 +65,67 @@ const loginUserCtrl = asyncHandler(async (req, res) => {
         throw new Error("Invalid Login Account")
     }
 })
+
+// admin login 
+const loginAdmin = asyncHandler(async (req, res) => {
+    const { email, password } = req.body
+    // console.log("email, passowrd : ", email, password);
+    // check if user exists or not
+    const findAdmin = await User.findOne({ email })
+    if (findAdmin.role !== "admin") throw new Error("Not Authorised")
+    if (findAdmin && (await findAdmin.isPasswordMatched(password))) {
+        const refreshToken = await generateRefreshToken(findAdmin?._id)
+        const updateUser = await User.findByIdAndUpdate(
+            findAdmin.id,
+            {
+                refreshToken: refreshToken,
+            },
+            {
+                new: true
+            }
+        )
+
+        const token = generateToken(findAdmin?.id)
+
+        // res.cookie("refreshToken", refreshToken, {
+        //     httpOnly: true,
+        //     maxAge: 72 * 60 * 60 * 1000,
+        // })
+        res.json({
+            _id: findAdmin?._id,
+            firstname: findAdmin?.firstname,
+            lastname: findAdmin?.lastname,
+            email: findAdmin?.email,
+            mobile: findAdmin?.mobile,
+            token: token,
+            // refreshToken: refreshToken
+        })
+    } else {
+        throw new Error("Invalid Login Account")
+    }
+})
+
+// save user address
+const saveAddress = asyncHandler(async (req, res) => {
+    const { _id } = req.user
+    validateMongoDbId(_id)
+    try {
+        const updateAUser = await User.findByIdAndUpdate(_id,
+            {
+                address: req?.body?.address
+            },
+            {
+                new: true
+            }
+        )
+        res.json({
+            updateAUser,
+        })
+    } catch (error) {
+        throw new Error(error)
+    }
+})
+
 
 // Get all users
 const getAllUser = asyncHandler(async (req, res) => {
@@ -185,9 +250,9 @@ const forgotPassowrdToken = asyncHandler(async (req, res) => {
     try {
         const token = await user.createPasswordResetToken()
         await user.save()
-        const resetURL =  `Hi. Please follow this link to reset your password.
+        const resetURL = `Hi. Please follow this link to reset your password.
         This link is valid still 10 minutes from now. <a href='localhost:5000/api/user/reset-password/${token}'>Click here !</a>`
-    
+
         const data = {
             to: email,
             text: "Alo User",
@@ -202,13 +267,13 @@ const forgotPassowrdToken = asyncHandler(async (req, res) => {
     }
 })
 
-const resetPassword = asyncHandler(async(req, res) => {
+const resetPassword = asyncHandler(async (req, res) => {
     const { password } = req.body
     const { token } = req.params
     const hashedToken = crypto.createHash("sha256").update(token).digest("hex")
     const user = await User.findOne({
         passwordResetToken: hashedToken,
-        passwordResetExpires: { $gt: Date.now()}
+        passwordResetExpires: { $gt: Date.now() }
     })
     if (!user) throw new Error("Token Expired. Please try again later.")
     user.password = password
@@ -217,6 +282,67 @@ const resetPassword = asyncHandler(async(req, res) => {
     await user.save()
     res.json(user)
 })
+
+const getWishList = asyncHandler(async (req, res) => {
+    const { _id } = req.user
+    try {
+        const findUser = await User.findById(_id).populate('wishlist')
+        res.json(findUser)
+    } catch (error) {
+        throw new Error(error)
+    }
+})
+
+const userCart = asyncHandler(async (req, res) => {
+    const { cart } = req.body;
+    const { _id } = req.user;
+    validateMongoDbId(_id);
+    try {
+      let products = [];
+      const user = await User.findById(_id);
+      // check if user already have product in cart
+      const alreadyExistCart = await Cart.findOneAndDelete({ orderby: user._id });
+      if (alreadyExistCart) {
+        // findOneAndDelete co tra ve method remove con findOne thi khong
+        alreadyExistCart.remove();
+      }
+      for (let i = 0; i < cart.length; i++) {
+        let object = {};
+        object.product = cart[i]._id;
+        object.count = cart[i].count;
+        object.color = cart[i].color;
+        let getPrice = await Product.findById(cart[i]._id).select("price").exec();
+        object.price = getPrice.price;
+        products.push(object);
+      }
+      let cartTotal = 0;
+      for (let i = 0; i < products.length; i++) {
+        cartTotal = cartTotal + products[i].price * products[i].count;
+      }
+      let newCart = await new Cart({
+        products,
+        cartTotal,
+        orderby: user?._id,
+      }).save();
+      res.json(newCart);
+    } catch (error) {
+      throw new Error(error);
+    }
+  });
+
+
+const getUserCart = asyncHandler(async(req, res) => {
+    const { _id } = req.user
+    validateMongoDbId(_id)
+    try {
+        const cart = await Cart.findOne({ orderby: _id}).populate("products.product")
+        res.json(cart)
+    } catch (error) {
+        throw new Error(error)
+    }
+})
+
+
 
 module.exports = {
     createUser,
@@ -229,5 +355,10 @@ module.exports = {
     logout,
     updatePassword,
     forgotPassowrdToken,
-    resetPassword
+    resetPassword,
+    loginAdmin,
+    getWishList,
+    saveAddress,
+    userCart,
+    getUserCart
 }
