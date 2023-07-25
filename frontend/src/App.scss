@@ -8,8 +8,8 @@ body {
   font-family: "Rubik", sans-serif;
 }
 
-h6{
-  font-family: "Vast Shadow","Times New Roman",Times,serif;
+h6 {
+  font-family: "Vast Shadow", "Times New Roman", Times, serif;
   font-weight: 400;
   line-height: 1.3;
   color: #20533b;
@@ -20,9 +20,13 @@ h6{
   --background-color-hover: #2ca457;
   --bottom-color: #ded7d7;
   --main-color: #7fad39;
+  --btn-color-1: #7fad39;
+  --btn-color-2: #ff7d3f;
+  --btn-color-3: #071c1f;
   --bg-footer-color: #f3f6fa;
   --text-color: #fff;
   --content-bg: #fff;
+  --bg-red: #a00;
   --sub-title-color: #808389;
   --title-highlight: #77a464;
 }
@@ -30,14 +34,13 @@ h6{
 :roottt {
   --woocommerce: #a46497;
   --wc-green: #7ad03a;
-  --wc-red: #a00;
-  --wc-orange: #ffba00;
+    --wc-orange: #ffba00;
   --wc-blue: #2ea2cc;
   --wc-primary: #a46497;
   --wc-primary-text: #fff;
   --wc-secondary: #ebe9eb;
   --wc-secondary-text: #515151;
-  
+
   --wc-highligh-text: #fff;
   --wc-content-bg: #fff;
   --wc-subtext: #767676;
@@ -65,7 +68,7 @@ a {
 }
 
 .button {
-  background-color: var(--main-color);
+  background-color: var(--btn-color-1);
   color: var(--text-color);
   font-size: 14px;
   padding: 13px 33px;
@@ -78,4 +81,42 @@ a {
 .button:hover {
   background-color: var(--background-color-hover);
   color: var(--text-color);
+}
+
+.button-1 {
+  background-color: var(--btn-color-2);
+  color: var(--text-color);
+  font-size: 14px;
+  padding: 13px 33px;
+  border-radius: 15px;
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 0.8px;
+}
+
+.button-1:hover {
+  background-color: var(--btn-color-1);
+  color: var(--text-color);
+}
+
+.button-2 {
+  background-color: var( --btn-color-3);
+  color: var(--text-color);
+  font-size: 14px;
+  padding: 13px 33px;
+  border-radius: 15px;
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 0.8px;
+}
+
+
+.section-heading {  
+  line-height: 32px;
+  color: #20533b;
+  font-size: 30px;
+  font-weight: 500;
+  text-transform: uppercase;
+  text-align: start;
+  margin-bottom: 30px;
 }

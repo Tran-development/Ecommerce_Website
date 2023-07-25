@@ -33,7 +33,7 @@ const Header = () => {
           <div className='row'>
             <div className='col-2'>
               <h1>
-                <Link className='logo-text'>Organic</Link>
+                <Link to="/" className='logo-text'>Organic</Link>
               </h1>
             </div>
             <div className='col-5'>
@@ -116,7 +116,7 @@ const Header = () => {
                 <div className='menu-links'>
                   <div className='d-flex align-items-center gap-30'>
                     <NavLink className="text-dark text-hover" to="/">Home</NavLink>
-                    <NavLink className="text-dark text-hover" to="/">Our Store</NavLink>
+                    <NavLink className="text-dark text-hover" to="store">Our Store</NavLink>
                     <NavLink className="text-dark text-hover" to="/">Blogs</NavLink>
                     <NavLink className="text-dark text-hover" to="/contact">Contact</NavLink>
                   </div>

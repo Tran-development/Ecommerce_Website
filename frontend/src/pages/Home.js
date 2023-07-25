@@ -3,6 +3,8 @@ import { Link } from "react-router-dom"
 import Marquee from 'react-fast-marquee'
 import './Home.scss'
 import BlogCard from '../components/BlogCard'
+import ProductCard from '../components/ProductCard'
+import SpecialProduct from '../components/SpecialProduct'
 
 export const Home = () => {
   return (
@@ -45,7 +47,7 @@ export const Home = () => {
                 </div>
 
                 <div className='small-banner position-relative'>
-                  <img className='img-fluid rounded-3' src='images/catbanner-03.jpg' alt='main banner' />
+                  <img className='img-fluid rounded-3' src='images/catbanner-01.jpg' alt='main banner' />
                   <div className='small-banner-content position-absolute'>
                     <h6>FRUIT FRESH</h6>
                     <h3>Vegetable <br />
@@ -55,7 +57,7 @@ export const Home = () => {
                 </div>
 
                 <div className='small-banner position-relative'>
-                  <img className='img-fluid rounded-3' src='images/catbanner-04.jpg' alt='main banner' />
+                  <img className='img-fluid rounded-3' src='images/catbanner-02.jpg' alt='main banner' />
                   <div className='small-banner-content position-absolute'>
                     <h6>EAT HEALTHY</h6>
                     <h3>100 % Pure<br />
@@ -63,6 +65,8 @@ export const Home = () => {
                     {/* <p>Free Pickup and Delivery Available</p> */}
                   </div>
                 </div>
+
+                
               </div>
             </div>
           </div>
@@ -172,6 +176,105 @@ export const Home = () => {
         </div>
       </section>
 
+      <section className='features-wrapper py-5 home-wrapper-2'>
+        <div className='container-xxl'>
+          <div className='row'>
+            <div className='col-12'>
+              <h3 className='section-heading'>FEATURED PRODUCTS</h3>
+            </div>
+            <ProductCard />
+            <ProductCard />
+            <ProductCard />
+            <ProductCard />
+          </div>
+        </div>
+      </section>
+
+      <section className='famous-wrapper py-5 home-wrapper-2'>
+        <div className='container-xxl'>
+          <div className='row'>
+            <div className='col-3'>
+              <div className='famous-card position-relative'>
+                <img src='images/famous-banner.png' className='img-fluid' alt='famous-banner'/>
+                <div className='famous-content-sale position-absolute'>
+                  <label className='item-title-label'>Special Offer</label>
+                </div>
+                <div className='famous-content position-absolute'>
+                <h5>Summer Sale <br /> 50% off Fruits</h5>
+                  <p>From $50 to 200$</p>
+                </div>
+              </div>
+            </div>
+            <div className='col-3'>
+              <div className='famous-card position-relative'>
+                <img src='images/famous-banner-2.png' className='img-fluid' alt='famous-banner'/>
+                <div className='famous-content-sale position-absolute'>
+                  <label className='item-title-label'>Special Offer</label>
+                </div>
+                <div className='famous-content position-absolute'>
+                <h5>Summer Sale <br /> 50% off Fruits</h5>
+                  <p>From $50 to 200$</p>
+                </div>
+              </div>
+            </div>
+            <div className='col-3'>
+              <div className='famous-card position-relative'>
+                <img src='images/famous-banner-3.png' className='img-fluid' alt='famous-banner'/>
+                <div className='famous-content-sale position-absolute'>
+                  <label className='item-title-label'>Black Friday</label>
+                </div>
+                <div className='famous-content position-absolute'>
+                <h5>Summer Sale <br /> 50% off Fruits</h5>
+                  <p>From $50 to 200$</p>
+                </div>
+              </div>
+            </div>
+            <div className='col-3'>
+              <div className='famous-card position-relative'>
+                <img src='images/famous-banner-2.png' className='img-fluid' alt='famous-banner'/>
+                <div className='famous-content-sale position-absolute'>
+                  <label className='item-title-label'>Special Offer</label>
+                </div>
+                <div className='famous-content position-absolute'>
+                <h5>Summer Sale <br /> 50% off Fruits</h5>
+                  <p>From $50 to 200$</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className='special-wrapper py-5 home-wrapper-2'>
+        <div className='container-xxl'>
+          <div className='row'>
+            <div className='col-12'>
+              <h3 className='section-heading'>DEAL OF THE DAY</h3>
+            </div>
+            <div className='row'>
+              <SpecialProduct />
+              <SpecialProduct />
+              <SpecialProduct />
+              <SpecialProduct />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className='trending-wrapper py-5 home-wrapper-2'>
+        <div className='container-xxl'>
+          <div className='row'>
+            <div className='col-12'>
+              <h3 className='section-heading'>Our Trending Products</h3>
+            </div>
+            <ProductCard />
+            <ProductCard />
+            <ProductCard />
+            <ProductCard />
+          </div>
+        </div>
+      </section>
+
       <section className="home warpper-2 py-5">
         <div className='container-xxl'>
           <div className='row'>
@@ -179,22 +282,22 @@ export const Home = () => {
               <div className='marquee-inner-wrapper card-wrapper'>
                 <Marquee className='d-flex'>
                   <div className='mx-4 w-25'>
-                    <img src='images/brand-01.png' alt='brand'/>
+                    <img src='images/brand-01.png' alt='brand' />
                   </div>
                   <div className='mx-4 w-25'>
-                    <img src='images/brand-02.png' alt='brand'/>
+                    <img src='images/brand-02.png' alt='brand' />
                   </div>
                   <div className='mx-4 w-25'>
-                    <img src='images/brand-03.png' alt='brand'/>
+                    <img src='images/brand-03.png' alt='brand' />
                   </div>
                   <div className='mx-4 w-25'>
-                    <img src='images/brand-04.png' alt='brand'/>
+                    <img src='images/brand-04.png' alt='brand' />
                   </div>
                   <div className='mx-4 w-25'>
-                    <img src='images/brand-05.png' alt='brand'/>
+                    <img src='images/brand-05.png' alt='brand' />
                   </div>
                   <div className='mx-4 w-25'>
-                    <img src='images/brand-06.png' alt='brand'/>
+                    <img src='images/brand-06.png' alt='brand' />
                   </div>
                 </Marquee>
               </div>
@@ -203,15 +306,20 @@ export const Home = () => {
         </div>
       </section>
 
+
+
       <section className='blog-wrapper py-5 home-wrapper-2 py-5'>
-          <div className='container-xxl'>
-            <div className='row'>
-              <BlogCard />
-              <BlogCard />
-              <BlogCard />
-              <BlogCard />
+        <div className='container-xxl'>
+          <div className='row'>
+            <div className='col-12'>
+              <h3 className='section-heading'>Our Latest Blogs</h3>
             </div>
+            <BlogCard />
+            <BlogCard />
+            <BlogCard />
+            <BlogCard />
           </div>
+        </div>
       </section>
     </>
   )
