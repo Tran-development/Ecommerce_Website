@@ -1,0 +1,49 @@
+.blog-wrapper {
+    .filter-card {
+        background-color: var(--content-bg);
+        padding: 15px 15px 25px;
+        border-radius: 10px;
+        margin-bottom: 20px;
+        border: 1px solid var(--sub-title-color);
+
+        .filter-title {
+            font-size: 16px;
+            line-height: 20px;
+            font-weight: 600;
+            text-transform: uppercase;
+            color: var(--title-highlight);
+        }
+
+        .sub-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--sub-title-color);
+            margin-bottom: 15px;
+            margin-top: 20px;
+        }
+
+        .random-products {
+            cursor: pointer;
+            h5 {
+                font-size: 16px;
+                margin-bottom: 8px;
+            }
+
+            .date {
+                font-size: 13px;
+                color: var(--sub-title-color);
+            }
+        }
+
+        .random-products img {
+            height: auto;
+            width: 110px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+        }
+
+        .random-products:first-child {
+            border-bottom: 1px solid var(--bottom-color);
+        }
+    }
+}

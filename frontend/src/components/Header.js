@@ -51,25 +51,25 @@ const Header = () => {
             <div className='col-5'>
               <div className='header-upper-links d-flex align-items-center justify-content-between'>
                 <div>
-                  <Link className='d-flex align-items-center d-flex gap-10 text-dark'>
+                  <Link to='/compare-product' className='d-flex align-items-center d-flex gap-10 text-dark'>
                     <BsArrowsAngleContract className='fs-4' />
                     <p className='mb-0 text-hover'>Compare <br /> Products</p>
                   </Link>
                 </div>
                 <div>
-                  <Link className='d-flex align-items-center d-flex gap-10 text-dark'>
+                  <Link to='/wishlist' className='d-flex align-items-center d-flex gap-10 text-dark'>
                     <BsFillHeartFill className='fs-4' />
                     <p className='mb-0 text-hover'>Favourite <br /> wishlist</p>
                   </Link>
                 </div>
                 <div>
-                  <Link className='d-flex align-items-center d-flex gap-10 text-dark'>
+                  <Link to='/login' className='d-flex align-items-center d-flex gap-10 text-dark'>
                     <BsFillPersonFill className='fs-4' />
                     <p className='mb-0 text-hover'>Log in <br /> My Account</p>
                   </Link>
                 </div>
                 <div>
-                  <Link className='d-flex align-items-center d-flex gap-10 text-dark'>
+                  <Link to='/cart' className='d-flex align-items-center d-flex gap-10 text-dark'>
                     <BsFillCartFill className='fs-4' />
                     <div className='d-flex flex-column gap-10'>
                       <span className='badge bg-dark text-white'>0</span>
@@ -117,7 +117,7 @@ const Header = () => {
                   <div className='d-flex align-items-center gap-30'>
                     <NavLink className="text-dark text-hover" to="/">Home</NavLink>
                     <NavLink className="text-dark text-hover" to="store">Our Store</NavLink>
-                    <NavLink className="text-dark text-hover" to="/">Blogs</NavLink>
+                    <NavLink className="text-dark text-hover" to="/blogs">Blogs</NavLink>
                     <NavLink className="text-dark text-hover" to="/contact">Contact</NavLink>
                   </div>
                 </div>

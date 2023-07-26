@@ -1,0 +1,32 @@
+.contact-wrapper {
+
+    .contact-title {
+        font-size: 26px;
+        font-weight: 500;
+        line-height: 35px;
+        text-align: left;
+        color: var(--main-color);
+        text-transform: uppercase;
+
+
+    }
+
+    ul {
+        list-style: none;
+
+        p, a, address {
+            color: var(--sub-title-color);
+        }
+    }
+
+    .form-control {
+        background-color: var(--background-color);
+        border-radius: 10px;
+        padding: 10px;
+        border: transparent;
+    }
+
+    .form-control:focus {
+        box-shadow: none;
+    }
+}

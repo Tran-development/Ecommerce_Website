@@ -47,29 +47,29 @@ const Footer = () => {
               <h5 className='mb-4'>Contact Us</h5>
               <div>
                 <address className='fs-6'>
-                Address: La Son, Loc Son, Phu Loc, Thua Thien Hue <br />
-                PinCode: 131103
+                  Address: Kiet 479 Đ. Mai Đang Chon, Hoa Quy, Ngu Hanh Son, Da Nang <br />
                 </address>
-                <a 
+                <p>PinCode: 50000</p>
+                <a
                   href='tel: +65 11.188.888'
                   className='mt-3 d-block mb-2'
                 >Phone: +84 359.682.321</a>
                 <span>Email: tqtinh.19it5@vku.udn.vn</span>
                 <div className='social_icons d-flex align-times-center gap-15 mt-4'>
                   <a className="text-dark" href='#'>
-                    <BsFacebook className='fs-4'/>
+                    <BsFacebook className='fs-4' />
                   </a>
                   <a className="text-dark" href='#'>
-                    <BsInstagram className='fs-4'/>
+                    <BsInstagram className='fs-4' />
                   </a>
                   <a className="text-dark" href='#'>
-                    <BsYoutube className='fs-4'/>
+                    <BsYoutube className='fs-4' />
                   </a>
                   <a className="text-dark" href='#'>
-                    <BsLinkedin className='fs-4'/>
+                    <BsLinkedin className='fs-4' />
                   </a>
                   <a className="text-dark" href='#'>
-                    <BsGithub className='fs-4'/>
+                    <BsGithub className='fs-4' />
                   </a>
                 </div>
               </div>

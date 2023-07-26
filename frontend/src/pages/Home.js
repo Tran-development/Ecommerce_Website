@@ -66,7 +66,7 @@ export const Home = () => {
                   </div>
                 </div>
 
-                
+
               </div>
             </div>
           </div>
@@ -183,9 +183,6 @@ export const Home = () => {
               <h3 className='section-heading'>FEATURED PRODUCTS</h3>
             </div>
             <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
           </div>
         </div>
       </section>
@@ -195,48 +192,48 @@ export const Home = () => {
           <div className='row'>
             <div className='col-3'>
               <div className='famous-card position-relative'>
-                <img src='images/famous-banner.png' className='img-fluid' alt='famous-banner'/>
+                <img src='images/famous-banner.png' className='img-fluid' alt='famous-banner' />
                 <div className='famous-content-sale position-absolute'>
                   <label className='item-title-label'>Special Offer</label>
                 </div>
                 <div className='famous-content position-absolute'>
-                <h5>Summer Sale <br /> 50% off Fruits</h5>
+                  <h5>Summer Sale <br /> 50% off Fruits</h5>
                   <p>From $50 to 200$</p>
                 </div>
               </div>
             </div>
             <div className='col-3'>
               <div className='famous-card position-relative'>
-                <img src='images/famous-banner-2.png' className='img-fluid' alt='famous-banner'/>
+                <img src='images/famous-banner-2.png' className='img-fluid' alt='famous-banner' />
                 <div className='famous-content-sale position-absolute'>
                   <label className='item-title-label'>Special Offer</label>
                 </div>
                 <div className='famous-content position-absolute'>
-                <h5>Summer Sale <br /> 50% off Fruits</h5>
+                  <h5>Summer Sale <br /> 50% off Fruits</h5>
                   <p>From $50 to 200$</p>
                 </div>
               </div>
             </div>
             <div className='col-3'>
               <div className='famous-card position-relative'>
-                <img src='images/famous-banner-3.png' className='img-fluid' alt='famous-banner'/>
+                <img src='images/famous-banner-3.png' className='img-fluid' alt='famous-banner' />
                 <div className='famous-content-sale position-absolute'>
                   <label className='item-title-label'>Black Friday</label>
                 </div>
                 <div className='famous-content position-absolute'>
-                <h5>Summer Sale <br /> 50% off Fruits</h5>
+                  <h5>Summer Sale <br /> 50% off Fruits</h5>
                   <p>From $50 to 200$</p>
                 </div>
               </div>
             </div>
             <div className='col-3'>
               <div className='famous-card position-relative'>
-                <img src='images/famous-banner-2.png' className='img-fluid' alt='famous-banner'/>
+                <img src='images/famous-banner-2.png' className='img-fluid' alt='famous-banner' />
                 <div className='famous-content-sale position-absolute'>
                   <label className='item-title-label'>Special Offer</label>
                 </div>
                 <div className='famous-content position-absolute'>
-                <h5>Summer Sale <br /> 50% off Fruits</h5>
+                  <h5>Summer Sale <br /> 50% off Fruits</h5>
                   <p>From $50 to 200$</p>
                 </div>
               </div>
@@ -267,9 +264,6 @@ export const Home = () => {
             <div className='col-12'>
               <h3 className='section-heading'>Our Trending Products</h3>
             </div>
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
             <ProductCard />
           </div>
         </div>
@@ -314,10 +308,20 @@ export const Home = () => {
             <div className='col-12'>
               <h3 className='section-heading'>Our Latest Blogs</h3>
             </div>
-            <BlogCard />
-            <BlogCard />
-            <BlogCard />
-            <BlogCard />
+          </div>
+          <div className='row'>
+            <div className='col-3'>
+              <BlogCard />
+            </div>
+            <div className='col-3'>
+              <BlogCard />
+            </div>
+            <div className='col-3'>
+              <BlogCard />
+            </div>
+            <div className='col-3'>
+              <BlogCard />
+            </div>
           </div>
         </div>
       </section>

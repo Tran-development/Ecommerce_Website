@@ -12,6 +12,7 @@
             line-height: 20px;
             font-weight: 600;
             color: var(--title-highlight);
+            text-transform: uppercase;
         }
 
         .sub-title {
@@ -45,21 +46,7 @@
             .list-group-item {
                 border-bottom: 1px dotted var(--title-highlight);
             }
-        }
-
-        .colors {
-            list-style-type: none;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-
-            li {
-                background-color: red;
-                width: 20px;
-                height: 20px;
-                border-radius: 50%;
-            }
-        }
+        }        
 
         .random-products {
             h5 {
@@ -96,6 +83,7 @@
             padding: 8px;
             border-radius: 5px;
             background-color: var(--title-highlight);
+            cursor: pointer;
         }
     }
 }

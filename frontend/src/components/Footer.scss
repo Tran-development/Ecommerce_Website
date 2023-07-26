@@ -1,12 +1,15 @@
 footer {
     background-color: var(--bg-footer-color);
-
+    p, a {
+        color: var(--btn-color-3);
+    }
     .footer-top {
 
         .send-icon {
             margin-top: -17px;
         }
     }
+    
     .input-group {
         .input-group-text{
             background: var(--main-color)!important;

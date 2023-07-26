@@ -1,0 +1,31 @@
+
+.wishlist-prod-card {
+    padding: 20px 15px;
+    background-color: white;
+    border-radius: 10px;
+
+    img {
+        width: 100%;
+    }
+
+    .cross {
+        top: 30px;
+        width: 25px;
+        right: 25px;
+        padding: 3px;
+        cursor: pointer;
+    }
+    .wishlist-prod-details {
+        h5 {
+            font-size: 15px;
+            line-height: 22px;
+            font-weight: 500;
+            color: black;
+        }
+        h6 {
+            font-size: 15px;
+            line-height: 22px;
+            font-weight: 400;
+        }
+    }
+}

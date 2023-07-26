@@ -1,0 +1,41 @@
+.auth-login-card {
+    width: 500px;
+    margin: 30px auto;
+    border-radius: 10px;
+    padding: 20px;
+    background-color: var(--background-color);
+
+    h3 {
+        font-size: 19px;
+        font-weight: 500;
+        color: var(--main-color);
+    }
+
+    .form-control {
+        height: 50px;
+        background-color: var(--content-bg);
+        color: var(--sub-title-color);
+        border: transparent;
+        font-size: 14px;
+        border-radius: 10px;
+    }
+
+    .form-control:focus {
+        box-shadow: none;
+    }
+
+    .link-forgot {
+        font-size: 14px;
+        font-weight: 400;
+        color: var(--main-color);
+    }
+
+}
+
+.signup {
+    background-color: var(--btn-color-2);
+}
+
+.signup:hover {
+    background-color: var(--main-color);
+}

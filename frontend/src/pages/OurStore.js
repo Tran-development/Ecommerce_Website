@@ -1,11 +1,16 @@
-import React from 'react'
+import React, { useState } from 'react'
 import BreadCrum from '../components/BreadCrum'
 import Meta from '../components/Meta'
 import ReactStars from "react-rating-stars-component"
+import ProductCard from "../components/ProductCard"
 
 import './OurStore.scss'
+import Color from '../components/Color'
 
 const OurStore = () => {
+
+    const [grid, setGrid] = useState(4)
+
     return (
         <>
             <Meta title={"Our store"} />
@@ -102,13 +107,7 @@ const OurStore = () => {
 
                                 <h5 className='sub-title'>Colors</h5>
                                 <div>
-                                    <ul className='colors ps-0'>
-                                        <li></li>
-                                        <li></li>
-                                        <li></li>
-                                        <li></li>
-                                        <li></li>
-                                    </ul>
+                                    <Color />
                                 </div>
 
                                 <h5 className='sub-title'>Size</h5>
@@ -243,7 +242,7 @@ const OurStore = () => {
                         </div>
 
                         <div className='col-9'>
-                            <div className='filter-sort-grid'>
+                            <div className='filter-sort-grid mb-3'>
                                 <div className='d-flex justify-content-between align-items-center px-4'>
                                     <div className='d-flex align-items-center gap-10'>
                                         <p className='mb-0 sort-by'>Sort By:</p>
@@ -263,28 +262,38 @@ const OurStore = () => {
                                     <div className='d-flex align-items-center gap-10'>
                                         <span className='totalproducts'>Showing 1–16 products</span>
                                         <div className='d-flex gap-10 align-items-center grid'>
-                                            <img
-                                                src='images/gr2.svg'
-                                                className='d-block img-fluid'
-                                                alt='grid'
-                                            />
-                                            <img
-                                                src='images/gr3.svg'
-                                                className='d-block img-fluid'
-                                                alt='grid'
-                                            />
-                                            <img
+                                            <img 
+                                                onClick={() => setGrid(3)}
                                                 src='images/gr4.svg'
                                                 className='d-block img-fluid'
                                                 alt='grid'
                                             />
-                                            <img
+                                            <img 
+                                                onClick={() => setGrid(4)}
+                                                src='images/gr3.svg'
+                                                className='d-block img-fluid'
+                                                alt='grid'
+                                            />
+                                            <img 
+                                                onClick={() => setGrid(6)}
+                                                src='images/gr2.svg'
+                                                className='d-block img-fluid'
+                                                alt='grid'
+                                            />                                            
+                                            <img 
+                                                onClick={() => setGrid(12)}
                                                 src='images/gr.svg'
                                                 className='d-block img-fluid'
                                                 alt='grid'
                                             />
                                         </div>
                                     </div>
+                                </div>
+                            </div>
+
+                            <div className='product-cards d-flex'>
+                                <div className='d-flex flex-wrap gap-12'>
+                                <ProductCard grid={grid}/>
                                 </div>
                             </div>
                         </div>
