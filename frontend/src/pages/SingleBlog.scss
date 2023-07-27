@@ -1,0 +1,23 @@
+
+.single-blog-card {
+    a {
+        font-size: 18px;
+        color: var(--sub-title-color);
+        margin-bottom: 20px;
+    }
+    h3 {
+    font-size: 26px;
+    font-weight: 700;
+    line-height: 32px;
+    margin: 0 0 18px;
+    padding: 5px 0 0;
+    text-align: center;
+    }
+    p {
+        font-size: 14px;
+        color: black;
+        line-height: 26px;
+        margin: 0 0 26px;
+        text-align: left;
+    }
+}
