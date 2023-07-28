@@ -1,0 +1,39 @@
+
+.cart-wrapper {
+    .back-prod-link {
+        color: var(--main-color);
+    }
+    .cart-header {
+        border-bottom: 1px solid var(--bottom-color);
+    
+        h4 {
+            font-size: 16px;
+            color: var(--text-title);
+        }
+    }
+    
+    .cart-data {
+        border-bottom: 1px solid var(--bottom-color);
+    
+        h5 {
+            font-size: 16px;
+        }
+    
+        p {
+            font-size: 14px;
+            color: var(--sub-title);
+        }
+    
+    
+    
+    
+    }
+    
+    input.coupon {
+        width: 150px;
+        padding: 0px 22px;
+        outline: none;
+        font-size: 15px;
+        border: 1px solid var(--bottom-color);
+    }
+}

@@ -35,7 +35,7 @@ h6 {
 :roottt {
   --woocommerce: #a46497;
   --wc-green: #7ad03a;
-    --wc-orange: #ffba00;
+  --wc-orange: #ffba00;
   --wc-blue: #2ea2cc;
   --wc-primary: #a46497;
   --wc-primary-text: #fff;
@@ -72,6 +72,22 @@ a {
   color: var(--main-color) !important;
 }
 
+.cart-col-1 {
+  width: 40%;
+}
+
+.cart-col-2 {
+  width: 10%;
+}
+
+.cart-col-3 {
+  width: 15%;
+}
+
+.cart-col-4 {
+  width: 15%;
+}
+
 .button {
   background-color: var(--btn-color-1);
   color: var(--text-color);
@@ -105,7 +121,7 @@ a {
 }
 
 .button-2 {
-  background-color: var( --btn-color-3);
+  background-color: var(--btn-color-3);
   color: var(--text-color);
   font-size: 14px;
   padding: 13px 33px;
@@ -116,7 +132,7 @@ a {
 }
 
 
-.section-heading {  
+.section-heading {
   line-height: 32px;
   color: #20533b;
   font-size: 30px;
@@ -125,4 +141,3 @@ a {
   text-align: start;
   margin-bottom: 30px;
 }
-

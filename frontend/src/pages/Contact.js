@@ -6,14 +6,14 @@ import { AiTwotoneHome } from 'react-icons/ai'
 import { BsFillTelephoneInboundFill } from "react-icons/bs"
 import { MdEmail} from "react-icons/md"
 import { HiInformationCircle} from "react-icons/hi"
+import Container from '../components/Container'
 
 const Contact = () => {
   return (
     <>
       <Meta title={"Contact Us"} />
       <BreadCrum title="Contact Us" />
-      <div className='contact-wrapper py-5 home-wrapper-2'>
-        <div className='container-xxl'>
+      <Container class1='contact-wrapper py-5 home-wrapper-2'>
           <div className='row'>
             <div className='col-12'>
               <iframe
@@ -58,17 +58,17 @@ const Contact = () => {
                 </div>
                 <div className='col-6'>
                   <h3 className='contact-title mb-4'>LEAVE A MESSAGE</h3>
-                  <form class="row g-3">
-                    <div class="col-md-6">
-                      <input type="text" class="form-control" id="name" placeholder='Your name' />
+                  <form className="row g-3">
+                    <div className="col-md-6">
+                      <input type="text" className="form-control" id="name" placeholder='Your name' />
                     </div>
-                    <div class="col-md-6">
-                      <input type="email" class="form-control" id="Email" placeholder='Your email' />
+                    <div className="col-md-6">
+                      <input type="email" className="form-control" id="Email" placeholder='Your email' />
                     </div>
-                    <div class="col-12">
-                      <input type="text" class="form-control" id="phone" placeholder="Mobile phone" />
+                    <div className="col-12">
+                      <input type="text" className="form-control" id="phone" placeholder="Mobile phone" />
                     </div>
-                    <div class="col-12">
+                    <div className="col-12">
                       <textarea
                         name=''
                         id=''
@@ -81,16 +81,15 @@ const Contact = () => {
                       </textarea>
                     </div>
 
-                    <div class="col-12">
-                      <button class="button border-0">SEND MESSAGE</button>
+                    <div className="col-12">
+                      <button className="button border-0">SEND MESSAGE</button>
                     </div>
                   </form>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </div>
+        </Container>
     </>
   )
 }

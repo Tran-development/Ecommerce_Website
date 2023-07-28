@@ -4,8 +4,10 @@ import Meta from '../components/Meta'
 import ProductCard from '../components/ProductCard'
 import ReactStars from "react-rating-stars-component"
 import ReactImageZoom from 'react-image-zoom';
+import Color from '../components/Color'
 import './SingleProd.scss'
-
+import { BsArrowsAngleContract, BsFillHeartFill } from 'react-icons/bs'
+import Container from '../components/Container'
 const SingleProd = () => {
     const props = {
         width: 400,
@@ -17,12 +19,21 @@ const SingleProd = () => {
     };
     const [orderedProd, setOrderedProd] = useState(true)
 
+    const copyToClipboard = (text) => {
+        alert('Coppied', text)
+        var textField = document.createElement('textarea')
+        textField.innerText = text
+        document.body.appendChild(textField)
+        textField.select()
+        document.execCommand('copy')
+        textField.remove()
+      }
+
     return (
         <>
             <Meta title={"Product Name"} />
             <BreadCrum title="Product Name" />
-            <div className='main-prod-wrapper py-5 home-wrapper'>
-                <div className='container-xxl'>
+            <Container class1='main-prod-wrapper py-5 home-wrapper'>
                     <div className='row'>
                         <div className='col-6'>
                             <div className='main-prod-img' >
@@ -84,25 +95,86 @@ const SingleProd = () => {
                                 </div>
                                 <div className='details py-3'>
                                     <div className='d-flex gap-10 align-items-center my-2'>
-                                        <h3 className='prod-heading'>ABC : </h3> <p className='prod-data'>cde</p>
+                                        <h3 className='prod-heading'>Type : </h3> <p className='prod-data'>Fresh Fruits</p>
                                     </div>
                                     <div className='d-flex gap-10 align-items-center my-2'>
-                                        <h3 className='prod-heading'>ABC : </h3> <p className='prod-data'>cde</p>
+                                        <h3 className='prod-heading'>Brand : </h3> <p className='prod-data'>Organic</p>
                                     </div>
                                     <div className='d-flex gap-10 align-items-center my-2'>
-                                        <h3 className='prod-heading'>ABC : </h3> <p className='prod-data'>cde</p>
+                                        <h3 className='prod-heading'>Category : </h3> <p className='prod-data'>Fresh Fruits</p>
                                     </div>
                                     <div className='d-flex gap-10 align-items-center my-2'>
-                                        <h3 className='prod-heading'>ABC : </h3> <p className='prod-data'>cde</p>
+                                        <h3 className='prod-heading'>Tags : </h3> <p className='prod-data'>coffee, fish, grape</p>
+                                    </div>
+                                    <div className='d-flex gap-10 align-items-center my-2'>
+                                        <h3 className='prod-heading'>Availablity : </h3> <p className='prod-data'>In Stock</p>
+                                    </div>
+                                    <div className='d-flex gap-10 flex-column my-2'>
+                                        <h3 className='prod-heading'>Weight : </h3>
+                                        <div className='d-flex flex-wrap gap-15'>
+                                            <span className='badge border border-1 bg-white text-dark border-secondary'>0.5 KG</span>
+                                            <span className='badge border border-1 bg-white text-dark border-secondary'>1 KG</span>
+                                            <span className='badge border border-1 bg-white text-dark border-secondary'>2 KG</span>
+                                            <span className='badge border border-1 bg-white text-dark border-secondary'>5 KG</span>
+                                        </div>
+                                    </div>
+                                    <div className='d-flex gap-10 flex-column mt-2 mb-2'>
+                                        <h3 className='prod-heading'>Color : </h3>
+                                        <div>
+                                            <Color />
+                                        </div>
+                                    </div>
+                                    <div className='d-flex gap-10 align-items-center flex-row mt-2 mb-3'>
+                                        <h3 className='prod-heading'>Quantity : </h3>
+                                        <div className='d-flex gap'>
+                                            <input
+                                                type='number'
+                                                name=''
+                                                min={1}
+                                                max={50}
+                                                className='form-control'
+                                                style={{ width: "70px" }}
+                                                id=''
+                                            />
+                                        </div>
+                                        <div className='d-flex gap-15 align-items-center'>
+                                            <button className='button border-0' type='submit'>Add to Cart</button>
+                                            <button className='button border-0 signup'>Buy It Now</button>
+                                        </div>
+                                    </div>
+                                    <div className='d-flex gap-15 align-times-center'>
+                                        <div className=''>
+                                            <a href=''><BsArrowsAngleContract className='fs-5 me-2' />Compare</a>
+                                        </div>
+                                        <div className=''>
+                                            <a href=''><BsFillHeartFill className='fs-5 me-2' />Add to wishlist</a>
+                                        </div>
+                                    </div>
+                                    <div className='d-flex gap-10 flex-column my-3'>
+                                        <h3 className='prod-heading'>Shipping & Return : </h3> 
+                                        <p className='prod-data'>
+                                            Free shipping and returns available on all orders! <br />
+                                            We ship all Viet Nam domestic orders within <br />
+                                            <b>1-3 business days!</b>
+                                        </p>
+                                    </div>
+                                    <div className='d-flex gap-10 align-items-center my-3'>
+                                        <h3 className='prod-heading'>Copy Product Link : </h3> 
+                                        <a
+                                            href='javascript:void(0);'
+                                            onClick={() => {
+                                                copyToClipboard("https://demo.casethemes.net/organio/wp-content/uploads/2021/04/h3-product2-1.png")
+                                            }}
+                                        >
+                                            Copy Product Link
+                                        </a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div className='des-wrapper py-5 home-wrapper-2'>
-                <div className='container-xxl'>
+            </Container>
+            <Container class1='des-wrapper py-5 home-wrapper-2'>
                     <div className='row'>
                         <div className='col-12'>
                             <h4>Description</h4>
@@ -119,10 +191,9 @@ const SingleProd = () => {
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-            <section className='reviews-wrapper home-wrapper-2'>
-                <div className='container-xxl'>
+            </Container>
+
+            <Container class1='reviews-wrapper home-wrapper-2'>
                     <div className='row'>
                         <div className='col-12'>
                             <h3 id='review'>Reviews</h3>
@@ -165,9 +236,9 @@ const SingleProd = () => {
                                     </div>
                                     <div className='review-form'>
                                         <h5 className='mb-4 title'>Write A Review</h5>
-                                        <form class="row g-3">
+                                        <form className="row g-3">
 
-                                            <div class="col-12">
+                                            <div className="col-12">
                                                 <textarea
                                                     name=''
                                                     id=''
@@ -179,9 +250,9 @@ const SingleProd = () => {
                                                 </textarea>
                                             </div>
 
-                                            <div class="col-12 d-flex justify-content-end gap-10 mb-3">
-                                                {/* <button class="button border-0">CANCLE</button> */}
-                                                <button class="button border-0">SUBMIT</button>
+                                            <div className="col-12 d-flex justify-content-end gap-10 mb-3">
+                                                {/* <button className="button border-0">CANCLE</button> */}
+                                                <button className="button border-0">SUBMIT</button>
                                             </div>
                                         </form>
                                     </div>
@@ -207,18 +278,15 @@ const SingleProd = () => {
                         </div>
 
                     </div>
-                </div>
-            </section>
-            <section className='features-wrapper py-5 home-wrapper-2'>
-                <div className='container-xxl'>
+            </Container>
+            <Container class1='features-wrapper py-5 home-wrapper-2'>
                     <div className='row'>
                         <div className='col-12'>
                             <h3 className='section-heading'>FEATURED PRODUCTS</h3>
                         </div>
                         <ProductCard />
                     </div>
-                </div>
-            </section>
+            </Container>
         </>
     )
 }

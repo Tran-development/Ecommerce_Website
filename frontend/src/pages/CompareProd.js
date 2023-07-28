@@ -3,14 +3,14 @@ import BreadCrum from '../components/BreadCrum'
 import Meta from '../components/Meta'
 import Color from '../components/Color'
 import './CompareProd.scss'
+import Container from '../components/Container'
 
 const CompareProd = () => {
     return (
         <>
             <Meta title={"Compare Products"} />
             <BreadCrum title="Compare Products" />
-            <div className='compare-prod-wrapper py-5 home-wrapper-2'>
-                <div className='container-xxl'>
+            <Container class1='compare-prod-wrapper py-5 home-wrapper-2'>
                     <div className='row'>
                         <div className='col-3'>
                             <div className='compare-prod-card position-relative'>
@@ -181,8 +181,7 @@ const CompareProd = () => {
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
+                </Container>
         </>
     )
 }

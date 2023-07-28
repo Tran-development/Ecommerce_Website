@@ -3,14 +3,14 @@ import BreadCrum from '../components/BreadCrum'
 import Meta from '../components/Meta'
 import { Link } from 'react-router-dom'
 import './Login.scss'
+import Container from '../components/Container'
 
 const Login = () => {
     return (
         <>
             <Meta title={"Login"} />
             <BreadCrum title="Login" />
-            <div className='login-wrapper py-5 home-wrapper-2'>
-                <div className='container-xxl'>
+            <Container class1='login-wrapper py-5 home-wrapper-2'>
                     <div className='row'>
                         <div className='col-12'>
                             <div className='auth-login-card'>
@@ -45,8 +45,7 @@ const Login = () => {
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
+                </Container>
         </>
     )
 }

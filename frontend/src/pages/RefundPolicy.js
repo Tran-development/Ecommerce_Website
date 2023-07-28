@@ -2,6 +2,7 @@ import React from 'react'
 import BreadCrum from '../components/BreadCrum'
 import Meta from '../components/Meta'
 import './Policies.scss'
+import Container from '../components/Container'
 
 
 const RefundPolicy = () => {
@@ -9,17 +10,15 @@ const RefundPolicy = () => {
         <>
             <Meta title={"Refund Policy"} />
             <BreadCrum title="Refund Policy" />
-            <div className='privacy-wrapper py-5 home-wrapper-2'>
-                <div className='container-xxl'>
+            <Container class1='privacy-wrapper py-5 home-wrapper-2'>
                     <div className='row'>
                         <div className='col-12'>
                             <div className='policy'>
 
                             </div>
                         </div>
-                    </div>
                 </div>
-            </div>
+            </Container>
         </>
     )
 }

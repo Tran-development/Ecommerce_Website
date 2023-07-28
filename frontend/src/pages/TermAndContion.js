@@ -2,6 +2,7 @@ import React from 'react'
 import BreadCrum from '../components/BreadCrum'
 import Meta from '../components/Meta'
 import './Policies.scss'
+import Container from '../components/Container'
 
 
 const TermAndContion = () => {
@@ -9,8 +10,7 @@ const TermAndContion = () => {
         <>
             <Meta title={"Term And Conditions"} />
             <BreadCrum title="Term And Conditions" />
-            <div className='privacy-wrapper py-5 home-wrapper-2'>
-                <div className='container-xxl'>
+            <Container class1='privacy-wrapper py-5 home-wrapper-2'>
                     <div className='row'>
                         <div className='col-12'>
                             <div className='policy'>
@@ -18,8 +18,7 @@ const TermAndContion = () => {
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
+            </Container>
         </>
     )
 }

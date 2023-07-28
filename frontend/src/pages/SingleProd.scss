@@ -2,7 +2,7 @@
 .main-prod-wrapper {
 
     .main-prod-img {
-        padding: 20px;
+        padding: 30px;
         background-color: var(--content-bg);
         border-radius: 10px;
         position: relative;
@@ -43,6 +43,9 @@
         }
     }
     .main-prod-details {
+        background-color: var(--content-bg);
+        padding: 30px 20px;
+        border-radius: 10px;
 
         .title {
             font-size: 40px;
@@ -67,14 +70,18 @@
             color: var(--sub-title-color);
         }
         .prod-heading {
-            font-size: 14px;
+            font-size: 16px;
             color: var(--text-color);
             margin-bottom: 0px;
         }
         .prod-data {
-            font-size: 13px;
+            font-size: 14px;
             color: var(--sub-title-color);
             margin-bottom: 0px;
+        }
+        a {
+            font-size: 14px;
+            color: var(--main-color);
         }
     }
 }
