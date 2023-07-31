@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { NavLink, Link } from 'react-router-dom'
 import './Header.scss'
 import {
@@ -9,17 +9,37 @@ import {
   BsFillCartFill,
   BsList
 } from "react-icons/bs"
+import logoVN from '../images/logo_VN.png'
+import logoUK from '../images/logo_UK.png'
 
 const Header = () => {
+
+  const [isListVisible, setIsListVisible] = useState(true)
+
+  const toggleList = () => {
+    setIsListVisible(!isListVisible)
+  }
+
   return (
     <>
       <header className='header-top py-2'>
         <div className='container-xxl'>
           <div className='row align-items-center'>
-            <div className='col-6'>
+            <div className='col-8'>
               <p className='mb-0 text-hover'>Free Shipping for all Order of $99</p>
             </div>
-            <div className='col-6'>
+            <div className='col-2 d-flex gap-10 align-items-center'>
+            <img className='img-fluid logo' src={logoVN} style={{"display": "none"}}/>
+            <img className='img-fluid logo' src={logoUK}/>
+              <div class="dropdown">
+                <select class="form-select">
+                <option selected>English</option>
+                  <option value="1">VietNamese</option>
+                  <option value="2">France</option>
+                </select>
+              </div>
+            </div>
+            <div className='col-2'>
               <p className='text-end mb-0 text-hover'>
                 Hotline: <a className='text-info' href='tel: +84 359683421'> +84 359683421</a>
               </p>
@@ -44,7 +64,7 @@ const Header = () => {
                   placeholder="What do you need?"
                   aria-label="What do you need?" aria-describedby="basic-addon2" />
                 <span className="input-group-text p-3" id="basic-addon2">
-                  <BsSearchHeartFill className='fs-6' />
+                  <BsSearchHeartFill className='fs-6 search-icon' />
                 </span>
               </div>
             </div>
@@ -93,13 +113,11 @@ const Header = () => {
                     <button
                       className="drop-text btn btn-secondary dropdown-toggle bg-white border-0 d-flex align-items-center gap-10"
                       type="button"
-                      id="dropdownMenuButton1"
-                      data-bs-toggle="dropdown"
-                      aria-expanded="false"
+                      onClick={toggleList}
                     >
-                      <BsList className='fs-4'/><span className='text-dark me-3 d-inline-block text-hover'>All Categories</span>
+                      <BsList className='fs-4' /><span className='text-dark me-3 d-inline-block text-hover all-categories'>All Categories</span>
                     </button>
-                    <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                    <ul className="dropdown-menu list-item" style={{ display: isListVisible ? "block" : "none" }}>
                       <li><Link className="dropdown-item text-hover" to="">Fresh Meat</Link></li>
                       <li><Link className="dropdown-item text-hover" to="">Vegetables</Link></li>
                       <li><Link className="dropdown-item text-hover" to="">Fruit & Nut Gifts</Link></li>

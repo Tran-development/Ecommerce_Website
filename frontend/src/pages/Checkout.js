@@ -83,7 +83,7 @@ const Checkout = () => {
                         <div className='col-5'>
                             <div className='border-bottom py-4'>
                                 <div className='d-flex gap-10 mb-2 align-items-center'>
-                                    <div className='w-75 d-flex gap-10 '>
+                                    <div className='w-75 d-flex gap-10'>
                                         <div className='w-25 position-relative'>
                                             <span style={{"top": "-5px", "right": "-5px"}} className='badge bg-secondary text-white rounded-circle p-2 position-absolute '>0</span>
                                             <img src='images/cabbage.jpg' className='img-fluid' alt='product' />
@@ -93,7 +93,7 @@ const Checkout = () => {
                                             <p className='total-price'>Sumptuous, filling, and temptingly healthy</p>
                                         </div>
                                     </div>
-                                    <div className='flex-grow-1'>
+                                    <div className='flex-grow-1 price'>
                                         <h5 className='total'>$ 100</h5>
                                     </div>
                                 </div>

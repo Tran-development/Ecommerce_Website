@@ -4,7 +4,7 @@
         color: var(--main-color);
     }
     .cart-header {
-        border-bottom: 1px solid var(--bottom-color);
+        border-bottom: 1px solid var(--bottom-border);
     
         h4 {
             font-size: 16px;
@@ -13,7 +13,7 @@
     }
     
     .cart-data {
-        border-bottom: 1px solid var(--bottom-color);
+        border-bottom: 1px solid var(--bottom-border);
     
         h5 {
             font-size: 16px;
@@ -21,11 +21,16 @@
     
         p {
             font-size: 14px;
-            color: var(--sub-title);
+            color: var(--sub-title-color);
         }
-    
-    
-    
+
+        .item-cart {
+            cursor: pointer;
+        }
+        
+        .btn-delete {
+            cursor: pointer;
+        }
     
     }
     
@@ -34,6 +39,6 @@
         padding: 0px 22px;
         outline: none;
         font-size: 15px;
-        border: 1px solid var(--bottom-color);
+        border: 1px solid var(--bottom-border);
     }
 }

@@ -16,6 +16,10 @@
         cursor: pointer;
     }
     .compare-prod-details {
+    border-left: 1px solid var(--bottom-border);
+    border-right: 1px solid var(--bottom-border);
+    border-bottom: 1px solid var(--bottom-border);
+
         h5 {
             font-size: 15px;
             line-height: 22px;

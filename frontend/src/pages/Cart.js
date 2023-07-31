@@ -26,7 +26,7 @@ const Cart = () => {
                             <div className='cart-data mb-2 py-3 d-flex justify-content-between align-items-center'>
                                 <div className='cart-col-1 gap-15 d-flex align-items-center'>
                                     <div className='w-25'>
-                                        <img src='images/cabbage.jpg' className='img-fluid' />
+                                        <img src='images/cabbage.jpg' className='img-fluid item-cart' />
                                     </div>
                                     <div className='w-75'>
                                         <div className='w-75'>
@@ -51,7 +51,7 @@ const Cart = () => {
                                         />
                                     </div>
                                     <div>
-                                        <AiTwotoneDelete className='text-danger fs-4' />
+                                        <AiTwotoneDelete className='text-danger fs-4 btn-delete' />
                                     </div>
                                 </div>
                                 <div className='cart-col-4'>
@@ -84,7 +84,7 @@ const Cart = () => {
                                         />
                                     </div>
                                     <div>
-                                        <AiTwotoneDelete className='text-danger fs-4' />
+                                        <AiTwotoneDelete className='text-danger fs-4 btn-delete' />
                                     </div>
                                 </div>
                                 <div className='cart-col-4'>

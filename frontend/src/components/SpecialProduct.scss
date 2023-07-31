@@ -1,4 +1,19 @@
 .special-product-card {
-    padding: 20px 10px;
+    padding: 20px 5px;
     border-radius: 10px;
+
+    .img-fluid {
+        width: 340px;
+        height: auto;
+        border-radius: 10px;
+    }
+
+    .special-product-content {        
+
+    .brand {
+        font-size: 24px;
+        font-weight: 700;
+        line-height: 32px;
+    }
+    }
 }

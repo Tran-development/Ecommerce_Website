@@ -1,0 +1,109 @@
+@import "~bootstrap/dist/css/bootstrap.min.css";
+
+body {
+  font-family: Roboto, sans-serif;
+}
+
+:root {
+  --main-color: #008060;
+}
+
+.gap-20 {
+  gap: 20px;
+}
+
+.btn-login {
+  text-align: center;
+  text-decoration: none;
+  background-color: var(--main-color) !important;
+}
+
+.trigger {
+  padding: 0 24px;
+  font-size: 18px;
+  line-height: 64px;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.trigger:hover {
+  color: red;
+}
+
+.logo {
+  height: 32px;
+  margin: 16px;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.ant-layout {
+  min-height: 100vh;
+
+  .ant-layout-sider {
+    flex: 0 0 250px !important;
+    max-width: 250px !important;
+    min-width: 250px !important;
+    width: 250px !important
+  }
+
+
+  .ant-layout-sider-collapsed {
+    flex: 0 0 80px !important;
+    max-width: 80px !important;
+    min-width: 80px !important;
+    width: 80px !important;
+  }
+}
+
+.logo {
+  width: 60px;
+  height: 60px;
+  margin: 10px 11px;
+
+  .img-logo {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    transition: 0.3s;
+
+  }
+}
+
+.ant-layout-header {
+  h5 {
+    line-height: 20px;
+    font-size: 14px;
+  }
+
+  p {
+    line-height: 20px;
+    font-size: 13px;
+  }
+  .badge {
+    top: 20px;
+    right: -4px;
+  }
+  .search-box {
+    width: 480px;
+    display: flex;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    background-color: white;
+
+    input {
+      width: 400px;
+      margin: 0 20px;
+      border: none;
+    }
+    input:focus {
+      outline: transparent !important;
+      box-shadow: none;
+    }
+
+    .icon-search {
+      cursor: pointer;
+      z-index: 999;
+      margin-left: -30px;
+    }
+  }
+}

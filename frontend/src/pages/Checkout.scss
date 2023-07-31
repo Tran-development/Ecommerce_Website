@@ -1,5 +1,14 @@
 
 .checkout-wrapper {
+    a {
+        cursor: pointer;
+    }
+    a:hover {
+        color: var(--main-color) !important;
+    }
+    .price {
+        margin-left: 82px;
+    }
     
     .total {
         font-size: 14px;

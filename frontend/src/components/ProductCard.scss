@@ -2,11 +2,11 @@
     width: 100%;
 
     .product-card {
-        display: flex;
-        gap: 20px;
+       
         .btn-wishlist {
             width: 25px;
             height: 25px;
+            top: 10px;
         }
         
         .product-image {
@@ -44,8 +44,7 @@
 .gr-4 {
     width: 32%;
     
-    .product-card {
-    }
+    
 }
 
 .gr-3 {
@@ -55,9 +54,10 @@
 .product-card {
     border-radius: 10px;
     overflow: hidden;
+    border: 1px solid var(--main-color);
     width: 100%;
     padding: 15px;
-    // background-color: antiquewhite;
+    background-color: var(--bg-container);
 
     .wishlist-icon {
         top: 2%;

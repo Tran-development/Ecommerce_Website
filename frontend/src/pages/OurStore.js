@@ -11,6 +11,7 @@ import Color from '../components/Color'
 const OurStore = () => {
 
     const [grid, setGrid] = useState(4)
+    console.log(grid);
 
     return (
         <>
@@ -248,10 +249,11 @@ const OurStore = () => {
                                         <p className='mb-0 sort-by'>Sort By:</p>
                                         <select
                                             name=''
+                                            defaultValue={"manula"}
                                             className='form-control form-select'
                                             id='SortBy'
                                         >
-                                            <option className='sort-by-element' value="menu_order" selected="selected">Best selling</option>
+                                            <option className='sort-by-element' value="manula">Best selling</option>
                                             <option className='sort-by-element' value="popularity">Sort by popularity</option>
                                             <option className='sort-by-element' value="rating">Sort by average rating</option>
                                             <option className='sort-by-element' value="date">Sort by latest</option>

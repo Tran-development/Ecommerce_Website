@@ -30,7 +30,7 @@
 
         .form-check-input:checked {
             outline: none;
-            background-color: var(--bg-red);
+            background-color: var(--checkbox-red);
         }
 
         .form-check-label {
@@ -45,10 +45,12 @@
 
             .list-group-item {
                 border-bottom: 1px dotted var(--title-highlight);
+                cursor: pointer;
             }
         }        
 
         .random-products {
+            cursor: pointer;
             h5 {
                 font-size: 14px;
                 margin-bottom: 8px;
@@ -58,10 +60,13 @@
         .random-products:first-child {
             border-bottom: 1px solid var(--bottom-color);
         }
+        span {
+            cursor: pointer;
+        }
     }
 
     .filter-sort-grid {
-        border: 1px solid var(--bottom-color);
+        border: 1px solid var(--bottom-border);
         border-radius: 10px;
         padding: 5px 0;
 
@@ -73,7 +78,7 @@
             border: none;
             border-radius: 0;
             outline: none;
-            border-bottom: 1px solid var(--bg-red);
+            border-bottom: 1px solid var(--checkbox-red);
             box-shadow: none;
         }        
 

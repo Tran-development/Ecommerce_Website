@@ -7,7 +7,7 @@ const SpecialProduct = () => {
   return (
     <div className='col-6 mb-4'>
       <div className='special-product-card'>
-        <div className='d-flex justify-content-between'>
+        <div className='d-flex justify-content-between gap-15'>
           <div>
             <img src='images/beef.jpg' className='img-fluid' alt='Onion' />
           </div>
@@ -24,7 +24,7 @@ const SpecialProduct = () => {
               activeColor="#ffd700"
             />
             <p className='price'>
-              <span className='red-p'>$100</span> &nbsp; <strike>$150</strike>
+              <b className='red-p'>$100</b> &nbsp; <strike>$150</strike>
             </p>
             <div className='discount-till d-flex align-items-center gap-10'>
               <p className='mb-0 d-flex'>

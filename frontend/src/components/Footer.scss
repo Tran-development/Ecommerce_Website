@@ -13,7 +13,8 @@ footer {
     .input-group {
         .input-group-text{
             background: var(--main-color)!important;
-            color: var(--text-color);
+            color: var(--text-color-in);
+            cursor: pointer;
         }
         .form-control {
             padding: 8px 20px;            
