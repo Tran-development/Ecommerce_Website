@@ -17,11 +17,8 @@ import { MdNotificationsActive } from 'react-icons/md'
 import { AiTwotoneFileAdd } from 'react-icons/ai'
 import { BsFillPeopleFill, BsFillCartCheckFill, BsSearch } from 'react-icons/bs'
 import { Layout, Menu, Button, theme } from 'antd';
-import { useNavigate } from 'react-router-dom';
-import { Outlet } from 'react-router-dom';
+import { Outlet, Link, useNavigate } from 'react-router-dom';
 import logo from '../images/logo.png'
-import CustomInput from '../components/CustomInput'
-
 
 const { Header, Sider, Content } = Layout;
 const MainLayout = () => {
@@ -158,36 +155,36 @@ const MainLayout = () => {
           }}
         >
           <div className='d-flex gap-20'>
-          <Button
-            type="text"
-            icon={collapsed ? <FaToggleOff /> : <FaToggleOn />}
-            onClick={() => setCollapsed(!collapsed)}
-            style={{
-              fontSize: '16px',
-              width: 64,
-              height: 64,
-            }}
-          />
-          <div className='search-box mt-2 mb-2'>
-            <div className='d-flex align-items-center gap-4'>
-            <input 
-            type="text"
-            className="form-control"
-            id="search"
-            placeholder="Search"
-          />
-            <BsSearch className='fs-4 icon-search'/>
+            <Button
+              type="text"
+              icon={collapsed ? <FaToggleOff /> : <FaToggleOn />}
+              onClick={() => setCollapsed(!collapsed)}
+              style={{
+                fontSize: '16px',
+                width: 64,
+                height: 64,
+              }}
+            />
+            <div className='search-box mt-2 mb-2'>
+              <div className='d-flex align-items-center gap-4'>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="search"
+                  placeholder="Search"
+                />
+                <BsSearch className='fs-4 icon-search' />
+              </div>
             </div>
           </div>
-          </div>
-          
+
           <div className='d-flex gap-4 align-items-center'>
-            <div className='position-relative abs'>
+            <div className='position-relative'>
               <MdNotificationsActive className='fs-4 mt-2' />
               <span className='badge bg-warning rounded-circle p-1 position-absolute'>5</span>
             </div>
-            <div className='d-flex gap-3 align-items-center'>
-              <div >
+            <div className='d-flex gap-3 align-items-center dropdown'>
+              <div className=''>
                 <img
                   width={32}
                   height={32}
@@ -195,12 +192,24 @@ const MainLayout = () => {
                   alt=''
                 />
               </div>
-            </div>
-            <div>
-              <h5 className='mb-0'>Admin</h5>
-              <p className='mb-0'>admin@gmail.com</p>
+              <div
+                role="button"
+                id="dropdownMenuLink"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                <h5 className='mb-0'>Admin</h5>
+                <p className='mb-0'>admin@gmail.com</p>
+              </div>
+              <div className="dropdown-menu mt-2" aria-labelledby="dropdownMenuLink">
+                <li>
+                <Link className="dropdown-item py-1 mb-1" style={{height: "auto", lineHeight: "20px"}} href="#">View Account</Link></li>
+                <li>
+                <Link className="dropdown-item py-1 mb-1" style={{height: "auto", lineHeight: "20px"}} href="#">Logout</Link></li>
+              </div>
             </div>
           </div>
+
         </Header>
         <Content
           style={{

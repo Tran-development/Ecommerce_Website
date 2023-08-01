@@ -1,0 +1,43 @@
+.wrapper-main {
+    .red {
+        color: var(--text-red);
+    }
+
+    .blue {
+        color: var(--text-blue);
+    }
+
+    .green {
+        color: var(--text-green);
+    }
+
+
+}
+
+.recent-order {
+    background: white;
+    border-radius: 10px;
+    padding: 30px;    
+    margin-left: 15px;
+}
+
+.main-statistic {
+    background: white;
+    padding: 30px;    
+    border-radius: 10px;
+    margin-left: 13px;
+    margin-left: 72px;
+    height: 500px;
+
+    a {
+        text-decoration: none;
+    }
+
+    a:hover {
+        text-decoration: underline;
+    }
+
+    h3 {
+        font-size: 18px;
+    }
+}
