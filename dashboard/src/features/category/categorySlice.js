@@ -1,42 +1,42 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import customerService from "./customerService";
+import categoryService from "./categoryService";
 
-export const getUsers = createAsyncThunk(
-    "customer/get-customers",
+export const getCategories = createAsyncThunk(
+    "productCategory/get-categories",
     async (thunkAPI) => {
         try {
-            return await customerService.getUsers();
+            return await categoryService.getCategories()
         } catch (error) {
-            return thunkAPI.rejectWithValue(error);
+            return thunkAPI.rejectWithValue(error)
         }
     }
-);
+)
 
 const initialState = {
-    customers: [],
+    categories: [],
     isError: false,
     isLoading: false,
     isSuccess: false,
     message: "",
 }
 
-export const customerSlice = createSlice({
-    name: "users",
+export const categorySlice = createSlice({
+    name: "list-category",
     initialState,
     reducers: {},
     extraReducers: (builder) => {
         builder
-        .addCase(getUsers.pending, (state) => {
+        .addCase(getCategories.pending, (state) => {
             state.isLoading = true;
         })
-        .addCase(getUsers.fulfilled, (state, action) => {
+        .addCase(getCategories.fulfilled, (state, action) => {
             state.isLoading = false
             state.isSuccess = true
             state.isError = false
-            state.customers = action.payload
+            state.categories = action.payload
             // state.message = "success"
         })
-        .addCase(getUsers.rejected, (state, action) => {
+        .addCase(getCategories.rejected, (state, action) => {
             state.isLoading = false
             state.isSuccess = false
             state.isError = true
@@ -46,4 +46,4 @@ export const customerSlice = createSlice({
 })
 
 
-export default customerSlice.reducer
+export default categorySlice.reducer

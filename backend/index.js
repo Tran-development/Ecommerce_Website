@@ -12,14 +12,16 @@ const brandRouter = require('./routes/brandRoute')
 const colorRouter = require('./routes/colorRoute')
 const couponRouter = require('./routes/couponRoute')
 const contactRouter = require('./routes/contactRoute')
+const enqRouter = require("./routes/enqRoute");
 
 const bodyParser = require("body-parser")
 const { notFound, errorHandler } = require("./middlewares/handleError")
 const cookieParser = require('cookie-parser')
 const morgan = require("morgan")
-
-dbConnect()
+const cors = require("cors")
  
+dbConnect()
+app.use(cors())
 app.use(morgan('dev'))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false}))
@@ -34,6 +36,7 @@ app.use('/api/brand', brandRouter)
 app.use('/api/coupon', couponRouter)
 app.use('/api/color', colorRouter)
 app.use('/api/contact', contactRouter)
+app.use("/api/enquiry", enqRouter);
 
 // catch and handle thoughout of the process
 app.use(notFound)

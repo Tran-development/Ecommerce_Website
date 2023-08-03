@@ -1,42 +1,42 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import customerService from "./customerService";
+import colorService from "./colorService";
 
-export const getUsers = createAsyncThunk(
-    "customer/get-customers",
+export const getColors = createAsyncThunk(
+    "color/get-colors",
     async (thunkAPI) => {
         try {
-            return await customerService.getUsers();
+            return await colorService.getColors()
         } catch (error) {
-            return thunkAPI.rejectWithValue(error);
+            return thunkAPI.rejectWithValue(error)
         }
     }
-);
+)
 
 const initialState = {
-    customers: [],
+    colors: [],
     isError: false,
     isLoading: false,
     isSuccess: false,
     message: "",
 }
 
-export const customerSlice = createSlice({
-    name: "users",
+export const blogSlice = createSlice({
+    name: "list-color",
     initialState,
     reducers: {},
     extraReducers: (builder) => {
         builder
-        .addCase(getUsers.pending, (state) => {
+        .addCase(getColors.pending, (state) => {
             state.isLoading = true;
         })
-        .addCase(getUsers.fulfilled, (state, action) => {
+        .addCase(getColors.fulfilled, (state, action) => {
             state.isLoading = false
             state.isSuccess = true
             state.isError = false
-            state.customers = action.payload
+            state.colors = action.payload
             // state.message = "success"
         })
-        .addCase(getUsers.rejected, (state, action) => {
+        .addCase(getColors.rejected, (state, action) => {
             state.isLoading = false
             state.isSuccess = false
             state.isError = true
@@ -46,4 +46,4 @@ export const customerSlice = createSlice({
 })
 
 
-export default customerSlice.reducer
+export default blogSlice.reducer
