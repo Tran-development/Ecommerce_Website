@@ -44,7 +44,7 @@ const Enquiries = () => {
   const data1 = [];
   for (let i = 0; i < enquiryState.length; i++) {
     data1.push({
-      key: i,
+      key: i + 1,
       name: enquiryState[i].name,
       email: enquiryState[i].email,
       phone: enquiryState[i].mobile,

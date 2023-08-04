@@ -166,3 +166,9 @@ main::-webkit-scrollbar {
   line-height: 32px;
   color: var(--highlight);
 }
+
+.validate-error {
+  color: #dc3545;
+  font-size: 13px;
+  line-height: 24px;
+}
