@@ -13,6 +13,7 @@ const colorRouter = require('./routes/colorRoute')
 const couponRouter = require('./routes/couponRoute')
 const contactRouter = require('./routes/contactRoute')
 const enqRouter = require("./routes/enqRoute");
+const uploadRouter = require("./routes/uploadRoute");
 
 const bodyParser = require("body-parser")
 const { notFound, errorHandler } = require("./middlewares/handleError")
@@ -37,6 +38,7 @@ app.use('/api/coupon', couponRouter)
 app.use('/api/color', colorRouter)
 app.use('/api/contact', contactRouter)
 app.use("/api/enquiry", enqRouter);
+app.use("/api/upload", uploadRouter);
 
 // catch and handle thoughout of the process
 app.use(notFound)

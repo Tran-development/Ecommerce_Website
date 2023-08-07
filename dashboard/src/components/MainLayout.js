@@ -13,6 +13,9 @@ import {
   FaToggleOn,
   FaToggleOff
 } from 'react-icons/fa'
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { MdNotificationsActive } from 'react-icons/md'
 import { AiTwotoneFileAdd } from 'react-icons/ai'
 import { BsFillPeopleFill, BsFillCartCheckFill, BsSearch } from 'react-icons/bs'
@@ -203,9 +206,9 @@ const MainLayout = () => {
               </div>
               <div className="dropdown-menu mt-2" aria-labelledby="dropdownMenuLink">
                 <li>
-                <Link className="dropdown-item py-1 mb-1" style={{height: "auto", lineHeight: "20px"}} href="#">View Account</Link></li>
+                  <Link className="dropdown-item py-1 mb-1" style={{ height: "auto", lineHeight: "20px" }} href="#">View Account</Link></li>
                 <li>
-                <Link className="dropdown-item py-1 mb-1" style={{height: "auto", lineHeight: "20px"}} href="#">Logout</Link></li>
+                  <Link className="dropdown-item py-1 mb-1" style={{ height: "auto", lineHeight: "20px" }} href="#">Logout</Link></li>
               </div>
             </div>
           </div>
@@ -221,6 +224,18 @@ const MainLayout = () => {
         >
           <Outlet />
         </Content>
+        <ToastContainer
+          position="bottom-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={true}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light"
+        />
       </Layout>
     </Layout>
   );
