@@ -8,8 +8,7 @@ import { useFormik } from 'formik';
 import * as yup from 'yup';
 import { toast } from 'react-toastify';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import { createBlog } from '../features/blog/blogSlice';
+import { createBlog, resetState } from '../features/blog/blogSlice';
 import { getbCategories } from '../features/bcategory/bcategorySlice';
 
 let schema = yup.object().shape({
@@ -21,7 +20,6 @@ let schema = yup.object().shape({
 const AddBlog = () => {
 
     const dispatch = useDispatch()
-    const navigate = useNavigate()
 
     useEffect(() => {
         dispatch(getbCategories())
@@ -63,11 +61,10 @@ const AddBlog = () => {
 
         validationSchema: schema,
         onSubmit: values => {
-            // alert(JSON.stringify(values))
             dispatch(createBlog(values));
             formik.resetForm()
             setTimeout(() => {
-                navigate("/admin/blog-list")
+                dispatch(resetState())
             }, 3000)
         },
     });

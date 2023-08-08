@@ -1,23 +1,22 @@
 import { createSlice, createAsyncThunk, createAction } from "@reduxjs/toolkit";
-import bCategoryService from "./bcategoryService";
+import couponService from "./couponService";
 
-export const getbCategories = createAsyncThunk(
-    "blogcategory/get-blogcategories",
+export const getCoupons = createAsyncThunk(
+    "coupon/get-coupons",
     async (thunkAPI) => {
         try {
-            return await bCategoryService.getbCategories();
+            return await couponService.getCoupons();
         } catch (error) {
             return thunkAPI.rejectWithValue(error);
         }
     }
-)
+);
 
-
-export const createbCategory = createAsyncThunk(
-    "blogcategory/create-category",
-    async (bcateData, thunkAPI) => {
+export const createCoupon = createAsyncThunk(
+    "coupon/create-coupon",
+    async (couponData, thunkAPI) => {
         try {
-            return await bCategoryService.createbCategory(bcateData);
+            return await couponService.createCoupon(couponData);
         } catch (error) {
             return thunkAPI.rejectWithValue(error);
         }
@@ -27,46 +26,44 @@ export const createbCategory = createAsyncThunk(
 export const resetState = createAction("Reset_all")
 
 const initialState = {
-    bCategories: [],
+    coupons: [],
     isError: false,
     isLoading: false,
     isSuccess: false,
     message: "",
 }
 
-
-export const bCategorySlice = createSlice({
-    name: "blog-category-list",
+export const couponSlice = createSlice({
+    name: "add-coupon",
     initialState,
     reducers: {},
     extraReducers: (builder) => {
         builder
-            .addCase(getbCategories.pending, (state) => {
+            .addCase(getCoupons.pending, (state) => {
                 state.isLoading = true;
             })
-            .addCase(getbCategories.fulfilled, (state, action) => {
+            .addCase(getCoupons.fulfilled, (state, action) => {
                 state.isLoading = false
                 state.isSuccess = true
                 state.isError = false
-                state.bCategories = action.payload
-                // state.message = "success"
+                state.coupons = action.payload
             })
-            .addCase(getbCategories.rejected, (state, action) => {
+            .addCase(getCoupons.rejected, (state, action) => {
                 state.isLoading = false
                 state.isSuccess = false
                 state.isError = true
                 state.message = action.error
             })
-            .addCase(createbCategory.pending, (state) => {
+            .addCase(createCoupon.pending, (state) => {
                 state.isLoading = true;
             })
-            .addCase(createbCategory.fulfilled, (state, action) => {
+            .addCase(createCoupon.fulfilled, (state, action) => {
                 state.isLoading = false
                 state.isSuccess = true
                 state.isError = false
-                state.createdbCate = action.payload
+                state.createdCoupon = action.payload
             })
-            .addCase(createbCategory.rejected, (state, action) => {
+            .addCase(createCoupon.rejected, (state, action) => {
                 state.isLoading = false
                 state.isSuccess = false
                 state.isError = true
@@ -77,4 +74,4 @@ export const bCategorySlice = createSlice({
 })
 
 
-export default bCategorySlice.reducer
+export default couponSlice.reducer

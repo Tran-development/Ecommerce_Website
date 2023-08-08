@@ -12,8 +12,7 @@ import { getColors } from '../features/color/colorSlice';
 import { Select } from 'antd'
 import Dropzone from 'react-dropzone'
 import { delImg, uploadImg } from '../features/upload/uploadSlice';
-import { createProducts } from '../features/product/productSlice';
-import { useNavigate } from 'react-router-dom';
+import { createProducts, resetState } from '../features/product/productSlice';
 
 let schema = yup.object().shape({
     title: yup.string().required("*Title is Required"),
@@ -29,7 +28,6 @@ let schema = yup.object().shape({
 const AddProduct = () => {
 
     const dispatch = useDispatch()
-    const navigate = useNavigate()
     const [color, setColor] = useState([])
     const [images, setImages] = useState([])
 
@@ -91,12 +89,11 @@ const AddProduct = () => {
 
         validationSchema: schema,
         onSubmit: values => {
-            // alert(JSON.stringify(values))
             dispatch(createProducts(values));
             formik.resetForm()            
             setColor(null)
             setTimeout(() => {
-                navigate("/admin/list-product")
+                dispatch(resetState())
             }, 3000)
         },
     });

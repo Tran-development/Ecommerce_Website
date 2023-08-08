@@ -4,8 +4,8 @@ import { useFormik } from 'formik';
 import * as yup from 'yup';
 import { toast } from 'react-toastify';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import { createCategory } from '../features/category/categorySlice';
+import { createCategory, getACategory, resetState, updateACategory } from '../features/category/categorySlice';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 
 let schema = yup.object().shape({
@@ -15,13 +15,35 @@ let schema = yup.object().shape({
 const AddCat = () => {
 
     const dispatch = useDispatch()
+    const location = useLocation()
     const navigate = useNavigate()
+
+    const getCateId = location.pathname.split('/')[3]
     const newCategory = useSelector((state) => state.category)
-    const { isSuccess, isError, isLoading, createdCategory } = newCategory
+    const {
+        isSuccess,
+        isError,
+        isLoading,
+        createdCategory,
+        categoryName,
+        updatedCategory
+    } = newCategory
+
+    // fill title on input
+    useEffect(() => {
+        if (getCateId !== undefined) {
+            dispatch(getACategory(getCateId))
+        } else {
+            dispatch(resetState())
+        }
+    }, [getCateId])
 
     useEffect(() => {
         if (isSuccess && createdCategory) {
             toast.success("Category Added Successfullly!");
+        } if (updatedCategory && isSuccess) {
+            toast.success("Category Update Successfully!")
+            navigate("/admin/list-category")
         }
         if (isError) {
             toast.error("Something Went Wrong!");
@@ -29,23 +51,30 @@ const AddCat = () => {
     }, [isSuccess, isError, isLoading]);
 
     const formik = useFormik({
+        enableReinitialize: true,
         initialValues: {
-            title: '',
+            title: categoryName || '',
         },
 
         validationSchema: schema,
+        // update and reset form
         onSubmit: values => {
-            dispatch(createCategory(values));
-            formik.resetForm()
-            setTimeout(() => {
-                navigate("/admin/list-category")
-            }, 3000)
+            if (getCateId !== undefined) {
+                const data = { id: getCateId, categoryData: values }
+                dispatch(updateACategory(data))
+            } else {
+                dispatch(createCategory(values));
+                formik.resetForm()
+                setTimeout(() => {
+                    dispatch(resetState())
+                }, 1000)
+            }
         },
     });
 
     return (
         <div>
-            <h3 className='mb-4'>Add Category</h3>
+            <h3 className='mb-4'>{getCateId !== undefined ? "Edit" : "Add"} Category</h3>
             <div>
                 <form action="" onSubmit={formik.handleSubmit}>
                     <CustomInput
@@ -65,7 +94,7 @@ const AddCat = () => {
                     <button
                         className='btn btn-success border-0 rounded-3 my-5'
                         type='submit'>
-                        Add Category
+                        {getCateId !== undefined ? "Edit" : "Add"} Category
                     </button>
                 </form>
             </div>

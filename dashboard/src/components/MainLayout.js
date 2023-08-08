@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import {
   BiSolidDashboard,
-  BiSolidCategoryAlt
+  BiSolidCategoryAlt,
+  BiSolidCoupon
 } from "react-icons/bi"
 import { IoIosColorFilter } from 'react-icons/io'
 import { PiNotebookBold } from 'react-icons/pi'
@@ -13,6 +14,7 @@ import {
   FaToggleOn,
   FaToggleOff
 } from 'react-icons/fa'
+import { AiFillGift } from 'react-icons/ai'
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -139,6 +141,23 @@ const MainLayout = () => {
                   icon: <BiSolidCategoryAlt className='fs-5' />,
                   label: 'Blog Category List',
                 }
+              ]
+            },
+            {
+              key: 'coupons',
+              icon: <AiFillGift className='fs-5' />,
+              label: 'Coupons',
+              children: [
+                {
+                  key: 'add-coupon',
+                  icon: <BiSolidCoupon className='fs-5' />,
+                  label: 'Add Coupon',
+                },
+                {
+                  key: 'coupon-list',
+                  icon: <FaClipboardList className='fs-5' />,
+                  label: 'Coupon List',
+                },                
               ]
             },
             {

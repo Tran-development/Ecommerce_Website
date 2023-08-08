@@ -20,6 +20,8 @@ import AddColor from './pages/AddColor';
 import AddCat from './pages/AddCat';
 import AddBrand from './pages/AddBrand';
 import AddProduct from './pages/AddProduct';
+import AddCoupon from './pages/AddCoupon';
+import CouponList from './pages/CouponList';
 function App() {
   return (
     <Router>
@@ -30,18 +32,22 @@ function App() {
         <Route path='/admin' element={<MainLayout />}>
           <Route index element={<DashBoard />} />
           <Route path='enquiries' element={<Enquiries />} />
-          <Route path='blog-list' element={<BlogList />} />
           <Route path='blog-category-list' element={<BlogCatList />} />
           <Route path='blog-category' element={<AddBlogCat />} />
           <Route path='add-blog' element={<AddBlog />} />
+          <Route path='blog-list' element={<BlogList />} />
+          <Route path='add-coupon' element={<AddCoupon />} />
+          <Route path='coupon-list' element={<CouponList />} />
           <Route path='color' element={<AddColor />} />
           <Route path='orders' element={<Orders />} />
           <Route path='customers' element={<Customers />} />
           <Route path='list-color' element={<Colorlist />} />
           <Route path='list-category' element={<CategoryList />} />
           <Route path='category' element={<AddCat />} />
+          <Route path='category/:id' element={<AddCat />} />
           <Route path='list-brand' element={<BrandList />} />
           <Route path='brand' element={<AddBrand />} />
+          <Route path='brand/:id' element={<AddBrand />} />
           <Route path='list-product' element={<ProductList />} />
           <Route path='product' element={<AddProduct />} />
         </Route>

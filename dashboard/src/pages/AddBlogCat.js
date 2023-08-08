@@ -4,8 +4,7 @@ import { useFormik } from 'formik';
 import * as yup from 'yup';
 import { toast } from 'react-toastify';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import { createbCategory } from '../features/bcategory/bcategorySlice';
+import { createbCategory, resetState } from '../features/bcategory/bcategorySlice';
 
 let schema = yup.object().shape({
   title: yup.string().required("*Blog Category name is Required"),
@@ -15,7 +14,6 @@ const AddBlogCat = () => {
 
 
   const dispatch = useDispatch()
-  const navigate = useNavigate()
   const newbCate = useSelector((state) => state.bCategory)
   const { isSuccess, isError, isLoading, createdbCate } = newbCate
 
@@ -39,7 +37,7 @@ const AddBlogCat = () => {
       dispatch(createbCategory(values));
       formik.resetForm()
       setTimeout(() => {
-        navigate("/admin/blog-category-list")
+        dispatch(resetState())
       }, 3000)
     },
   });
