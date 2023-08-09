@@ -27,7 +27,7 @@ const AddCat = () => {
         createdCategory,
         categoryName,
         updatedCategory
-    } = newCategory
+    } = newCategory 
 
     // fill title on input
     useEffect(() => {
@@ -42,7 +42,7 @@ const AddCat = () => {
         if (isSuccess && createdCategory) {
             toast.success("Category Added Successfullly!");
         } if (updatedCategory && isSuccess) {
-            toast.success("Category Update Successfully!")
+            toast.success("Category Updated Successfully!")
             navigate("/admin/list-category")
         }
         if (isError) {

@@ -32,13 +32,16 @@ function App() {
         <Route path='/admin' element={<MainLayout />}>
           <Route index element={<DashBoard />} />
           <Route path='enquiries' element={<Enquiries />} />
-          <Route path='blog-category-list' element={<BlogCatList />} />
-          <Route path='blog-category' element={<AddBlogCat />} />
+          <Route path='blogcategory-list' element={<BlogCatList />} />
+          <Route path='blogcategory' element={<AddBlogCat />} />
+          <Route path='blogcategory/:id' element={<AddBlogCat />} />
           <Route path='add-blog' element={<AddBlog />} />
           <Route path='blog-list' element={<BlogList />} />
-          <Route path='add-coupon' element={<AddCoupon />} />
+          <Route path='coupon' element={<AddCoupon />} />
+          <Route path='coupon/:id' element={<AddCoupon />} />
           <Route path='coupon-list' element={<CouponList />} />
           <Route path='color' element={<AddColor />} />
+          <Route path='color/:id' element={<AddColor />} />
           <Route path='orders' element={<Orders />} />
           <Route path='customers' element={<Customers />} />
           <Route path='list-color' element={<Colorlist />} />

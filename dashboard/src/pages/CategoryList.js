@@ -85,7 +85,7 @@ const CategoryList = () => {
         hideModal={hideModal}
         open={open}
         performAction={() => {deleteCategory(cateId)}}
-        title="Are you sure you want to delete this category?"
+        title="Are you sure you want to delete this Product Category?"
       />
     </div>
   )

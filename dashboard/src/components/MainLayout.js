@@ -132,12 +132,12 @@ const MainLayout = () => {
                   label: 'Blog List',
                 },
                 {
-                  key: 'blog-category',
+                  key: 'blogcategory',
                   icon: <BiSolidCategoryAlt className='fs-5' />,
                   label: 'Add Blog Category',
                 },
                 {
-                  key: 'blog-category-list',
+                  key: 'blogcategory-list',
                   icon: <BiSolidCategoryAlt className='fs-5' />,
                   label: 'Blog Category List',
                 }
@@ -149,7 +149,7 @@ const MainLayout = () => {
               label: 'Coupons',
               children: [
                 {
-                  key: 'add-coupon',
+                  key: 'coupon',
                   icon: <BiSolidCoupon className='fs-5' />,
                   label: 'Add Coupon',
                 },

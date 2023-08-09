@@ -5,6 +5,7 @@ import * as yup from 'yup';
 import { toast } from 'react-toastify';
 import { useDispatch, useSelector } from 'react-redux';
 import { createbCategory, resetState } from '../features/bcategory/bcategorySlice';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 let schema = yup.object().shape({
   title: yup.string().required("*Blog Category name is Required"),
@@ -14,6 +15,11 @@ const AddBlogCat = () => {
 
 
   const dispatch = useDispatch()
+  const location = useLocation()
+  const navigate = useNavigate()
+
+  const getbCateId = location.pathname.split("/")[3]
+  console.log(getbCateId);
   const newbCate = useSelector((state) => state.bCategory)
   const { isSuccess, isError, isLoading, createdbCate } = newbCate
 

@@ -14,10 +14,44 @@ export const getbCategories = createAsyncThunk(
 
 
 export const createbCategory = createAsyncThunk(
-    "blogcategory/create-category",
+    "blogcategory/create-blogcategory",
     async (bcateData, thunkAPI) => {
         try {
             return await bCategoryService.createbCategory(bcateData);
+        } catch (error) {
+            return thunkAPI.rejectWithValue(error);
+        }
+    }
+);
+
+
+export const getABCategory = createAsyncThunk(
+    "blogcategory/get-blogcategory",
+    async (id, thunkAPI) => {
+        try {
+            return await bCategoryService.getbCategory(id);
+        } catch (error) {
+            return thunkAPI.rejectWithValue(error);
+        }
+    }
+);
+
+export const updateABCategory = createAsyncThunk(
+    "blogcategory/update-blogcategory",
+    async (bcategory, thunkAPI) => {
+        try {
+            return await bCategoryService.updatebCategory(bcategory);
+        } catch (error) {
+            return thunkAPI.rejectWithValue(error);
+        }
+    }
+);
+
+export const deleteABCategory = createAsyncThunk(
+    "blogcategory/delete-blogcategory",
+    async (id, thunkAPI) => {
+        try {
+            return await bCategoryService.deletebCategory(id);
         } catch (error) {
             return thunkAPI.rejectWithValue(error);
         }
@@ -36,7 +70,7 @@ const initialState = {
 
 
 export const bCategorySlice = createSlice({
-    name: "blog-category-list",
+    name: "blogcategory-list",
     initialState,
     reducers: {},
     extraReducers: (builder) => {
@@ -49,7 +83,6 @@ export const bCategorySlice = createSlice({
                 state.isSuccess = true
                 state.isError = false
                 state.bCategories = action.payload
-                // state.message = "success"
             })
             .addCase(getbCategories.rejected, (state, action) => {
                 state.isLoading = false
@@ -67,6 +100,51 @@ export const bCategorySlice = createSlice({
                 state.createdbCate = action.payload
             })
             .addCase(createbCategory.rejected, (state, action) => {
+                state.isLoading = false
+                state.isSuccess = false
+                state.isError = true
+                state.message = action.error
+            })
+            .addCase(getABCategory.pending, (state) => {
+                state.isLoading = true;
+            })
+            .addCase(getABCategory.fulfilled, (state, action) => {
+                state.isLoading = false
+                state.isSuccess = true
+                state.isError = false
+                state.bcategoryName = action.payload.title
+            })
+            .addCase(getABCategory.rejected, (state, action) => {
+                state.isLoading = false
+                state.isSuccess = false
+                state.isError = true
+                state.message = action.error
+            })
+            .addCase(updateABCategory.pending, (state) => {
+                state.isLoading = true;
+            })
+            .addCase(updateABCategory.fulfilled, (state, action) => {
+                state.isLoading = false
+                state.isSuccess = true
+                state.isError = false
+                state.updatedbCategory = action.payload
+            })
+            .addCase(updateABCategory.rejected, (state, action) => {
+                state.isLoading = false
+                state.isSuccess = false
+                state.isError = true
+                state.message = action.error
+            })
+            .addCase(deleteABCategory.pending, (state) => {
+                state.isLoading = true;
+            })
+            .addCase(deleteABCategory.fulfilled, (state, action) => {
+                state.isLoading = false
+                state.isSuccess = true
+                state.isError = false
+                state.deletedbCategory = action.payload
+            })
+            .addCase(deleteABCategory.rejected, (state, action) => {
                 state.isLoading = false
                 state.isSuccess = false
                 state.isError = true
