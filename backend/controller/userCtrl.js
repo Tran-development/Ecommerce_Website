@@ -505,5 +505,6 @@ module.exports = {
     createOrder,
     getOrders,
     getAllOrders,
-    updateOrderStatus
+    updateOrderStatus,
+    getOrderByUserId
 }

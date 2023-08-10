@@ -9,8 +9,19 @@ const getOrders = async () => {
     return respone.data
 }
 
+const getOrder = async (id) => {
+    const response = await axios.post(
+      `${base_url}user/getorderbyuser/${id}`,
+      "",
+      config
+    );
+    
+    return response.data
+}
+
 const orderService = {
-    getOrders
+    getOrders,    
+    getOrder
 }
 
 export default orderService

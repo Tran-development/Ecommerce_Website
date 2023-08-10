@@ -15,78 +15,74 @@ let schema = yup.object().shape({
 
 const AddCoupon = () => {
 
-    const dispatch = useDispatch()
-    const location = useLocation()
-    const navigate = useNavigate()
+    const dispatch = useDispatch();
+  const location = useLocation();
+  const navigate = useNavigate();
+  const getCouponId = location.pathname.split("/")[3];
+  const newCoupon = useSelector((state) => state.coupon);
 
-    const getCouponId = location.pathname.split('/')[3]
+  const {
+    isSuccess,
+    isError,
+    isLoading,
+    createdCoupon,
+    couponName,
+    couponDiscount,
+    couponExpiry,
+    updatedCoupon,
+  } = newCoupon;
 
-    // const changeDateFormat = (date) => {
-    //     const newDate = new Date(date).toLocaleDateString()
-    //     const [month, day, year] = newDate.split("/")
-    //     return [year, month, day].join("-")
-    // }
+  const changeDateFormat = (date) => {
+    const newDate = new Date(date).toLocaleDateString();
+    const [month, day, year] = newDate.split("/");
+    return [year, month, day].join("-");
+  };
 
-    const newCoupon = useSelector((state) => state.coupon)
-    const {
-        isSuccess,
-        isError,
-        isLoading,
-        createdCoupon,
-        couponName,
-        couponExpiry,
-        couponDiscount,
-        updatedCoupon,
-    } = newCoupon
+  useEffect(() => {
+    if (getCouponId !== undefined) {
+      dispatch(getACoupon(getCouponId));
+    } else {
+      dispatch(resetState());
+    }
+  }, [getCouponId]);
 
-    useEffect(() => {
-        if (getCouponId !== undefined) {
-            dispatch(getACoupon(getCouponId))
-        } else {
-            dispatch(resetState())
-        }
-    }, [getCouponId])
+  useEffect(() => {
+    if (isSuccess && createdCoupon) {
+      toast.success("Coupon Added Successfullly!");
+    }
+    if (isSuccess && updatedCoupon) {
+      toast.success("Coupon Updated Successfullly!");
+      navigate("/admin/coupon-list");
+    }
+    if (isError && couponName && couponDiscount && couponExpiry) {
+      toast.error("Something Went Wrong!");
+    }
+  }, [isSuccess, isError, isLoading]);
+  const formik = useFormik({
+    enableReinitialize: true,
+    initialValues: {
+      name: couponName || "",
+      expiry: changeDateFormat(couponExpiry) || "",
+      discount: couponDiscount || "",
+    },
+    validationSchema: schema,
+    onSubmit: (values) => {
+      if (getCouponId !== undefined) {
+        const data = { id: getCouponId, couponData: values };
+        dispatch(updateACoupon(data));
+        dispatch(resetState());
+      } else {
+        dispatch(createCoupon(values));
+        formik.resetForm();
+        setTimeout(() => {
+          dispatch(resetState);
+        }, 300);
+      }
+    },
+  });
 
-    useEffect(() => {
-        if (isSuccess && createdCoupon) {
-            toast.success("Coupon Added Successfullly!");
-        }
-        if (isSuccess && updatedCoupon) {
-            toast.success("Coupon Updated Successfullly!");
-            navigate("/admin/coupon-list");
-        }
-        if (isError && couponName && couponDiscount && couponExpiry) {
-            toast.error("Something Went Wrong!");
-        }
-    }, [isSuccess, isError, isLoading]);
-
-
-    const formik = useFormik({
-        enableReinitialize: true,
-        initialValues: {
-            name: couponName || '',
-            expiry: new Date().toISOString().slice(0, 10) || '',
-            discount: couponDiscount || ''
-        },
-
-        validationSchema: schema,
-        // update and reset form
-        onSubmit: (values) => {
-            if (getCouponId !== undefined) {
-                const data = { id: getCouponId, couponData: values };
-                dispatch(updateACoupon(data));
-            } else {
-                dispatch(createCoupon(values));
-                formik.resetForm();
-                setTimeout(() => {
-                    dispatch(resetState);
-                }, 300);
-            }
-        },
-    });
-
-    return (
-        <div>
+  return (
+    <div>
             <h3 className='mb-4'>{getCouponId !== undefined ? "Edit" : "Add"} Coupon</h3>
             <div>
                 <form action="" onSubmit={formik.handleSubmit}>

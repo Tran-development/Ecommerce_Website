@@ -9,52 +9,48 @@ import CustomModal from '../components/CustomModal';
 
 const columns = [
   {
-    title: 'SNo',
-    dataIndex: 'key',
+    title: "SNo",
+    dataIndex: "key",
   },
+
   {
-    title: 'Name',
-    dataIndex: 'name',
+    title: "Name",
+    dataIndex: "name",
     sorter: (a, b) => a.name.length - b.name.length,
   },
   {
-    title: 'Discount',
-    dataIndex: 'discount',
+    title: "Discount",
+    dataIndex: "discount",
     sorter: (a, b) => a.discount - b.discount,
   },
   {
-    title: 'Expiry',
-    dataIndex: 'expiry',
+    title: "Expiry",
+    dataIndex: "expiry",
     sorter: (a, b) => a.expiry.length - b.expiry.length,
   },
   {
-    title: 'Action',
-    dataIndex: 'action',
+    title: "Action",
+    dataIndex: "action",
   },
 ];
 
-const CouponList = () => {
-
-  const [open, setOpen] = useState(false)
-  const [couponId, setCouponId] = useState("")
-
+const Couponlist = () => {
+  const [open, setOpen] = useState(false);
+  const [couponId, setcouponId] = useState("");
   const showModal = (e) => {
     setOpen(true);
-    setCouponId(e)
-  }
+    setcouponId(e);
+  };
 
   const hideModal = () => {
     setOpen(false);
   };
-
-  const dispatch = useDispatch()
-
+  const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getCoupons())
     dispatch(resetState())
-  }, [])
-
-  const couponState = useSelector((state) => state.coupon.coupons)
+    dispatch(getCoupons());
+  }, []);
+  const couponState = useSelector((state) => state.coupon.coupons);
   const data1 = [];
   for (let i = 0; i < couponState.length; i++) {
     data1.push({
@@ -64,41 +60,46 @@ const CouponList = () => {
       expiry: new Date(couponState[i].expiry).toLocaleString(),
       action: (
         <>
-          <Link to={`/admin/coupon/${couponState[i]._id}`} className='ms-3 fs-5 text-danger'>
+          <Link
+            to={`/admin/coupon/${couponState[i]._id}`}
+            className=" fs-3 text-danger"
+          >
             <BiEditAlt />
           </Link>
-          <button className='ms-3 fs-5 text-danger bg-transparent border-0'
+          <button
+            className="ms-3 fs-3 text-danger bg-transparent border-0"
             onClick={() => showModal(couponState[i]._id)}
           >
             <AiFillDelete />
           </button>
         </>
-      )
+      ),
     });
   }
-
   const deleteCoupon = (e) => {
-    dispatch(deleteAcoupon(e))
-    setOpen(false)
-    setTimeout(() => {
-      dispatch(getCoupons())
-    }, 100)
-  }
+    dispatch(deleteAcoupon(e));
 
+    setOpen(false);
+    setTimeout(() => {
+      dispatch(getCoupons());
+    }, 100);
+  };
   return (
     <div>
-      <h3>Coupons</h3>
+      <h3 className="mb-4 title">Coupons</h3>
       <div>
         <Table columns={columns} dataSource={data1} />
       </div>
       <CustomModal
         hideModal={hideModal}
         open={open}
-        performAction={() => {deleteCoupon(couponId)}}
+        performAction={() => {
+          deleteCoupon(couponId);
+        }}
         title="Are you sure you want to delete this Coupon?"
       />
     </div>
-  )
-}
+  );
+};
 
-export default CouponList
+export default Couponlist;

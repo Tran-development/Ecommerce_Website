@@ -117,12 +117,12 @@ const MainLayout = () => {
               label: 'Orders',
             },
             {
-              key: 'blog',
+              key: 'blogs',
               icon: <FaBlogger className='fs-5' />,
               label: 'Blogs',
               children: [
                 {
-                  key: 'add-blog',
+                  key: 'blog',
                   icon: <AiTwotoneFileAdd className='fs-5' />,
                   label: 'Add Blog',
                 },

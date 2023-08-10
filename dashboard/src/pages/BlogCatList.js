@@ -4,7 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { BiEditAlt } from 'react-icons/bi'
 import { AiFillDelete } from 'react-icons/ai'
-import { getbCategories, resetState } from '../features/bcategory/bcategorySlice';
+import { deleteABCategory, getbCategories, resetState } from '../features/bcategory/bcategorySlice';
+import CustomModal from '../components/CustomModal';
 
 const columns = [
   {
@@ -67,12 +68,27 @@ const BlogCatList = () => {
     });
   }
 
+  const deleteBCategory = (e) => {
+    dispatch(deleteABCategory(e))
+    setOpen(false)
+    setTimeout(() => {
+      dispatch(getbCategories())
+    }, 100)
+  }
+
+
   return (
     <div>
       <h3>Blog Categories</h3>
       <div>
         <Table columns={columns} dataSource={data1} />
       </div>
+      <CustomModal
+        hideModal={hideModal}
+        open={open}
+        performAction={() => {deleteBCategory(bCateId)}}
+        title="Are you sure you want to delete this Blog Category?"
+      />
     </div>
   )
 }

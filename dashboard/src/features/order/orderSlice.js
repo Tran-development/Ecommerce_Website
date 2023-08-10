@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import orderService from "./orderService";
 
 export const getOrders = createAsyncThunk(
-    "enquiry/get-enquiries",
+    "enquiry/get-orders",
     async (thunkAPI) => {
         try {
             return await orderService.getOrders()
@@ -11,6 +11,18 @@ export const getOrders = createAsyncThunk(
         }
     }
 )
+
+
+export const getOrderByUser = createAsyncThunk(
+    "order/get-order",
+    async (id, thunkAPI) => {
+        try {
+            return await orderService.getOrder(id);
+        } catch (error) {
+            return thunkAPI.rejectWithValue(error);
+        }
+    }
+);
 
 // const orders = localStorage.getItem("user")
 //     ? JSON.parse(localStorage.getItem("user"))
@@ -39,9 +51,23 @@ export const orderSlice = createSlice({
             state.isSuccess = true
             state.isError = false
             state.orders = action.payload
-            // state.message = "success"
         })
         .addCase(getOrders.rejected, (state, action) => {
+            state.isLoading = false
+            state.isSuccess = false
+            state.isError = true
+            state.message = action.error
+        })
+        .addCase(getOrderByUser.pending, (state) => {
+            state.isLoading = true;
+        })
+        .addCase(getOrderByUser.fulfilled, (state, action) => {
+            state.isLoading = false
+            state.isSuccess = true
+            state.isError = false
+            state.orderbyuser = action.payload
+        })
+        .addCase(getOrderByUser.rejected, (state, action) => {
             state.isLoading = false
             state.isSuccess = false
             state.isError = true
