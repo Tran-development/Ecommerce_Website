@@ -31,8 +31,8 @@ const Header = () => {
             <div className='col-2 d-flex gap-10 align-items-center'>
             <img className='img-fluid logo' src={logoVN} style={{"display": "none"}}/>
             <img className='img-fluid logo' src={logoUK}/>
-              <div class="dropdown">
-                <select class="form-select">
+              <div className="dropdown">
+                <select className="form-select">
                 <option selected>English</option>
                   <option value="1">VietNamese</option>
                   <option value="2">France</option>

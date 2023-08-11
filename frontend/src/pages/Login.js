@@ -5,8 +5,33 @@ import { Link } from 'react-router-dom'
 import './Login.scss'
 import Container from '../components/Container'
 import CustomInput from '../components/CustomInput'
+import * as yup from "yup";
+import { useFormik } from "formik";
+import { useDispatch } from 'react-redux'
+import { loginUser } from '../features/user/userSlice'
+
+
+let loginSchema = yup.object().shape({
+    email: yup.string().nullable().required("*Email is Required"),
+    password: yup.string().required("*Password is Required"),
+});
 
 const Login = () => {
+
+    const dispatch = useDispatch()
+
+    const formik = useFormik({
+        enableReinitialize: true,
+        initialValues: {
+            email: "",
+            password: "",
+        },
+        validationSchema: loginSchema,
+        onSubmit: (values) => {
+            dispatch(loginUser(values))
+        },
+    });
+
     return (
         <>
             <Meta title={"Login"} />
@@ -16,21 +41,37 @@ const Login = () => {
                     <div className='col-12'>
                         <div className='auth-login-card'>
                             <h3 className='text-center mb-3'>Login</h3>
-                            <form action='' className='d-flex flex-column gap-15'>
+                            <form action='' className='d-flex flex-column' onSubmit={formik.handleSubmit}>
                                 <CustomInput
-                                    name=''
                                     type='email'
-                                    placeholder='Username'
                                     className='form-control'
-                                    style={{ "padding": "25px" }}
+                                    id="email"
+                                    label="Your email"
+                                    name="email"
+                                    val={formik.values.email}
+                                    onCh={formik.handleChange("email")}
+                                    onBl={formik.handleBlur("email")}
+
                                 />
+                                <div className='validate-error'>
+                                    {formik.touched.email && formik.errors.email ? (
+                                        <div>{formik.errors.email}</div>
+                                    ) : null}
+                                </div>
                                 <CustomInput
                                     name=''
                                     type='password'
-                                    placeholder='Password'
+                                    label='Password'
                                     className='form-control'
-                                    style={{ "padding": "25px" }}
+                                    val={formik.values.password}
+                                    onCh={formik.handleChange("password")}
+                                    onBl={formik.handleBlur("password")}
                                 />
+                                <div className='validate-error'>
+                                    {formik.touched.password && formik.errors.password ? (
+                                        <div>{formik.errors.password}</div>
+                                    ) : null}
+                                </div>
                                 <div>
                                     <Link to='/forgot-password' className='link-forgot'>Forgot Password?</Link>
                                     <div className='d-flex justify-content-center gap-15 align-items-center mt-3'>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import BreadCrum from '../components/BreadCrum'
 import Meta from '../components/Meta'
 import ReactStars from "react-rating-stars-component"
@@ -7,11 +7,24 @@ import Container from '../components/Container'
 
 import './OurStore.scss'
 import Color from '../components/Color'
+import { useDispatch, useSelector } from 'react-redux'
+import { getProducts } from '../features/products/productSlice'
 
 const OurStore = () => {
 
+    const distpatch = useDispatch()
+    const productState = useSelector((state) => state?.product?.product)
+
+    useEffect(() => {
+        getProduct()
+    }, [])
+
+    const getProduct =  () => {
+        distpatch(getProducts())
+    }
+
+
     const [grid, setGrid] = useState(4)
-    console.log(grid);
 
     return (
         <>
@@ -295,7 +308,7 @@ const OurStore = () => {
 
                             <div className='product-cards d-flex'>
                                 <div className='d-flex flex-wrap gap-12'>
-                                <ProductCard grid={grid}/>
+                                <ProductCard data={productState ? productState : []} grid={grid}/>
                                 </div>
                             </div>
                         </div>

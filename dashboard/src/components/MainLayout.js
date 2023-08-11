@@ -17,7 +17,6 @@ import {
 import { AiFillGift } from 'react-icons/ai'
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import { MdNotificationsActive } from 'react-icons/md'
 import { AiTwotoneFileAdd } from 'react-icons/ai'
 import { BsFillPeopleFill, BsFillCartCheckFill, BsSearch } from 'react-icons/bs'
