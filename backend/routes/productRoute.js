@@ -10,12 +10,11 @@ const {
     rating,
 } = require("../controller/productCtrl")
 const { isAdmin, authMiddleware } = require('../middlewares/authMiddleware')
-const { uploadPhoto, productImgResize } = require("../middlewares/uploadImages")
 
 router.post('/', authMiddleware, isAdmin, createProduct)
 
 router.get('/:id', getAProduct)
-router.put("/wishlist", authMiddleware, addToWishList)
+router.post("/wishlist", authMiddleware, addToWishList)
 router.put("/rating", authMiddleware, rating)
 
 

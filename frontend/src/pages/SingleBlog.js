@@ -1,37 +1,51 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import BreadCrum from '../components/BreadCrum'
 import Meta from '../components/Meta'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { FaArrowLeft } from 'react-icons/fa'
 import './SingleBlog.scss'
 import Container from '../components/Container'
+import { useDispatch, useSelector } from 'react-redux'
+import { getABlog } from '../features/blogs/blogSlice'
 
 const SingleBlog = () => {
+
+    const blogState = useSelector((state) => state?.blog?.singleBlog)
+    const location = useLocation()
+    const getBlogId = location.pathname.split('/')[2]
+    const distpatch = useDispatch()
+    useEffect(() => {
+        getBlog()
+    }, [])
+
+    const getBlog = () => {
+        distpatch(getABlog(getBlogId))
+    }
+
     return (
         <>
-            <Meta title={"Single Blog"} />
-            <BreadCrum title="Single Blog" />
+            <Meta title={blogState?.title} />
+            <BreadCrum title={blogState?.title} />
             <Container class1='blog-wrapper home-wrapper-2 py-5'>
-                    <div className='row'>
-                        <div className='col-12'>
-                            <div className='single-blog-card'>
-                                <Link to='/blogs' className='d-flex align-items-center gap-15'>
-                                    <FaArrowLeft />
-                                    Go back to Blogs
-                                </Link>
-                                <img
-                                    src='/images/blog-2.jpg'
-                                    className='img-fluid w-100 my-4'
-                                    alt='fruit'
-                                />
-                                <h3 className='title'>Our 6 of the Best Organic Chocolates to Buy.</h3>
-                                <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.
-                                    The point of using Lorem Ipsum The man, who is in a stable condition inhospital,
-                                    has “potentially life-changing injuries” after the overnight attack in Garvagh, County Lonodonderry. He was shot in the arms and legs.”
-                                    What sort of men would think.” A reader will be distracted by the readable content.</p>
-                            </div>
+                <div className='row'>
+                    <div className='col-12'>
+                        <div className='single-blog-card'>
+                            <Link to='/blogs' className='d-flex align-items-center gap-15'>
+                                <FaArrowLeft />
+                                Go back to Blogs
+                            </Link>
+                            <img
+                                src={blogState?.images[0].url ? blogState?.images[0].url : '/images/blog-2.jpg'}
+                                className='img-fluid w-100 my-4'
+                                alt='fruit'
+                            />
+                            <h3 className='title'>{blogState?.title}</h3>
+                            <p
+                                // dangerouslySetInnerHTML={{ __html: description }}
+                            ></p>
                         </div>
                     </div>
+                </div>
             </Container>
         </>
     )

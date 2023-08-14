@@ -2,19 +2,23 @@ import React from 'react'
 import './BlogCard.scss'
 import { Link } from 'react-router-dom'
 
-const BlogCard = () => {
+const BlogCard = (props) => {
+
+  const {id, title, description, date, image } = props
+
   return (
     <div className='blog-card'>
       <div className='card-img'>
-        <img src='images/blog-1.jpg' className='img-fluid w-100' alt='blog' />
+        <img src={image ? image : 'images/blog-1.jpg'} className='img-fluid w-100' alt='blog' />
       </div>
       <div className='blog-content'>
-        <p className='date-blog'>1 July, 2023</p>
-        <h5 className='title'>Finding a way to separate ‘work’ to do a business.</h5>
-        <p className='desc'>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod ...
+        <p className='date-blog'>{date}</p>
+        <h5 className='title'>{title}</h5>
+        <p className='desc'
+          dangerouslySetInnerHTML={{ __html: description?.substr(0, 40) + ' ...' }}
+        >
         </p>
-        <Link to="/blogs/:id" className="button-2">Read More</Link>
+        <Link to={"/blog/" + id} className="button-2">Read More</Link>
       </div>
     </div>
   )

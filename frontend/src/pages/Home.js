@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Link } from "react-router-dom"
 import Marquee from 'react-fast-marquee'
 import './Home.scss'
@@ -7,8 +7,29 @@ import ProductCard from '../components/ProductCard'
 import SpecialProduct from '../components/SpecialProduct'
 import Container from '../components/Container'
 import services from "../utils/Data"
-
+import { useDispatch, useSelector } from 'react-redux'
+import { getBlogs } from '../features/blogs/blogSlice'
+import moment from 'moment'
+import { getProducts } from '../features/products/productSlice'
 export const Home = () => {
+
+  const blogState = useSelector((state) => state?.blog?.blog)
+  const productState = useSelector((state) => state?.product?.product)
+  console.log(productState);
+  const distpatch = useDispatch()
+  useEffect(() => {
+    getAllBlogs()
+    getAllProduct()
+  }, [])
+
+  const getAllBlogs = () => {
+    distpatch(getBlogs())
+  }
+
+  const getAllProduct = () => {
+    distpatch(getProducts())
+  }
+
   return (
     <>
 
@@ -241,10 +262,23 @@ export const Home = () => {
             <h3 className='section-heading'>DEAL OF THE DAY</h3>
           </div>
           <div className='row'>
-            <SpecialProduct />
-            <SpecialProduct />
-            <SpecialProduct />
-            <SpecialProduct />
+          {productState && 
+            productState?.map((item, index) => {
+              if (item.tags === "special") {
+                return (
+            <SpecialProduct 
+            key={index}
+              title={item?.title}
+              brand={item?.brand}
+              price={item?.price}
+              sold={item?.sold}
+              totalrating={item?.totalrating.toString()}
+              quantity={item?.quantity}
+            />
+              )
+              }
+            })
+          }
           </div>
         </div>
       </Container>
@@ -254,7 +288,18 @@ export const Home = () => {
           <div className='col-12'>
             <h3 className='section-heading'>Our Trending Products</h3>
           </div>
-          <ProductCard />
+          {productState && 
+            productState?.map((item, index) => {
+              if (item.tags === "popular") {
+                return (
+            <ProductCard 
+            key={index}
+              data={productState}
+            />
+              )
+              }
+            })
+          }
         </div>
       </Container>
 
@@ -296,18 +341,21 @@ export const Home = () => {
           </div>
         </div>
         <div className='row'>
-          <div className='col-3'>
-            <BlogCard />
-          </div>
-          <div className='col-3'>
-            <BlogCard />
-          </div>
-          <div className='col-3'>
-            <BlogCard />
-          </div>
-          <div className='col-3'>
-            <BlogCard />
-          </div>
+        { blogState &&
+                blogState?.map((item, index) => {
+                  return (
+                    <div className='col-3' key={index}>
+                      <BlogCard
+                        id={item?._id}
+                        title={item?.title}
+                        description={item?.description}
+                        image={item?.images[0]?.url}
+                        data={blogState ? blogState : []}
+                        date={moment(item?.createdAt).format('MMMM Do YYYY, h:mm a')}
+                      />
+                    </div>
+                  )
+                })}
         </div>
       </Container>
     </>
