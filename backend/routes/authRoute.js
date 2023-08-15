@@ -23,7 +23,9 @@ const {
     getOrders,
     updateOrderStatus,
     getAllOrders,
-    getOrderByUserId
+    getOrderByUserId,
+    removeProdFromCart,
+    updateQuantityProdFromCart
 } = require("../controller/userCtrl")
 const { authMiddleware, isAdmin, blockUser, unBlockUser } = require("../middlewares/authMiddleware")
 const router = express.Router()
@@ -56,6 +58,8 @@ router.put('/unblock-user/:id', authMiddleware, isAdmin, unBlockUser)
 router.put('/order/update-order/:id', authMiddleware, isAdmin, updateOrderStatus)
 
 router.delete('/empty-cart', authMiddleware, emptyCart)
+router.delete('/delete-product-cart/:cartItemId', authMiddleware, removeProdFromCart)
+router.delete('/update-product-cart/:cartItemId/:newQuantity', authMiddleware, updateQuantityProdFromCart)
 router.delete('/:id', deleteAUser)
 
 

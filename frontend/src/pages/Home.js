@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import Marquee from 'react-fast-marquee'
 import './Home.scss'
 import BlogCard from '../components/BlogCard'
@@ -10,6 +10,7 @@ import services from "../utils/Data"
 import { useDispatch, useSelector } from 'react-redux'
 import { getBlogs } from '../features/blogs/blogSlice'
 import moment from 'moment'
+import ReactStars from "react-rating-stars-component"
 import { getProducts } from '../features/products/productSlice'
 export const Home = () => {
 
@@ -17,6 +18,7 @@ export const Home = () => {
   const productState = useSelector((state) => state?.product?.product)
   console.log(productState);
   const distpatch = useDispatch()
+  const navigate = useNavigate()
   useEffect(() => {
     getAllBlogs()
     getAllProduct()
@@ -30,6 +32,10 @@ export const Home = () => {
     distpatch(getProducts())
   }
 
+  const handleAddToWishList = (id) => {
+    console.log(id);
+    dispatch(addToWishList(id))
+}
   return (
     <>
 
@@ -143,7 +149,7 @@ export const Home = () => {
             <h5 className='shop-title-market'>SHOP MARKETS</h5>
             <div className='categories d-flex justify-content-between align-items-center'>
               <div className=''>
-                <img src='images/fruit.jpg' alt='fruit'/>
+                <img src='images/fruit.jpg' alt='fruit' />
                 <div className='shop-maket'>
                   <h6 className='title'>Fresh Fruits</h6>
                   <p>10 Products</p>
@@ -199,7 +205,65 @@ export const Home = () => {
           <div className='col-12'>
             <h3 className='section-heading'>FEATURED PRODUCTS</h3>
           </div>
-          <ProductCard />
+          {productState &&
+            productState?.map((item, index) => {
+              if (item.tags === "featured") {
+                return (
+                  <div key={index} className={"col-3"}>
+                        <div
+                            className='product-card position-relative'
+                        >
+                            <div className='wishlist-icon position-absolute'>
+                                <button className='border-0 bg-transparent'>
+                                    <img
+                                        className='btn-wishlist'
+                                        src='images/wish.svg'
+                                        alt='wishlist'
+                                        onClick={() => handleAddToWishList(item?._id) }
+                                    />
+                                </button>
+                            </div>
+                            <div className='product-image'>
+                                <img src={item?.images[0].url} className='img-fluid' alt='Organic Cabbage' />
+                                <img src='images/oninon.jpg' className='img-fluid' alt='Onion' />
+                            </div>
+                            <div className='product-details'>
+                                <h6 className='brand'>{item?.brand}</h6>
+                                <h5 className='product-title'>{item?.title}</h5>
+                                <ReactStars
+                                    count={5}
+                                    size={24}
+                                    value={item?.totalrating.toString()}
+                                    edit={false}
+                                    activeColor="#ffd700"
+                                />
+                                <p className={"d-none"}
+                                    dangerouslySetInnerHTML={{ __html: item?.description }}
+                                >
+
+                                </p>
+                                <p className='price'>${item?.price}</p>
+                            </div>
+
+                            <div className='action-bar position-absolute'>
+                                <div className='d-flex flex-column gap-15'>
+                                    <button className='border-0 bg-transparent'>
+                                        <img className='btn-product' src='images/prodcompare.svg' alt='compare' />
+                                    </button>
+                                    <button className='border-0 bg-transparent'>
+                                        <img onClick={() => navigate('/product/'+item?._id)} className='btn-product' src='images/view.svg' alt='view' />
+                                    </button>
+                                    <button className='border-0 bg-transparent'>
+                                        <img className='btn-product' src='images/add-cart.svg' alt='addcart' />
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                )
+              }
+            })
+          }
         </div>
       </Container>
 
@@ -262,23 +326,24 @@ export const Home = () => {
             <h3 className='section-heading'>DEAL OF THE DAY</h3>
           </div>
           <div className='row'>
-          {productState && 
-            productState?.map((item, index) => {
-              if (item.tags === "special") {
-                return (
-            <SpecialProduct 
-            key={index}
-              title={item?.title}
-              brand={item?.brand}
-              price={item?.price}
-              sold={item?.sold}
-              totalrating={item?.totalrating.toString()}
-              quantity={item?.quantity}
-            />
-              )
-              }
-            })
-          }
+            {productState &&
+              productState?.map((item, index) => {
+                if (item.tags === "special") {
+                  return (
+                    <SpecialProduct
+                      key={index}
+                      id={item?._id}
+                      title={item?.title}
+                      brand={item?.brand}
+                      price={item?.price}
+                      sold={item?.sold}
+                      totalrating={item?.totalrating.toString()}
+                      quantity={item?.quantity}
+                    />
+                  )
+                }
+              })
+            }
           </div>
         </div>
       </Container>
@@ -288,15 +353,15 @@ export const Home = () => {
           <div className='col-12'>
             <h3 className='section-heading'>Our Trending Products</h3>
           </div>
-          {productState && 
+          {productState &&
             productState?.map((item, index) => {
               if (item.tags === "popular") {
                 return (
-            <ProductCard 
-            key={index}
-              data={productState}
-            />
-              )
+                  <ProductCard
+                    key={index}
+                    data={productState}
+                  />
+                )
               }
             })
           }
@@ -341,21 +406,21 @@ export const Home = () => {
           </div>
         </div>
         <div className='row'>
-        { blogState &&
-                blogState?.map((item, index) => {
-                  return (
-                    <div className='col-3' key={index}>
-                      <BlogCard
-                        id={item?._id}
-                        title={item?.title}
-                        description={item?.description}
-                        image={item?.images[0]?.url}
-                        data={blogState ? blogState : []}
-                        date={moment(item?.createdAt).format('MMMM Do YYYY, h:mm a')}
-                      />
-                    </div>
-                  )
-                })}
+          {blogState &&
+            blogState?.map((item, index) => {
+              return (
+                <div className='col-3' key={index}>
+                  <BlogCard
+                    id={item?._id}
+                    title={item?.title}
+                    description={item?.description}
+                    image={item?.images[0]?.url}
+                    data={blogState ? blogState : []}
+                    date={moment(item?.createdAt).format('MMMM Do YYYY, h:mm a')}
+                  />
+                </div>
+              )
+            })}
         </div>
       </Container>
     </>

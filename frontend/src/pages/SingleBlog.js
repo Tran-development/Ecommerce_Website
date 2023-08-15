@@ -35,13 +35,14 @@ const SingleBlog = () => {
                                 Go back to Blogs
                             </Link>
                             <img
-                                src={blogState?.images[0].url ? blogState?.images[0].url : '/images/blog-2.jpg'}
+                            // blogState?.images[0].url ? blogState?.images[0].url : 
+                                src={'/images/blog-2.jpg'}
                                 className='img-fluid w-100 my-4'
                                 alt='fruit'
                             />
                             <h3 className='title'>{blogState?.title}</h3>
                             <p
-                                // dangerouslySetInnerHTML={{ __html: description }}
+                                dangerouslySetInnerHTML={{ __html: blogState?.description }}
                             ></p>
                         </div>
                     </div>

@@ -7,6 +7,7 @@ const SpecialProduct = (props) => {
 
   const {
     title,
+    id,
     brand,
     price,
     sold,
@@ -58,7 +59,7 @@ const SpecialProduct = (props) => {
                 ></div>
               </div>
             </div>
-            <Link className="button-1">Add to Cart</Link>
+            <Link className="button-1" to={'/product/'+id}>View</Link>
           </div>
         </div>
       </div>

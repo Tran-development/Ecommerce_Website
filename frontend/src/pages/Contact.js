@@ -16,7 +16,7 @@ let loginSchema = yup.object().shape({
   name: yup.string().required("*Name is Required"),
   email: yup.string().nullable().required("*Email is Required"),
   mobile: yup.string().required("*Mobile Number is Required"),
-  message: yup.string().required("*Message is Required"),
+  comment: yup.string().required("*Message is Required"),
 });
 
 const Contact = () => {
@@ -29,7 +29,7 @@ const Contact = () => {
       name: "",
       email: "",
       mobile: "",
-      message: "",
+      comment: "",
     },
     validationSchema: loginSchema,
     onSubmit: (values) => {
@@ -37,7 +37,7 @@ const Contact = () => {
         name: values.name,
         email: values.email,
         mobile: values.mobile,
-        message: values.message
+        comment: values.comment
       }
 
       ))
@@ -151,16 +151,16 @@ const Contact = () => {
                       className='w-100 form-control'
                       cols="30"
                       rows="4"
-                      placeholder='Your message'
-                      name="message"
-                      val={formik.values.message}
-                      onChange={formik.handleChange("message")}
-                      onBlur={formik.handleBlur("message")}
+                      placeholder='Your comment'
+                      name="comment"
+                      val={formik.values.comment}
+                      onChange={formik.handleChange("comment")}
+                      onBlur={formik.handleBlur("comment")}
                     >
                     </textarea>
                     <div className='validate-error'>
-                      {formik.touched.message && formik.errors.message ? (
-                        <div>{formik.errors.message}</div>
+                      {formik.touched.comment && formik.errors.comment ? (
+                        <div>{formik.errors.comment}</div>
                       ) : null}
                     </div>
                   </div>
