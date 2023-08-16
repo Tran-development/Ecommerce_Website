@@ -12,19 +12,23 @@ import { deleteCartProduct, getUserCart, updateCartProduct } from '../features/u
 
 const Cart = () => {
 
-    const [quantity, setQuantity] = useState(null)
-
+    const [prodUpdateDetail, setProdUpdateDetail] = useState(null)
+    const [totalAmount, setTotalAmount] = useState(null)
     const dispatch = useDispatch()
     const userCartState = useSelector((state) => state?.auth?.cartProducts)
-    console.log(userCartState);
 
     useEffect(() => {
         dispatch(getUserCart())
     }, [])
 
     useEffect(() => {
-        updateACartProd()
-    }, [quantity])
+        if (prodUpdateDetail !== null) {
+            dispatch(updateCartProduct({ cartItemId: prodUpdateDetail?.cartItemId, quantity: prodUpdateDetail?.quantity }))
+            setTimeout(() => {
+                dispatch(getUserCart())
+            }, 200)
+        }
+    }, [prodUpdateDetail])
 
     const deleteACartProd = (id) => {
         dispatch(deleteCartProduct(id))
@@ -33,12 +37,13 @@ const Cart = () => {
         }, 200)
     }
 
-    const updateACartProd = (id) => {
-        dispatch(updateCartProduct({cartItemId: id, quantity}))
-        setTimeout(() => {
-            dispatch(getUserCart())
-        }, 200)
-    }
+    useEffect(() => {
+        let sum = 0;
+        for (let index = 0; index < userCartState?.length; index++) {
+            sum = sum + (Number(userCartState[index].quantity) * userCartState[index].productId.price)
+            setTotalAmount(sum)
+        }
+    }, [userCartState])
 
     return (
         <>
@@ -61,7 +66,7 @@ const Cart = () => {
                                     <div key={index} className='cart-data mb-2 py-3 d-flex justify-content-between align-items-center'>
                                         <div className='cart-col-1 gap-15 d-flex align-items-center'>
                                             <div className='w-25'>
-                                                <img src={item?.productId.images[0].url} className='img-fluid item-cart' />
+                                                <img src={item?.productId?.images[0]?.url} className='img-fluid item-cart' />
                                             </div>
                                             <div className='w-75'>
                                                 <div className='w-75'>
@@ -85,13 +90,13 @@ const Cart = () => {
                                                     min={1}
                                                     max={50}
                                                     id=''
-                                                    value={quantity ? quantity : item?.quantity}
-                                                    onChange={(e) => setQuantity(e.target.value)}
+                                                    value={prodUpdateDetail?.quantity ? prodUpdateDetail?.quantity : item?.quantity}
+                                                    onChange={(e) => setProdUpdateDetail({ cartItemId: item?._id, quantity: e.target.value })}
                                                 />
                                             </div>
                                             <div>
-                                                <AiTwotoneDelete 
-                                                className='text-danger fs-4 btn-delete' 
+                                                <AiTwotoneDelete
+                                                    className='text-danger fs-4 btn-delete'
                                                     onClick={() => deleteACartProd(item?._id)}
                                                 />
                                             </div>
@@ -115,14 +120,16 @@ const Cart = () => {
                                         Apply coupon
                                     </Link>
                                 </div>
-                                <div className='d-flex flex-column align-items-center'>
-                                    {/* {item?.price * item?.quantity} */}
-                                    <h4>SubTotal: $ </h4>
+                                {
+                                    (totalAmount !== null || totalAmount !== 0) &&
+                                    <div className='d-flex flex-column align-items-center'>
+                                    <h4>SubTotal: $ {totalAmount}</h4>
                                     <p>Taxes and shipping calculated at checkout</p>
                                     <Link to='/checkout' className='button'>
                                         Checkout
                                     </Link>
                                 </div>
+                                }
                             </div>
                         </div>
                     </div>

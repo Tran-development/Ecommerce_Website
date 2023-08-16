@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { NavLink, Link } from 'react-router-dom'
 import './Header.scss'
 import {
@@ -11,14 +11,28 @@ import {
 } from "react-icons/bs"
 import logoVN from '../images/logo_VN.png'
 import logoUK from '../images/logo_UK.png'
+import { useDispatch, useSelector } from 'react-redux'
 
 const Header = () => {
 
+  const dispatch = useDispatch()
+
+  const cartState = useSelector((state) => state?.auth?.cartProducts)
+
   const [isListVisible, setIsListVisible] = useState(true)
+  const [total, setTotal] = useState(null)
 
   const toggleList = () => {
     setIsListVisible(!isListVisible)
   }
+
+  useEffect(() => {
+    let sum = 0;
+    for (let index = 0; index < cartState?.length; index++) {
+        sum = sum + (Number(cartState[index].quantity) * Number(cartState[index].productId.price))
+        setTotal(sum)
+    }
+}, [cartState])
 
   return (
     <>
@@ -92,8 +106,8 @@ const Header = () => {
                   <Link to='/cart' className='d-flex align-items-center d-flex gap-10 text-dark'>
                     <BsFillCartFill className='fs-4' />
                     <div className='d-flex flex-column gap-10'>
-                      <span className='badge bg-dark text-white'>0</span>
-                      <p className='mb-0 text-hover'>$0.00</p>
+                      <span className='badge bg-dark text-white'>{cartState?.length ? cartState?.length : 0}</span>
+                      <p className='mb-0 text-hover'>$ {total ? total : 0}</p>
                     </div>
                   </Link>
                 </div>

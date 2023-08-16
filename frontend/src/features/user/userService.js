@@ -71,6 +71,17 @@ const updateProdFromCart = async (cartDetail) => {
     }
 };
 
+const createOrder = async (orderDetail) => {
+    try {
+        const response = await axios.post(`${base_url}user/cart/create-order`, orderDetail, config);
+        if (response.data) {
+            return response.data;
+        }
+    } catch (error) {
+        console.log(error);
+    }
+};
+
 export const authService = {
     register,
     login,
@@ -78,5 +89,6 @@ export const authService = {
     addToCart,
     getCart,
     removeProdFromCart,
-    updateProdFromCart
+    updateProdFromCart,
+    createOrder
 }
