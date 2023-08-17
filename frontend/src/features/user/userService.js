@@ -82,6 +82,28 @@ const createOrder = async (orderDetail) => {
     }
 };
 
+const getUserOrders = async () => {
+    try {
+        const response = await axios.get(`${base_url}user/getmyorders`, config);
+        if (response.data) {
+            return response.data;
+        }
+    } catch (error) {
+        console.log(error);
+    }
+}; 
+
+const updateUser = async (data) => {
+    try {
+        const response = await axios.put(`${base_url}user/edit-user`, data, config);
+        if (response.data) {
+            return response.data;
+        }
+    } catch (error) {
+        console.log(error);
+    }
+};
+
 export const authService = {
     register,
     login,
@@ -90,5 +112,7 @@ export const authService = {
     getCart,
     removeProdFromCart,
     updateProdFromCart,
-    createOrder
+    createOrder,
+    getUserOrders,
+    updateUser
 }

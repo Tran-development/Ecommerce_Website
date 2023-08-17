@@ -302,7 +302,7 @@ const userCart = asyncHandler(async (req, res) => {
     const { _id } = req.user;
     validateMongoDbId(_id);
     try {
-        
+
         let newCart = await new Cart({
             userId: _id,
             productId,
@@ -333,7 +333,7 @@ const removeProdFromCart = asyncHandler(async (req, res) => {
     const { cartItemId } = req.params
     validateMongoDbId(_id)
     try {
-        const deleteProd = await Cart.deleteOne({ userId: _id, _id: cartItemId})
+        const deleteProd = await Cart.deleteOne({ userId: _id, _id: cartItemId })
         res.json(deleteProd)
     } catch (error) {
         throw new Error(error)
@@ -347,7 +347,7 @@ const updateQuantityProdFromCart = asyncHandler(async (req, res) => {
     const { cartItemId, newQuantity } = req.params
     validateMongoDbId(_id)
     try {
-        const cartItem = await Cart.findOne({ userId: _id, _id: cartItemId})
+        const cartItem = await Cart.findOne({ userId: _id, _id: cartItemId })
         cartItem.quantity = newQuantity
         cartItem.save()
         res.json(cartItem)
@@ -359,25 +359,40 @@ const updateQuantityProdFromCart = asyncHandler(async (req, res) => {
 const createOrder = asyncHandler(async (req, res, next) => {
     const { shippingInfor, orderItems, totalPrice, totalPriceAfterDiscount, paymentInfor } = req.body;
     const { _id } = req.user;
-  
+
     try {
-      const order = await Order.create({
-        shippingInfor,
-        orderItems,
-        totalPrice,
-        totalPriceAfterDiscount,
-        paymentInfor,
-        user: _id
-      });
-  
-      res.json({
-        order,
-        success: true
-      });
+        const order = await Order.create({
+            shippingInfor,
+            orderItems,
+            totalPrice,
+            totalPriceAfterDiscount,
+            paymentInfor,
+            user: _id
+        });
+
+        res.json({
+            order,
+            success: true
+        });
     } catch (error) {
-      next(error); // Chuyển lỗi đến middleware xử lý lỗi
+        next(error); // Chuyển lỗi đến middleware xử lý lỗi
     }
-  });
+});
+
+const getMyOrders = asyncHandler(async (req, res) => {
+    const { _id } = req.user
+    try {
+        const orders = await Order.find({ user: _id })
+        .populate("user")
+        .populate("orderItems.product")
+        .populate("orderItems.color")
+        res.json({
+            orders
+        })
+    } catch (error) {
+        throw new Error(error)
+    }
+})
 
 // const emptyCart = asyncHandler(async (req, res) => {
 //     const { _id } = req.user
@@ -533,14 +548,9 @@ module.exports = {
     saveAddress,
     userCart,
     getUserCart,
-    // emptyCart,
-    // applyCoupon,
-    // createOrder,
-    // getOrders,
-    // getAllOrders,
-    // updateOrderStatus,
-    // getOrderByUserId,
+    getMyOrders,
     createOrder,
+    // getAllOrders,
     removeProdFromCart,
     updateQuantityProdFromCart
 }

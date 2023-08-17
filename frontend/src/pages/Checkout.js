@@ -98,7 +98,7 @@ const Checkout = () => {
             alert("Razorpay SDK failed to Load")
             return
         }
-        const result = await axios.post("http://localhost:5000/api/user/order/checkout", {amount: totalAmount + 5}, config)
+        const result = await axios.post("http://localhost:5000/api/user/order/checkout", { amount: totalAmount + 5 }, config)
         if (!result) {
             alert("Something Went Wrong")
             return
@@ -137,7 +137,7 @@ const Checkout = () => {
             prefill: {
                 name: "Tinh Tran",
                 // example@upi
-                email: "mm@gmail.com", 
+                email: "example@upi",
                 contact: "0987654321",
             },
             notes: {

@@ -6,46 +6,46 @@ var orderSchema = new mongoose.Schema(
     user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
-      required: true,
+      // required: true,
     },
     shippingInfor: {
       firstName: {
         type: String,
-        required: true
+        // required: true
       },
       lastName: {
         type: String,
-        required: true
+        // required: true
       },
       address: {
         type: String,
-        required: true
+        // required: true
       },
       city: {
         type: String,
-        required: true
+        // required: true
       },
       state: {
         type: String,
-        required: true
+        // required: true
       },
       other: {
         type: String,
-        required: true
+        // required: true
       },
       pincode: {
         type: Number,
-        required: true
+        // required: true
       }
     },
     paymentInfor: {
       razorpayOrderId: {
         type: String,
-        required: true
+        // required: true
       },
       razorpayPaymentId: {
         type: String,
-        required: true
+        // required: true
       }
     },
     orderItems: [
@@ -53,20 +53,20 @@ var orderSchema = new mongoose.Schema(
         product: {
           type: mongoose.Schema.Types.ObjectId,
           ref: "Product",
-          required: true
+          // required: true
         },
         color: {
           type: mongoose.Schema.Types.ObjectId,
           ref: "Color",
-          required: true
+          // required: true
         },
         quantity: {
           type: Number,
-          required: true
+          // required: true
         },
         price: {
           type: Number,
-          required: true
+          // required: true
         }
       }
     ],
@@ -76,11 +76,11 @@ var orderSchema = new mongoose.Schema(
     },
     totalPrice: {
       type: Number,
-      required: true
+      // required: true
     },
     totalPriceAfterDiscount: {
       type: Number,
-      required: true
+      // required: true
     },
     orderStatus: {
       type: String,

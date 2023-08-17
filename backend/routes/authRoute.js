@@ -25,7 +25,8 @@ const {
     // getAllOrders,
     // getOrderByUserId,
     removeProdFromCart,
-    updateQuantityProdFromCart
+    updateQuantityProdFromCart,
+    getMyOrders
 } = require("../controller/userCtrl")
 const { authMiddleware, isAdmin, blockUser, unBlockUser } = require("../middlewares/authMiddleware")
 const { checkout, paymentverification } = require("../controller/paymentCtrl")
@@ -44,7 +45,7 @@ router.post('/order/paymentverification', authMiddleware, paymentverification)
 router.post('/cart/create-order', authMiddleware, createOrder)
 
 router.get('/all-users', getAllUser)
-// router.get('/get-orders', authMiddleware, getOrders)
+router.get('/getmyorders', authMiddleware, getMyOrders)
 // router.get('/get-allorder', authMiddleware, isAdmin, getAllOrders)
 // router.post('/getorderbyuser/:id', authMiddleware, isAdmin, getOrderByUserId)
 router.get('/wishlist', authMiddleware, getWishList)

@@ -1,13 +1,13 @@
 import React from 'react'
 import BreadCrum from '../components/BreadCrum'
 import Meta from '../components/Meta'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import './Login.scss'
 import Container from '../components/Container'
 import CustomInput from '../components/CustomInput'
 import * as yup from "yup";
 import { useFormik } from "formik";
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { loginUser } from '../features/user/userSlice'
 
 
@@ -18,7 +18,10 @@ let loginSchema = yup.object().shape({
 
 const Login = () => {
 
+    const authState = useSelector((state) => state?.auth)
+
     const dispatch = useDispatch()
+    const navigate = useNavigate()
 
     const formik = useFormik({
         enableReinitialize: true,
@@ -29,6 +32,11 @@ const Login = () => {
         validationSchema: loginSchema,
         onSubmit: (values) => {
             dispatch(loginUser(values))
+            setTimeout(() => {
+            if (authState?.isSuccess) {
+                navigate('/')
+            }
+            }, 300)
         },
     });
 

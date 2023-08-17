@@ -18,6 +18,7 @@ const Header = () => {
   const dispatch = useDispatch()
 
   const cartState = useSelector((state) => state?.auth?.cartProducts)
+  const authState = useSelector((state) => state?.auth)
 
   const [isListVisible, setIsListVisible] = useState(true)
   const [total, setTotal] = useState(null)
@@ -97,9 +98,13 @@ const Header = () => {
                   </Link>
                 </div>
                 <div>
-                  <Link to='/login' className='d-flex align-items-center d-flex gap-10 text-dark'>
+                  <Link to={authState?.user === null ? '/login' : "/my-profile"} className='d-flex align-items-center d-flex gap-10 text-dark'>
                     <BsFillPersonFill className='fs-4' />
-                    <p className='mb-0 text-hover'>Log in <br /> My Account</p>
+                    {
+                      authState?.user === null ?
+                      <p className='mb-0 text-hover'>Log in <br /> My Account</p>
+                      :  <p className='mb-0 text-hover'>Welcome <br/> {authState?.user?.firstname} </p>
+                    }
                   </Link>
                 </div>
                 <div>
@@ -149,6 +154,7 @@ const Header = () => {
                   <div className='d-flex align-items-center gap-30'>
                     <NavLink className="text-dark text-hover" to="/">Home</NavLink>
                     <NavLink className="text-dark text-hover" to="/product">Our Store</NavLink>
+                    <NavLink className="text-dark text-hover" to="/my-orders">My Orders</NavLink>
                     <NavLink className="text-dark text-hover" to="/blogs">Blogs</NavLink>
                     <NavLink className="text-dark text-hover" to="/contact">Contact</NavLink>
                   </div>
