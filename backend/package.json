@@ -27,7 +27,8 @@
     "razorpay": "^2.9.1",
     "sharp": "^0.32.3",
     "slugify": "^1.6.6",
-    "uniqid": "^5.4.0"
+    "uniqid": "^5.4.0",
+    "xml2js": "^0.6.2"
   },
   "devDependencies": {
     "@types/cookie-parser": "^1.4.3",

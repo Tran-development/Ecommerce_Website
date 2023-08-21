@@ -10,6 +10,7 @@ const login = async (user) => {
     return response.data
 }
 
+
 const authService = {
     login,
 }

@@ -4,6 +4,11 @@ import ReactStars from "react-rating-stars-component"
 import { Link, useLocation } from 'react-router-dom'
 import { addToWishList } from '../features/products/productSlice'
 import { useDispatch } from 'react-redux'
+import wishlist from '../images/wish.svg'
+import {BsArrowsAngleContract} from 'react-icons/bs'
+import view from '../images/view.svg'
+import addcart from '../images/add-cart.svg'
+import imgHidden from '../images/oninon.jpg'
 
 const ProductCard = (props) => {
     const { grid, data } = props
@@ -26,7 +31,7 @@ const ProductCard = (props) => {
                                 <button className='border-0 bg-transparent'>
                                     <img
                                         className='btn-wishlist'
-                                        src='images/wish.svg'
+                                        src={wishlist}
                                         alt='wishlist'
                                         onClick={() => handleAddToWishList(item?._id) }
                                     />
@@ -34,7 +39,7 @@ const ProductCard = (props) => {
                             </div>
                             <div className='product-image'>
                                 <img src={item?.images[0].url} className='img-fluid' alt='Organic Cabbage' />
-                                <img src='images/oninon.jpg' className='img-fluid' alt='Onion' />
+                                <img src={imgHidden} className='img-fluid' alt='Onion' />
                             </div>
                             <div className='product-details'>
                                 <h6 className='brand'>{item?.brand}</h6>
@@ -55,15 +60,15 @@ const ProductCard = (props) => {
                             </div>
 
                             <div className='action-bar position-absolute'>
-                                <div className='d-flex flex-column gap-15'>
+                                <div className='d-flex flex-column gap-15 icon-list'>
                                     <button className='border-0 bg-transparent'>
-                                        <img className='btn-product' src='images/prodcompare.svg' alt='compare' />
+                                        <BsArrowsAngleContract className='fs-6'/>
                                     </button>
                                     <Link to={'/product/'+item._id} className='border-0 bg-transparent'>
-                                        <img className='btn-product' src='images/view.svg' alt='view' />
+                                        <img className='btn-product' src={view} alt='view' />
                                     </Link>
                                     <button className='border-0 bg-transparent'>
-                                        <img className='btn-product' src='images/add-cart.svg' alt='addcart' />
+                                        <img className='btn-product' src={addcart} alt='addcart' />
                                     </button>
                                 </div>
                             </div>

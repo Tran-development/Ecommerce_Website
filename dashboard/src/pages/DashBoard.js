@@ -4,6 +4,8 @@ import './DashBoard.scss'
 import { Area } from '@ant-design/plots';
 import { Table } from 'antd';
 import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { getMonthlyData, getOrders, getYearlyData } from '../features/order/orderSlice';
 
 const columns = [
   {
@@ -15,8 +17,16 @@ const columns = [
     dataIndex: 'name',
   },
   {
-    title: 'Product',
+    title: 'Product Count',
     dataIndex: 'product',
+  },
+  {
+    title: 'Total Price',
+    dataIndex: 'price',
+  },
+  {
+    title: 'Total Price After Discount',
+    dataIndex: 'dprice',
   },
   {
     title: 'Status',
@@ -34,6 +44,45 @@ for (let i = 0; i < 46; i++) {
 }
 
 const DashBoard = () => {
+
+  const [dataMonthly, setDataMonthly] = useState([])
+
+  const dispatch = useDispatch()
+  const monthlyDataState = useSelector((state) => state?.order?.monthlydata)
+  const yearlyDataState = useSelector((state) => state?.order?.yearlydata)
+  const ordersState = useSelector((state) => state?.order?.orders?.orders)
+
+  console.log(ordersState);
+
+  useEffect(() => {
+    dispatch(getMonthlyData())
+    dispatch(getYearlyData())
+    dispatch(getOrders())
+  }, [])
+
+  useEffect(() => {
+    let monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    let data = []
+    let monthlyOrderCount = []
+    for (let index = 0; index < monthlyDataState?.length; index++) {
+      const element = monthlyDataState[index];
+      
+      data.push({type: monthNames[element?._id?.amount], sales: element?.count})
+      // monthlyOrderCount.push({ type: monthNames[element?._id?]})
+    }
+    setDataMonthly(data);
+
+    const data1 = [];
+for (let i = 0; i < ordersState?.length; i++) {
+  data1.push({
+    key: i,
+    name: ordersState[6]?.shippingInfor?.firstName,
+    product: 32,
+    price: 22,
+    status: `Pending. ${i}`,
+  });
+}
+  }, [monthlyDataState])
 
   const data =
     [
@@ -100,7 +149,8 @@ const DashBoard = () => {
       });
   };
   const config = {
-    data,
+    data: dataMonthly,
+    // data,
     xField: 'timePeriod',
     yField: 'sales',
     xAxis: {

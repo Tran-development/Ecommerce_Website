@@ -1,11 +1,12 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { productService } from "./productService";
+import { toast } from "react-toastify";
 
 export const getProducts = createAsyncThunk(
     'product/get-products',
-    async (thunkAPI) => {
+    async (data, thunkAPI) => {
         try {
-            return await productService.getProduct()
+            return await productService.getProduct(data)
         } catch (error) {
             return thunkAPI.rejectWithValue(error)
         }
@@ -28,6 +29,17 @@ export const addToWishList = createAsyncThunk(
     async (proId, thunkAPI) => {
         try { 
             return await productService.addToWish(proId)
+        } catch (error) {
+            return thunkAPI.rejectWithValue(error)
+        }
+    }
+)
+
+export const addRating = createAsyncThunk(
+    'product/rating',
+    async (data, thunkAPI) => {
+        try { 
+            return await productService.rateProduct(data)
         } catch (error) {
             return thunkAPI.rejectWithValue(error)
         }
@@ -96,7 +108,29 @@ const productSlice = createSlice({
                 state.isSuccess = false
                 state.isError = true
                 state.message = action.error
-            })           
+            })     
+            .addCase(addRating.pending, (state) => {
+                state.isLoading = true
+            })
+            .addCase(addRating.fulfilled, (state, action) => {
+                state.isLoading = false
+                state.isSuccess = true
+                state.isError = false
+                state.rating = action.payload 
+                state.message = "Rating Added Successfully !"  
+                if (state.isSuccess) {
+                    toast.success("Rating Added Successfully")
+                }             
+            })
+            .addCase(addRating.rejected, (state, action) => {
+                state.isLoading = false
+                state.isSuccess = false
+                state.isError = true
+                state.message = action.error
+                if (state.isError) {
+                    toast.error("Something Went Wrong!")
+                } 
+            })       
     }
 })
 

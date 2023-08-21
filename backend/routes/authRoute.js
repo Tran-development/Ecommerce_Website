@@ -26,7 +26,10 @@ const {
     // getOrderByUserId,
     removeProdFromCart,
     updateQuantityProdFromCart,
-    getMyOrders
+    getMyOrders,
+    getMonthOrderIncome,
+    getYearTotalOrder,
+    getAllOrders
 } = require("../controller/userCtrl")
 const { authMiddleware, isAdmin, blockUser, unBlockUser } = require("../middlewares/authMiddleware")
 const { checkout, paymentverification } = require("../controller/paymentCtrl")
@@ -35,7 +38,7 @@ const router = express.Router()
 
 router.post('/register', createUser)
 router.post('/forgot-password-token', forgotPassowrdToken)
-router.put('reset-password/:id', resetPassword)
+router.put('/reset-password/:token', resetPassword)
 router.post('/login', loginUserCtrl)
 router.post('/admin-login', loginAdmin)
 router.post('/cart', authMiddleware, userCart)
@@ -46,14 +49,16 @@ router.post('/cart/create-order', authMiddleware, createOrder)
 
 router.get('/all-users', getAllUser)
 router.get('/getmyorders', authMiddleware, getMyOrders)
-// router.get('/get-allorder', authMiddleware, isAdmin, getAllOrders)
+router.get('/getallorders', authMiddleware, isAdmin, getAllOrders)
 // router.post('/getorderbyuser/:id', authMiddleware, isAdmin, getOrderByUserId)
 router.get('/wishlist', authMiddleware, getWishList)
 router.get('/cart', authMiddleware, getUserCart)
-router.get('/:id', authMiddleware, isAdmin, getAUser) 
+router.get('/getmonthorderincome', authMiddleware, getMonthOrderIncome)
+router.get('/getyearordercount', authMiddleware, getYearTotalOrder)
+router.get('/:id', authMiddleware, isAdmin, getAUser)  
 
 router.put('/password', authMiddleware, updatePassword)
-router.put('/refresh', handleRefreshToken)
+router.put('/refresh', handleRefreshToken) 
 router.put('/edit-user', authMiddleware, updateAUser)
 router.put('/save-address', authMiddleware, saveAddress)
 router.put('/logout', logout)

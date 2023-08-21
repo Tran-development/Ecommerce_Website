@@ -3,7 +3,6 @@ import './Color.scss'
 
 const Color = (props) => {
     const { colorData, setColor } = props
-    console.log(colorData);
     return (
         <>
             <ul className='colors ps-0'>

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { NavLink, Link } from 'react-router-dom'
+import { NavLink, Link, useNavigate } from 'react-router-dom'
 import './Header.scss'
 import {
   BsSearchHeartFill,
@@ -12,28 +12,51 @@ import {
 import logoVN from '../images/logo_VN.png'
 import logoUK from '../images/logo_UK.png'
 import { useDispatch, useSelector } from 'react-redux'
+import { Typeahead } from 'react-bootstrap-typeahead';
+import 'react-bootstrap-typeahead/css/Typeahead.css';
+import { getAProduct } from '../features/products/productSlice'
+
+
 
 const Header = () => {
 
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const cartState = useSelector((state) => state?.auth?.cartProducts)
   const authState = useSelector((state) => state?.auth)
+  const productState = useSelector((state) => state?.product?.product)
 
   const [isListVisible, setIsListVisible] = useState(true)
   const [total, setTotal] = useState(null)
+  const [paginate, setPaginate] = useState(true);
+  const [productOpt, setProductOpt] = useState([])
 
   const toggleList = () => {
     setIsListVisible(!isListVisible)
   }
 
+  const handleLogout = () => {
+    localStorage.clear()
+    window.location.reload()
+  }
+
   useEffect(() => {
     let sum = 0;
     for (let index = 0; index < cartState?.length; index++) {
-        sum = sum + (Number(cartState[index].quantity) * Number(cartState[index].productId.price))
-        setTotal(sum)
+      sum = sum + (Number(cartState[index].quantity) * Number(cartState[index].productId.price))
+      setTotal(sum)
     }
-}, [cartState])
+  }, [cartState])
+
+  useEffect(() => {
+    let data = []
+    for (let index = 0; index < productState.length; index++) {
+      const element = productState[index];
+      data.push({ id: index, prod: element?._id, name: element?.title})
+    }
+    setProductOpt(data)
+  }, [productState])
 
   return (
     <>
@@ -44,11 +67,11 @@ const Header = () => {
               <p className='mb-0 text-hover'>Free Shipping for all Order of $99</p>
             </div>
             <div className='col-2 d-flex gap-10 align-items-center'>
-            <img className='img-fluid logo' src={logoVN} style={{"display": "none"}}/>
-            <img className='img-fluid logo' src={logoUK}/>
+              <img className='img-fluid logo' src={logoVN} style={{ "display": "none" }} />
+              <img className='img-fluid logo' src={logoUK} />
               <div className="dropdown">
                 <select className="form-select">
-                <option selected>English</option>
+                  <option selected>English</option>
                   <option value="1">VietNamese</option>
                   <option value="2">France</option>
                 </select>
@@ -73,11 +96,19 @@ const Header = () => {
             </div>
             <div className='col-5'>
               <div className="input-group">
-                <input
-                  type="text"
-                  className="form-control py-2"
-                  placeholder="What do you need?"
-                  aria-label="What do you need?" aria-describedby="basic-addon2" />
+                <Typeahead
+                  id="pagination-example"
+                  onPaginate={() => console.log('Results paginated')}
+                  options={productOpt}
+                  onChange={(selected) => {
+                    navigate(`/product/${selected[0]?.prod}`)
+                    dispatch(getAProduct(selected[0]?.prod))
+                  }}
+                  paginate={paginate}
+                  labelKey={"name"}
+                  minLength={1}
+                  placeholder="Search for Products here..."
+                />
                 <span className="input-group-text p-3" id="basic-addon2">
                   <BsSearchHeartFill className='fs-6 search-icon' />
                 </span>
@@ -102,8 +133,8 @@ const Header = () => {
                     <BsFillPersonFill className='fs-4' />
                     {
                       authState?.user === null ?
-                      <p className='mb-0 text-hover'>Log in <br /> My Account</p>
-                      :  <p className='mb-0 text-hover'>Welcome <br/> {authState?.user?.firstname} </p>
+                        <p className='mb-0 text-hover'>Log in <br /> My Account</p>
+                        : <p className='mb-0 text-hover'>Welcome <br /> {authState?.user?.firstname} </p>
                     }
                   </Link>
                 </div>
@@ -157,6 +188,10 @@ const Header = () => {
                     <NavLink className="text-dark text-hover" to="/my-orders">My Orders</NavLink>
                     <NavLink className="text-dark text-hover" to="/blogs">Blogs</NavLink>
                     <NavLink className="text-dark text-hover" to="/contact">Contact</NavLink>
+                    <button
+                      onClick={handleLogout}
+                      className='border border-0 bg-transparent text-dark text-uppercase'
+                    >Logout</button>
                   </div>
                 </div>
               </div>

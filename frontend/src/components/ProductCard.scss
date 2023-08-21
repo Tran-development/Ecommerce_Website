@@ -17,9 +17,13 @@
         .action-bar {
             top: 14%;
 
-            .btn-product {
-                width: 25px;
-                height: 25px;
+            .btn-product, .fs-6 {
+                width: 25px !important;
+                height: 25px !important;
+            }
+            .icon-list {
+                display: flex;
+                gap: 25px;
             }
         }
         .product-details {
@@ -86,11 +90,7 @@
         display: block;
     }
 
-    img {
-        width: 100%;
-        object-fit: contain;
-    }
-
+   
     .brand {
         color: var(--title-highlight);
         font-size: 13px;

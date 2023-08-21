@@ -11,7 +11,7 @@ import Container from '../components/Container'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
-import { getAProduct } from '../features/products/productSlice'
+import { addRating, getAProduct, getProducts } from '../features/products/productSlice'
 import { toast } from 'react-toastify'
 import { addToCart, getUserCart } from '../features/user/userSlice'
 
@@ -20,17 +20,21 @@ const SingleProd = () => {
     const [color, setColor] = useState(null)
     const [quantity, setQuantity] = useState(1)
     const [alreadyAdded, setAlreadyAdded] = useState(false)
+    const [orderedProd, setOrderedProd] = useState(true)
+    const [popularProd, setPopularProd] = useState([])
 
     const location = useLocation()
     const navigate = useNavigate()
     const productId = location.pathname.split('/')[2]
     const dispatch = useDispatch()
     const productState = useSelector((state) => state?.product?.singleProduct)
+    const productsState = useSelector((state) => state?.product?.product)
     const cartState = useSelector((state) => state?.auth?.cartProducts)
 
     useEffect(() => {
         dispatch(getAProduct(productId))
         dispatch(getUserCart())
+        dispatch(getProducts())
     }, [])
 
     useEffect(() => {
@@ -38,9 +42,9 @@ const SingleProd = () => {
             if (productId === cartState[index]?.productId?._id) {
                 setAlreadyAdded(true)
             }
-            
+
         }
-    })
+    }, [cartState])
 
     const uploadToCart = () => {
         if (color === null) {
@@ -69,7 +73,6 @@ const SingleProd = () => {
         position: 'relative',
         img: productState?.images[0]?.url ? productState?.images[0]?.url : 'Updating ...'
     };
-    const [orderedProd, setOrderedProd] = useState(true)
 
     const copyToClipboard = (text) => {
         alert('Coppied', text)
@@ -81,10 +84,40 @@ const SingleProd = () => {
         textField.remove()
     }
 
+    useEffect(() => {
+        let data = []
+        for (let index = 0; index < productsState.length; index++) {
+            const element = productsState[index];
+            if (element.tags === 'popular') {
+                data.push(element)
+            }
+
+            setPopularProd(data)
+        }
+    }, [productsState])
+
+
+    const [star, setStar] = useState(null)
+    const [comment, setComment] = useState(null)
+
+    const addRatingToProduct = () => {
+        if (star === null) {
+            toast.error("Please add star rating")
+            return false
+        } else if (comment === null) {
+            toast.error("Please Write Review About the Product!")
+            return false
+        } else {
+            dispatch(addRating({ star: star, prodId: productId, comment: comment }))
+            
+        }
+        return false
+    }
+
     return (
         <>
             <Meta title={"Product Name"} />
-            <BreadCrum title="Product Name" />
+            <BreadCrum title={productState?.title} />
             <Container class1='main-prod-wrapper py-5 home-wrapper'>
                 <div className='row'>
                     <div className='col-6'>
@@ -155,40 +188,40 @@ const SingleProd = () => {
                                 </div>
                                 {
                                     alreadyAdded === false && <>
-                                    <div className='d-flex gap-10 flex-column mt-2 mb-2'>
-                                    <h3 className='prod-heading'>Color : </h3>
-                                    <div>
-                                        <Color setColor={setColor} colorData={productState?.color}/>
-                                    </div>
-                                </div>
+                                        <div className='d-flex gap-10 flex-column mt-2 mb-2'>
+                                            <h3 className='prod-heading'>Color : </h3>
+                                            <div>
+                                                <Color setColor={setColor} colorData={productState?.color} />
+                                            </div>
+                                        </div>
                                     </>
                                 }
                                 <div className='d-flex gap-10 align-items-center flex-row mt-2 mb-3'>
-                                   {
-                                    alreadyAdded === false && <>
-                                    <h3 className='prod-heading'>Quantity : </h3>
-                                    <div className='d-flex gap'>
-                                        <input
-                                            type='number'
-                                            name=''
-                                            min={1}
-                                            max={50}
-                                            className='form-control'
-                                            style={{ width: "70px" }}
-                                            id=''
-                                            onChange={(e) => setQuantity(e.target.value)}
-                                            value={quantity}
-                                        />
-                                    </div>
-                                    </>
-                                   }
+                                    {
+                                        alreadyAdded === false && <>
+                                            <h3 className='prod-heading'>Quantity : </h3>
+                                            <div className='d-flex gap'>
+                                                <input
+                                                    type='number'
+                                                    name=''
+                                                    min={1}
+                                                    max={50}
+                                                    className='form-control'
+                                                    style={{ width: "70px" }}
+                                                    id=''
+                                                    onChange={(e) => setQuantity(e.target.value)}
+                                                    value={quantity}
+                                                />
+                                            </div>
+                                        </>
+                                    }
                                     <div className='d-flex gap-15 align-items-center'>
                                         <button
                                             className='button border-0'
                                             type='submit'
                                             // data-bs-toggle="modal"
                                             // data-bs-target="#staticBackdrop"
-                                            onClick={() => {alreadyAdded ? navigate('/cart') : uploadToCart()}}
+                                            onClick={() => { alreadyAdded ? navigate('/cart') : uploadToCart() }}
                                         >{alreadyAdded ? "Go To Cart" : "Add to Cart"}</button>
                                         {/* <button className='button border-0 signup'>Buy It Now</button> */}
                                     </div>
@@ -277,49 +310,62 @@ const SingleProd = () => {
                                         count={5}
                                         size={24}
                                         value={3}
-                                        edit={false}
+                                        edit={true}
+                                        onChange={(e) => setStar(e)}
                                         activeColor="#ffd700"
                                     />
                                 </div>
                                 <div className='review-form'>
                                     <h5 className='mb-4 title'>Write A Review</h5>
-                                    <form className="row g-3">
+                                    <div className="col-12">
+                                        <textarea
+                                            name=''
+                                            id=''
+                                            className='w-100 form-control'
+                                            cols="30"
+                                            rows="4"
+                                            placeholder='Write your comments here'
+                                            onChange={(e) => setComment(e.target.value)}
+                                        >
+                                        </textarea>
+                                    </div>
 
-                                        <div className="col-12">
-                                            <textarea
-                                                name=''
-                                                id=''
-                                                className='w-100 form-control'
-                                                cols="30"
-                                                rows="4"
-                                                placeholder='Write your comments here'
-                                            >
-                                            </textarea>
-                                        </div>
+                                    <div className="col-12 d-flex justify-content-end gap-10 mb-3">
+                                        {/* <button className="button border-0">CANCLE</button> */}
+                                        <button
+                                            onClick={addRatingToProduct}
+                                            className="button border-0 mt-3"
+                                            type='button'>
+                                            SUBMIT
+                                        </button>
+                                    </div>
 
-                                        <div className="col-12 d-flex justify-content-end gap-10 mb-3">
-                                            {/* <button className="button border-0">CANCLE</button> */}
-                                            <button className="button border-0">SUBMIT</button>
-                                        </div>
-                                    </form>
                                 </div>
                             </div>
                             <div className='reviews mt-4'>
-                                <div className='review'>
-                                    <div className='d-flex gap-10 align-items-center'>
-                                        <h6 className='mb-0'>Cristiano Ronaldo</h6>
-                                        <ReactStars
-                                            count={5}
-                                            size={24}
-                                            value={3}
-                                            edit={false}
-                                            activeColor="#ffd700"
-                                        />
-                                    </div>
-                                    <p className='mt-3'>
-                                        It’s no secret that the digital industry is booming. From exciting startups to need ghor fore global and brands, companies are reaching out.
-                                    </p>
-                                </div>
+
+                                {
+                                    productState && productState?.ratings?.map((item, index) => {
+                                        return (
+                                            <div key={index} className='review'>
+                                                <div className='d-flex gap-10 align-items-center'>
+                                                    <h6 className='mb-0'>{item?.postedby.slice(20)}</h6>
+                                                    <ReactStars
+                                                        count={5}
+                                                        size={24}
+                                                        value={item?.star}
+                                                        edit={false}
+                                                        activeColor="#ffd700"
+                                                    />
+                                                </div>
+                                                <p className='mt-3'>
+                                                    {item?.comment}
+                                                </p>
+                                            </div>
+                                        )
+                                    })
+                                }
+
                             </div>
                         </div>
                     </div>
@@ -331,7 +377,7 @@ const SingleProd = () => {
                     <div className='col-12'>
                         <h3 className='section-heading'>FEATURED PRODUCTS</h3>
                     </div>
-                    <ProductCard />
+                    <ProductCard data={popularProd} />
                 </div>
             </Container>
         </>
