@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import {
   BiSolidDashboard,
   BiSolidCategoryAlt,
-  BiSolidCoupon
+  BiSolidCoupon,
+  BiLogOut
 } from "react-icons/bi"
 import { IoIosColorFilter } from 'react-icons/io'
 import { PiNotebookBold } from 'react-icons/pi'
@@ -46,8 +47,9 @@ const MainLayout = () => {
           mode="inline"
           defaultSelectedKeys={['']}
           onClick={({ key }) => {
-            if (key == "sigout") {
-
+            if (key === "logout") {
+              localStorage.clear()
+              window.location.reload()
             } else {
               navigate(key)
             }
@@ -163,6 +165,11 @@ const MainLayout = () => {
               key: 'enquiries',
               icon: <FaQuestionCircle className='fs-5' />,
               label: 'Enquiries',
+            },
+            {
+              key: 'logout',
+              icon: <BiLogOut className='fs-5' />,
+              label: 'Log Out',
             }
           ]}
         />

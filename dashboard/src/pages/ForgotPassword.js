@@ -19,7 +19,7 @@ const ForgotPassword = () => {
             label="Your email"
           />
           <button
-            className='btn-login border-0 px-3 py-2 text-white fw-bold w-100'
+            className='btn-login border-0 mt-3 px-3 py-2 text-white fw-bold w-100'
             type='submit'
           >
             Send Link

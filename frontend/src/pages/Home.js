@@ -34,7 +34,7 @@ export const Home = () => {
 
   const handleAddToWishList = (id) => {
     console.log(id);
-    dispatch(addToWishList(id))
+    distpatch(addToWishList(id))
 }
   return (
     <>
@@ -52,7 +52,7 @@ export const Home = () => {
                 <h3>Vegetable <br />
                   100% Organic</h3>
                 <p>Reach for healthier you with organic foods</p>
-                <Link className='button'>DISCOVER NOW</Link>
+                <Link to='/product' className='button'>DISCOVER NOW</Link>
               </div>
             </div>
           </div>
@@ -69,7 +69,7 @@ export const Home = () => {
                 <h3>Vegetable <br />
                   100% Organic</h3>
                 <p>Reach for healthier you with organic foods</p>
-                <Link className='button'>DISCOVER NOW</Link>
+                <Link to='/product' className='button'>DISCOVER NOW</Link>
               </div>
             </div>
           </div>

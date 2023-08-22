@@ -9,6 +9,12 @@ const getOrders = async () => {
     return respone.data
 }
 
+const getAOrder = async (id) => {
+    const respone = await axios.get(`${base_url}user/getAOrder/${id}`, config)
+
+    return respone.data
+}
+
 const getOrder = async (id) => {
     const response = await axios.post(
         `${base_url}user/getorderbyuser/${id}`,
@@ -40,7 +46,8 @@ const orderService = {
     getOrders,
     getOrder,
     getMonthlyOrders,
-    getYearOrder
+    getYearOrder,
+    getAOrder
 }
 
 export default orderService

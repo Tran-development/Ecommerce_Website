@@ -12,35 +12,41 @@ import { deleteCartProduct, getUserCart, updateCartProduct } from '../features/u
 
 const Cart = () => {
 
+    const config2 = {
+        headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+    };
+
     const [prodUpdateDetail, setProdUpdateDetail] = useState(null)
     const [totalAmount, setTotalAmount] = useState(null)
     const dispatch = useDispatch()
     const userCartState = useSelector((state) => state?.auth?.cartProducts)
 
     useEffect(() => {
-        dispatch(getUserCart())
+        dispatch(getUserCart(config2))
     }, [])
 
     useEffect(() => {
         if (prodUpdateDetail !== null) {
             dispatch(updateCartProduct({ cartItemId: prodUpdateDetail?.cartItemId, quantity: prodUpdateDetail?.quantity }))
             setTimeout(() => {
-                dispatch(getUserCart())
+                dispatch(getUserCart(config2))
             }, 200)
         }
     }, [prodUpdateDetail])
 
     const deleteACartProd = (id) => {
-        dispatch(deleteCartProduct(id))
+        dispatch(deleteCartProduct({ id: id, config2: config2 }))
         setTimeout(() => {
-            dispatch(getUserCart())
+            dispatch(getUserCart(config2))
         }, 200)
     }
 
     useEffect(() => {
         let sum = 0;
         for (let index = 0; index < userCartState?.length; index++) {
-            sum = sum + (Number(userCartState[index].quantity) * userCartState[index].productId.price)
+            sum = sum + (Number(userCartState[index]?.quantity) * userCartState[index]?.productId?.price)
             setTotalAmount(sum)
         }
     }, [userCartState])
@@ -70,7 +76,7 @@ const Cart = () => {
                                             </div>
                                             <div className='w-75'>
                                                 <div className='w-75'>
-                                                    <h5>{item?.productId.title}</h5>
+                                                    <h5>{item?.productId?.title}</h5>
                                                     {/* <p>Size: ssad</p> */}
                                                     <p className='d-flex gap-3'>Color: <ul className='colors ps-0'>
                                                         <li style={{ backgroundColor: item?.title }}></li>
@@ -86,11 +92,11 @@ const Cart = () => {
                                                 <input
                                                     type='number'
                                                     className='form-control'
-                                                    name=''
+                                                    name={"quantity" + item?._id}
                                                     min={1}
                                                     max={50}
-                                                    id=''
-                                                    value={prodUpdateDetail?.quantity ? prodUpdateDetail?.quantity : item?.quantity}
+                                                    id={"cart" + item?._id}
+                                                    value={item?.quantity}
                                                     onChange={(e) => setProdUpdateDetail({ cartItemId: item?._id, quantity: e.target.value })}
                                                 />
                                             </div>
@@ -123,12 +129,12 @@ const Cart = () => {
                                 {
                                     (totalAmount !== null || totalAmount !== 0) &&
                                     <div className='d-flex flex-column align-items-center'>
-                                    <h4>SubTotal: $ {totalAmount}</h4>
-                                    <p>Taxes and shipping calculated at checkout</p>
-                                    <Link to='/checkout' className='button'>
-                                        Checkout
-                                    </Link>
-                                </div>
+                                        <h4>SubTotal: $ {totalAmount}</h4>
+                                        <p>Taxes and shipping calculated at checkout</p>
+                                        <Link to='/checkout' className='button'>
+                                            Checkout
+                                        </Link>
+                                    </div>
                                 }
                             </div>
                         </div>

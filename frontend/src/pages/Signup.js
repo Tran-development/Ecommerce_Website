@@ -1,13 +1,14 @@
 import React from 'react'
 import BreadCrum from '../components/BreadCrum'
 import Meta from '../components/Meta'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import Container from '../components/Container'
 import CustomInput from '../components/CustomInput'
 import * as yup from "yup";
 import { useFormik } from "formik";
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { registerUser } from '../features/user/userSlice'
+import { useEffect } from 'react'
 
 let signUpSchema = yup.object().shape({
   firstname: yup.string().required("*First Name is Required"),
@@ -20,6 +21,8 @@ let signUpSchema = yup.object().shape({
 const Signup = () => {
 
   const dispatch = useDispatch()
+  const navigate = useNavigate()
+  const authState = useSelector((state) => state?.auth)
 
   const formik = useFormik({
     enableReinitialize: true,
@@ -35,6 +38,12 @@ const Signup = () => {
       dispatch(registerUser(values))
     },
   });
+
+  // useEffect(() => {
+  //   if (authState?.createdUser !== null && authState?.isError === false) {
+  //     navigate('/login')
+  //   }
+  // }, [authState])
   return (
     <>
       <Meta title={"Sign Up"} />

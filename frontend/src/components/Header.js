@@ -15,6 +15,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Typeahead } from 'react-bootstrap-typeahead';
 import 'react-bootstrap-typeahead/css/Typeahead.css';
 import { getAProduct } from '../features/products/productSlice'
+import { getUserCart } from '../features/user/userSlice'
 
 
 
@@ -44,7 +45,7 @@ const Header = () => {
   useEffect(() => {
     let sum = 0;
     for (let index = 0; index < cartState?.length; index++) {
-      sum = sum + (Number(cartState[index].quantity) * Number(cartState[index].productId.price))
+      sum = sum + (Number(cartState[index]?.quantity) * Number(cartState[index]?.productId?.price))
       setTotal(sum)
     }
   }, [cartState])

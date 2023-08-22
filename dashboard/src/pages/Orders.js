@@ -40,19 +40,18 @@ const Orders = () => {
     dispatch(getOrders())
   }, [])
 
-  const orderState = useSelector((state) => state.order.orders)
-  // console.log(orderState.orderby.firstname);
+  const orderState = useSelector((state) => state?.order?.orders)
   const data1 = [];
-  for (let i = 0; i < orderState.length; i++) {
+  for (let i = 0; i < orderState?.length; i++) {
     data1.push({
       key: i + 1,
-      name: orderState[i].orderby.firstname,
+        name:  orderState?.user?.firstname + " " + orderState?.user?.lastname,
       product: (
-        <Link to={`/admin/orders/${orderState[i].orderby._id}`}>
+        <Link to={`/admin/orders/${orderState[i]?._id}`}>
           View Orders
         </Link>
       ),
-      amount: orderState[i].paymentIntent.amount,
+      amount: orderState[i]?.totalPrice,
       date: new Date(orderState[i].createdAt).toLocaleString(),
       status: <>
       <select className='form-control form-select'>
@@ -70,6 +69,7 @@ const Orders = () => {
         </>
       )
     });
+    
   }
 
     return (

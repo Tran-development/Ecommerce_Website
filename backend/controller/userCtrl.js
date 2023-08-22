@@ -406,6 +406,22 @@ const getAllOrders = asyncHandler(async (req, res) => {
     }
 })
 
+const getSingleOrders = asyncHandler(async (req, res) => {
+    const { id } = req.params
+    console.log(id);
+    try {
+        const order = await Order.findOne({ _id: id })
+            // .populate("product")
+            // .populate("user")
+            // .populate("color")
+        res.json({
+            order
+        })
+    } catch (error) {
+        throw new Error(error)
+    }
+})
+
 const getMonthOrderIncome = asyncHandler(async (req, res) => {
     let monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
     // var mS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'];
@@ -491,5 +507,6 @@ module.exports = {
     updateQuantityProdFromCart,
     getMonthOrderIncome,
     getYearTotalOrder,
-    getAllOrders
+    getAllOrders,
+    getSingleOrders
 }

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import BreadCrum from '../components/BreadCrum'
 import Meta from '../components/Meta'
 import { Link, useNavigate } from 'react-router-dom'
@@ -32,13 +32,14 @@ const Login = () => {
         validationSchema: loginSchema,
         onSubmit: (values) => {
             dispatch(loginUser(values))
-            setTimeout(() => {
-            if (authState?.isSuccess) {
-                navigate('/')
-            }
-            }, 300)
         },
     });
+
+    useEffect(() => {
+        if (authState?.user !== null && authState?.isError === false) {
+            navigate('/')
+        }
+    },[authState])
 
     return (
         <>

@@ -46,6 +46,7 @@ for (let i = 0; i < 46; i++) {
 const DashBoard = () => {
 
   const [dataMonthly, setDataMonthly] = useState([])
+  const [orderData, setOrderData] = useState([])
 
   const dispatch = useDispatch()
   const monthlyDataState = useSelector((state) => state?.order?.monthlydata)
@@ -66,23 +67,25 @@ const DashBoard = () => {
     let monthlyOrderCount = []
     for (let index = 0; index < monthlyDataState?.length; index++) {
       const element = monthlyDataState[index];
-      
-      data.push({type: monthNames[element?._id?.amount], sales: element?.count})
+
+      data.push({ type: monthNames[element?._id?.amount], sales: element?.count })
       // monthlyOrderCount.push({ type: monthNames[element?._id?]})
     }
     setDataMonthly(data);
 
     const data1 = [];
-for (let i = 0; i < ordersState?.length; i++) {
-  data1.push({
-    key: i,
-    name: ordersState[6]?.shippingInfor?.firstName,
-    product: 32,
-    price: 22,
-    status: `Pending. ${i}`,
-  });
-}
-  }, [monthlyDataState])
+    for (let i = 0; i < ordersState?.length; i++) {
+      data1.push({
+        key: i,
+        name: ordersState[6]?.shippingInfor?.firstName + " " + ordersState[6]?.shippingInfor?.lastName,
+        product: ordersState[6]?.orderItems?.length,
+        price: ordersState[6]?.totalPrice,
+        dprice: ordersState[6]?.totalPriceAfterDiscount,
+        status: ordersState[6]?.orderStatus,
+      });
+    }
+    setOrderData(data1)
+  }, [ordersState])
 
   const data =
     [
@@ -199,15 +202,15 @@ for (let i = 0; i < ordersState?.length; i++) {
           </div>
         </div>
         <div className='col-6 mt-5 recent-order'>
-        <div className=''>
-          <h3 className='mb-4 sub-title'>Recent Orders</h3>
-          <div>
-            <Table columns={columns} dataSource={data1} />
+          <div className=''>
+            <h3 className='mb-4 sub-title'>Recent Orders</h3>
+            <div>
+              <Table columns={columns} dataSource={orderData} />
+            </div>
           </div>
         </div>
-        </div>
         <div className='col-5 mt-5 main-statistic'>
-        <div className='d-flex justify-content-between'>
+          <div className='d-flex justify-content-between'>
             <h3 className='mb-4 sub-title'>Sale Statistic</h3>
             <div className='d-flex gap-3'>
               <Link>Daily</Link>
@@ -219,7 +222,7 @@ for (let i = 0; i < ordersState?.length; i++) {
             <Area {...config} />
           </div>
         </div>
-        
+
         <div className='mt-4'>
           <h3 className='mb-4 sub-title'>Recent Reviews</h3>
           <div>
