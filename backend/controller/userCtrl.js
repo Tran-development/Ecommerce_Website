@@ -340,6 +340,17 @@ const removeProdFromCart = asyncHandler(async (req, res) => {
     }
 })
 
+const removeMyCart = asyncHandler(async (req, res) => {
+    const { _id } = req.body
+    validateMongoDbId(_id)
+    try {
+        const deleteProd = await Cart.findByIdAndRemove(_id)
+        res.json(deleteProd)
+    } catch (error) {
+        throw new Error(error)
+    }
+})
+
 
 
 const updateQuantityProdFromCart = asyncHandler(async (req, res) => {
@@ -508,5 +519,6 @@ module.exports = {
     getMonthOrderIncome,
     getYearTotalOrder,
     getAllOrders,
-    getSingleOrders
+    getSingleOrders,
+    removeMyCart
 }

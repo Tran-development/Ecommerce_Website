@@ -203,6 +203,7 @@ const AddProduct = () => {
                         className='form-control py-3 mb-0 mt-3' id=""
                     >
                         <option value="" disabled>Select Tags</option>
+                        <option value="featured">Select Tags</option>
                         <option value="featured">Featured</option>
                         <option value="popular">Poplular</option>
                         <option value="special">Special</option>

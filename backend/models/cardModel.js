@@ -13,7 +13,7 @@ var cartSchema = new mongoose.Schema(
     },
     quantity: {
       type: Number,
-      required: true
+      // required: true
     },
     color: {
       type: mongoose.Schema.Types.ObjectId,

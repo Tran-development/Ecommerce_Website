@@ -27,6 +27,8 @@ const Cart = () => {
         dispatch(getUserCart(config2))
     }, [])
 
+
+
     useEffect(() => {
         if (prodUpdateDetail !== null) {
             dispatch(updateCartProduct({ cartItemId: prodUpdateDetail?.cartItemId, quantity: prodUpdateDetail?.quantity }))
@@ -129,7 +131,7 @@ const Cart = () => {
                                 {
                                     (totalAmount !== null || totalAmount !== 0) &&
                                     <div className='d-flex flex-column align-items-center'>
-                                        <h4>SubTotal: $ {totalAmount}</h4>
+                                        <h4>SubTotal: $ {totalAmount?.toFixed(1)}</h4>
                                         <p>Taxes and shipping calculated at checkout</p>
                                         <Link to='/checkout' className='button'>
                                             Checkout

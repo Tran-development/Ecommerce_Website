@@ -28,14 +28,9 @@ const Header = () => {
   const authState = useSelector((state) => state?.auth)
   const productState = useSelector((state) => state?.product?.product)
 
-  const [isListVisible, setIsListVisible] = useState(true)
   const [total, setTotal] = useState(null)
   const [paginate, setPaginate] = useState(true);
   const [productOpt, setProductOpt] = useState([])
-
-  const toggleList = () => {
-    setIsListVisible(!isListVisible)
-  }
 
   const handleLogout = () => {
     localStorage.clear()
@@ -144,7 +139,7 @@ const Header = () => {
                     <BsFillCartFill className='fs-4' />
                     <div className='d-flex flex-column gap-10'>
                       <span className='badge bg-dark text-white'>{cartState?.length ? cartState?.length : 0}</span>
-                      <p className='mb-0 text-hover'>$ {total ? total : 0}</p>
+                      <p className='mb-0 text-hover'>$ {total ? total?.toFixed(2) : 0}</p>
                     </div>
                   </Link>
                 </div>
@@ -164,22 +159,10 @@ const Header = () => {
                     <button
                       className="drop-text btn btn-secondary dropdown-toggle bg-white border-0 d-flex align-items-center gap-10"
                       type="button"
-                      onClick={toggleList}
                     >
                       <BsList className='fs-4' /><span className='text-dark me-3 d-inline-block text-hover all-categories'>All Categories</span>
                     </button>
-                    <ul className="dropdown-menu list-item" style={{ display: isListVisible ? "block" : "none" }}>
-                      <li><Link className="dropdown-item text-hover" to="">Fresh Meat</Link></li>
-                      <li><Link className="dropdown-item text-hover" to="">Vegetables</Link></li>
-                      <li><Link className="dropdown-item text-hover" to="">Fruit & Nut Gifts</Link></li>
-                      <li><Link className="dropdown-item text-hover" to="">Fresh Berries</Link></li>
-                      <li><Link className="dropdown-item text-hover" to="">Ocean Foods</Link></li>
-                      <li><Link className="dropdown-item text-hover" to="">Butter & Eggs</Link></li>
-                      <li><Link className="dropdown-item text-hover" to="">Fresh Onion</Link></li>
-                      <li><Link className="dropdown-item text-hover" to="">Papayaya & Crisps</Link></li>
-                      <li><Link className="dropdown-item text-hover" to="">Oatmeal</Link></li>
-                      <li><Link className="dropdown-item text-hover" to="">Fresh Bananas</Link></li>
-                    </ul>
+                    
                   </div>
                 </div>
                 <div className='menu-links'>

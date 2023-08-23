@@ -30,7 +30,8 @@ const {
     getMonthOrderIncome,
     getYearTotalOrder,
     getAllOrders,
-    getSingleOrders
+    getSingleOrders,
+    removeMyCart
 } = require("../controller/userCtrl")
 const { authMiddleware, isAdmin, blockUser, unBlockUser } = require("../middlewares/authMiddleware")
 const { checkout, paymentverification } = require("../controller/paymentCtrl")
@@ -43,6 +44,7 @@ router.put('/reset-password/:token', resetPassword)
 router.post('/login', loginUserCtrl)
 router.post('/admin-login', loginAdmin)
 router.post('/cart', authMiddleware, userCart)
+router.delete('/remove-my-cart', authMiddleware, removeMyCart)
 router.post('/order/checkout', authMiddleware, checkout)
 router.post('/order/paymentverification', authMiddleware, paymentverification)
 // router.post('/cart/applycoupon', authMiddleware, applyCoupon)

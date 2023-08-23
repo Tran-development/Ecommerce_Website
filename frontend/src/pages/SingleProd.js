@@ -13,7 +13,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
 import { addRating, getAProduct, getProducts } from '../features/products/productSlice'
 import { toast } from 'react-toastify'
-import { addToCart, getUserCart } from '../features/user/userSlice'
+import { addCartToProduct, getUserCart } from '../features/user/userSlice'
 
 const SingleProd = () => {
 
@@ -46,17 +46,23 @@ const SingleProd = () => {
         }
     }, [cartState])
 
+    const config2 = {
+        headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+    };
+    
     const uploadToCart = () => {
         if (color === null) {
             toast.error("Please choose color")
             return false
         } else {
-            dispatch(addToCart({
+            dispatch(addCartToProduct({
                 productId: productState?._id,
                 quantity,
                 color,
                 price: productState?.price
-            }))
+            }), config2)
             navigate('/cart')
         }
     }

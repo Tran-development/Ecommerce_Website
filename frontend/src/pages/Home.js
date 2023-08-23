@@ -11,7 +11,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getBlogs } from '../features/blogs/blogSlice'
 import moment from 'moment'
 import ReactStars from "react-rating-stars-component"
-import { getProducts } from '../features/products/productSlice'
+import { addToWishList, getProducts } from '../features/products/productSlice'
+
 export const Home = () => {
 
   const blogState = useSelector((state) => state?.blog?.blog)
@@ -35,14 +36,25 @@ export const Home = () => {
   const handleAddToWishList = (id) => {
     console.log(id);
     distpatch(addToWishList(id))
-}
+  }
   return (
     <>
 
       <Container class1="home-wrapper-1 banner-main py-5">
         <div className='row'>
-          <div className='col-2'>
-
+          <div className='col-2 position-relative'>
+            <ul className="dropdown-menu list-item position-absolute" style={{ display: "block" }}>
+              <li><Link className="dropdown-item text-hover" to="">Organic Produce</Link></li>
+              <li><Link className="dropdown-item text-hover" to="">Agricultural Products</Link></li>
+              <li><Link className="dropdown-item text-hover" to="">Processed Foods</Link></li>
+              <li><Link className="dropdown-item text-hover" to="">Dried Fruits</Link></li>
+              <li><Link className="dropdown-item text-hover" to="">Dried Vegetables</Link></li>
+              <li><Link className="dropdown-item text-hover" to="">Butter & Eggs</Link></li>
+              <li><Link className="dropdown-item text-hover" to="">Fresh Fruits</Link></li>
+              <li><Link className="dropdown-item text-hover" to="">Papayaya & Crisps</Link></li>
+              <li><Link className="dropdown-item text-hover" to="">Organic Rice</Link></li>
+              <li><Link className="dropdown-item text-hover" to="">Fresh Bananas</Link></li>
+            </ul>
           </div>
           <div className='col-10 banner-wrapper'>
             <div className='main-banner position-relative'>
@@ -148,48 +160,48 @@ export const Home = () => {
           <div className='col-12'>
             <h5 className='shop-title-market'>SHOP MARKETS</h5>
             <div className='categories d-flex justify-content-between align-items-center'>
-              <div className=''>
-                <img src='images/fruit.jpg' alt='fruit' />
+              <div>
+                <Link to="/product"><img className='item-maket' src='images/fruit.jpg' alt='fruit' /></Link>
                 <div className='shop-maket'>
                   <h6 className='title'>Fresh Fruits</h6>
                   <p>10 Products</p>
                 </div>
               </div>
 
-              <div className=''>
-                <img src='images/fresh-meat.jpg' alt='fresh-meat' />
+              <div>
+                <Link to="/product"><img className='item-maket' src='images/fresh-meat.jpg' alt='fresh-meat' /></Link>
                 <div className='shop-maket'>
                   <h6 className='title'>Fresh Meat</h6>
                   <p>3 Products</p>
                 </div>
               </div>
 
-              <div className=''>
-                <img src='images/vegetables.jpg' alt='vegetables' />
+              <div>
+                <Link to="/product"><img className='item-maket' src='images/vegetables.jpg' alt='vegetables' /></Link>
                 <div className='shop-maket'>
                   <h6 className='title'>Vegetables</h6>
                   <p>4 Products</p>
                 </div>
               </div>
 
-              <div className=''>
-                <img src='images/eggs.jpg' alt='eggs' />
+              <div>
+                <Link to="/product"><img className='item-maket' src='images/eggs.jpg' alt='eggs' /></Link>
                 <div className='shop-maket'>
                   <h6 className='title'>Butter & Eggs</h6>
                   <p>2 Products</p>
                 </div>
               </div>
 
-              <div className=''>
-                <img src='images/milk.jpg' alt='milk' />
+              <div>
+                <Link to="/product"><img className='item-maket' src='images/milk.jpg' alt='milk' /></Link>
                 <div className='shop-maket'>
                   <h6 className='title'>Milk & Scream</h6>
                   <p>2 Products</p>
                 </div>
               </div>
 
-              <div className=''>
-                <img src='images/juice.jpg' alt='juice' />
+              <div>
+                <Link to="/product"><img className='item-maket' src='images/juice.jpg' alt='juice' /></Link>
                 <div className='shop-maket'>
                   <h6 className='title'>Fresh Juice</h6>
                   <p>8 Products</p>
@@ -210,56 +222,56 @@ export const Home = () => {
               if (item.tags === "featured") {
                 return (
                   <div key={index} className={"col-3"}>
-                        <div
-                            className='product-card position-relative'
+                    <div
+                      className='product-card position-relative'
+                    >
+                      <div className='wishlist-icon position-absolute'>
+                        <button className='border-0 bg-transparent'>
+                          <img
+                            className='btn-wishlist'
+                            src='images/wish.svg'
+                            alt='wishlist'
+                            onClick={() => handleAddToWishList(item?._id)}
+                          />
+                        </button>
+                      </div>
+                      <div className='product-image'>
+                        <img src={item?.images[0].url} className='img-fluid' alt='Organic Cabbage' />
+                        <img src='images/oninon.jpg' className='img-fluid' alt='Onion' />
+                      </div>
+                      <div className='product-details'>
+                        <h6 className='brand'>{item?.brand}</h6>
+                        <h5 className='product-title'>{item?.title}</h5>
+                        <ReactStars
+                          count={5}
+                          size={24}
+                          value={item?.totalrating.toString()}
+                          edit={false}
+                          activeColor="#ffd700"
+                        />
+                        <p className={"d-none"}
+                          dangerouslySetInnerHTML={{ __html: item?.description }}
                         >
-                            <div className='wishlist-icon position-absolute'>
-                                <button className='border-0 bg-transparent'>
-                                    <img
-                                        className='btn-wishlist'
-                                        src='images/wish.svg'
-                                        alt='wishlist'
-                                        onClick={() => handleAddToWishList(item?._id) }
-                                    />
-                                </button>
-                            </div>
-                            <div className='product-image'>
-                                <img src={item?.images[0].url} className='img-fluid' alt='Organic Cabbage' />
-                                <img src='images/oninon.jpg' className='img-fluid' alt='Onion' />
-                            </div>
-                            <div className='product-details'>
-                                <h6 className='brand'>{item?.brand}</h6>
-                                <h5 className='product-title'>{item?.title}</h5>
-                                <ReactStars
-                                    count={5}
-                                    size={24}
-                                    value={item?.totalrating.toString()}
-                                    edit={false}
-                                    activeColor="#ffd700"
-                                />
-                                <p className={"d-none"}
-                                    dangerouslySetInnerHTML={{ __html: item?.description }}
-                                >
 
-                                </p>
-                                <p className='price'>${item?.price}</p>
-                            </div>
+                        </p>
+                        <p className='price'>${item?.price}</p>
+                      </div>
 
-                            <div className='action-bar position-absolute'>
-                                <div className='d-flex flex-column gap-15'>
-                                    <button className='border-0 bg-transparent'>
-                                        <img className='btn-product' src='images/prodcompare.svg' alt='compare' />
-                                    </button>
-                                    <button className='border-0 bg-transparent'>
-                                        <img onClick={() => navigate('/product/'+item?._id)} className='btn-product' src='images/view.svg' alt='view' />
-                                    </button>
-                                    <button className='border-0 bg-transparent'>
-                                        <img className='btn-product' src='images/add-cart.svg' alt='addcart' />
-                                    </button>
-                                </div>
-                            </div>
+                      <div className='action-bar position-absolute'>
+                        <div className='d-flex flex-column gap-15'>
+                          <button className='border-0 bg-transparent'>
+                            <img className='btn-product' src='images/prodcompare.svg' alt='compare' />
+                          </button>
+                          <button className='border-0 bg-transparent'>
+                            <img onClick={() => navigate('/product/' + item?._id)} className='btn-product' src='images/view.svg' alt='view' />
+                          </button>
+                          <button className='border-0 bg-transparent'>
+                            <img className='btn-product' src='images/add-cart.svg' alt='addcart' />
+                          </button>
                         </div>
+                      </div>
                     </div>
+                  </div>
                 )
               }
             })

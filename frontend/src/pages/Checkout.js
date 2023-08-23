@@ -9,7 +9,7 @@ import * as yup from "yup";
 import { useFormik } from "formik";
 import axios from 'axios'
 import { config } from "../utils/axiosConfig";
-import { createAnOrder } from '../features/user/userSlice'
+import { createAnOrder, getOrders, resetState } from '../features/user/userSlice'
 
 
 let shippingSchema = yup.object().shape({
@@ -34,6 +34,19 @@ const Checkout = () => {
 
     const dispatch = useDispatch()
     const cartState = useSelector((state) => state?.auth?.cartProducts)
+    // const resetAuthState = useSelector((state) => state?.auth?.orderedProduct)
+
+    // useEffect(() => {
+    //     if (resetAuthState?.success === true) {
+    //         setTotalAmount('')
+    //         setShippingInfor('')
+    //         setPaymentInfor('')
+    //         setCartProductState('')
+    //         dispatch(resetState())
+    //         dispatch(getOrders(''))
+    //         console.log('Reset form');
+    //     }
+    // }, [resetAuthState])
 
     useEffect(() => {
         let sum = 0;
@@ -359,7 +372,7 @@ const Checkout = () => {
                         <div className='border-top py-2'>
                             <div className='d-flex justify-content-between align-items-center'>
                                 <p className='total'>Subtotal</p>
-                                <p className='total-price'>$ {totalAmount ? totalAmount : '0'}</p>
+                                <p className='total-price'>$ {totalAmount && totalAmount?.toFixed(1) ? totalAmount?.toFixed(1) : '0'}</p>
                             </div>
                         </div>
                         <div>
@@ -370,7 +383,7 @@ const Checkout = () => {
                         </div>
                         <div className='d-flex justify-content-between align-items-center border-bottom py-4'>
                             <h4 className='total'>Total</h4>
-                            <h5 className='total-price'>$ {totalAmount ? totalAmount + 5 : '0'}</h5>
+                            <h5 className='total-price'>$ {totalAmount && totalAmount?.toFixed(1) ? (totalAmount + 5)?.toFixed(1) : '0'}</h5>
                         </div>
                     </div>
                 </div>
