@@ -53,7 +53,7 @@ const DashBoard = () => {
   const yearlyDataState = useSelector((state) => state?.order?.yearlydata)
   const ordersState = useSelector((state) => state?.order?.orders?.orders)
 
-  console.log(ordersState);
+  console.log(monthlyDataState);
 
   useEffect(() => {
     dispatch(getMonthlyData())
@@ -68,17 +68,20 @@ const DashBoard = () => {
     for (let index = 0; index < monthlyDataState?.length; index++) {
       const element = monthlyDataState[index];
 
-      data.push({ type: monthNames[element?._id?.amount], sales: element?.count })
+      data.push({ type: monthNames[element?.amount], sales: element?.count })
       // monthlyOrderCount.push({ type: monthNames[element?._id?]})
     }
     setDataMonthly(data);
 
+  }, [monthlyDataState])
+
+  useEffect(() => {
     const data1 = [];
     for (let i = 0; i < ordersState?.length; i++) {
       data1.push({
         key: i,
-        name: ordersState[6]?.shippingInfor?.firstName + " " + ordersState[6]?.shippingInfor?.lastName,
-        product: ordersState[6]?.orderItems?.length,
+        name: ordersState[0]?.shippingInfor?.firstName + " " + ordersState[0]?.shippingInfor?.lastName,
+        product: ordersState[0]?.orderItems?.length,
         price: ordersState[6]?.totalPrice,
         dprice: ordersState[6]?.totalPriceAfterDiscount,
         status: ordersState[6]?.orderStatus,
@@ -87,57 +90,10 @@ const DashBoard = () => {
     setOrderData(data1)
   }, [ordersState])
 
-  const data =
-    [
-      {
-        "timePeriod": "Jan 31",
-        "sales": 200
-      },
-      {
-        "timePeriod": "Feb 29",
-        "sales": 322
-      },
-      {
-        "timePeriod": "Mar 31",
-        "sales": 480
-      },
-      {
-        "timePeriod": "Apr 30",
-        "sales": 695
-      },
-      {
-        "timePeriod": "May 31",
-        "sales": 572
-      },
-      {
-        "timePeriod": "Jun 30",
-        "sales": 432
-      },
-      {
-        "timePeriod": "Jul 31",
-        "sales": 369
-      },
-      {
-        "timePeriod": "Aug 30",
-        "sales": 564
-      },
-      {
-        "timePeriod": "Sep 31",
-        "sales": 465
-      },
-      {
-        "timePeriod": "Oct 30",
-        "sales": 560
-      },
-      {
-        "timePeriod": "Nov 31",
-        "sales": 345
-      },
-      {
-        "timePeriod": "Dec 30",
-        "sales": 0
-      }
-    ]
+  const data = monthlyDataState?.map((item, index) => ({
+    amount: item?.amount,
+    sales: item.count
+  }))
 
   useEffect(() => {
     asyncFetch();
@@ -152,9 +108,8 @@ const DashBoard = () => {
       });
   };
   const config = {
-    data: dataMonthly,
-    // data,
-    xField: 'timePeriod',
+    data,
+    xField: 'amount',
     yField: 'sales',
     xAxis: {
       range: [0, 1],

@@ -3,7 +3,6 @@ import { base_url, config } from "../../utils/axiosConfig";
 
 
 const getProduct = async (data) => {
-  // console.log(data);
   const respone = await axios.get(`${base_url}product?${data?.brand?`brand=${data?.brand}&&`: ""}${data?.minPrice?`price[gte]=${data?.minPrice}&&`: ""}${data?.maxPrice?`price[lte]=${data?.maxPrice}&&`: ""}${data?.tag?`tags=${data?.tag}&&`: ""}${data?.sort?`sort=${data?.sort}&&`: ""}`)
   if (respone.data) {
 

@@ -27,7 +27,6 @@ const getUserWishList = async () => {
 }
 
 const addToCart = async (data) => {
-    console.log("Add product", data);
     try {
         const response = await axios.post(`${base_url}user/cart`,  data , config);
         if (response.data) {
@@ -39,7 +38,6 @@ const addToCart = async (data) => {
 };
 
 const getCart = async (data) => {
-    console.log(data);
     try {
         const response = await axios.get(`${base_url}user/cart`, data, config);
         if (response.data) {

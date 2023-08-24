@@ -27,10 +27,9 @@ const OurStore = () => {
     const [maxPrice, setMaxPrice] = useState(null)
     const [sort, setSort] = useState(null)
 
-
     useEffect(() => {
         let newBrands = []
-        let newColors= []
+        let newColors = []
         let newTags = []
         for (let index = 0; index < productState.length; index++) {
             const element = productState[index];
@@ -56,8 +55,6 @@ const OurStore = () => {
         }))
     }
 
-    // console.log([...new Set(brands)]);
-    console.log(tags);
 
     return (
         <>
@@ -89,39 +86,13 @@ const OurStore = () => {
                         <div className='filter-card mb-3'>
                             <h3 className='filter-title'>FILTER BY</h3>
 
-                            <h5 className='sub-title'>Availablity</h5>
-                            <div>
-                                <div className='form-check'>
-                                    <input
-                                        className='form-check-input'
-                                        type='checkbox'
-                                        value=""
-                                        id=""
-                                    />
-                                    <label className='form-check-label' htmlFor="">
-                                        In Stock (1)
-                                    </label>
-                                </div>
-                                <div className='form-check'>
-                                    <input
-                                        className='form-check-input'
-                                        type='checkbox'
-                                        value=""
-                                        id=""
-                                    />
-                                    <label className='form-check-label' htmlFor="">
-                                        Out of Stock (0)
-                                    </label>
-                                </div>
-                            </div>
-
                             <h5 className='sub-title'>Price</h5>
                             <div className='d-flex align-items-center gap-10'>
                                 <span>$</span>
                                 <div className='form-floating'>
                                     <input
                                         type='number'
-                                        className='form-control py-1'
+                                        className='form-control'
                                         id='floatingInput'
                                         placeholder='From'
                                         onChange={(e) => setMinPrice(e.target.value)}
@@ -132,7 +103,7 @@ const OurStore = () => {
                                 <div className='form-floating'>
                                     <input
                                         type='number'
-                                        className='form-control py-1'
+                                        className='form-control'
                                         id='floatingInput1'
                                         placeholder='To'
                                         onChange={(e) => setMaxPrice(e.target.value)}
@@ -143,7 +114,20 @@ const OurStore = () => {
 
                             <h5 className='sub-title'>Colors</h5>
                             <div>
-                                <Color />
+                                <ul className='colors ps-0'>
+
+                                    {
+                                        colors && [...new Set(colors)].map((item, index) => {
+                                            return (
+                                                <li
+                                                    style={{ backgroundColor: item?.title }}
+                                                    key={index}
+                                                    onClick={() => setColor(item?._id)}
+                                                ></li>
+                                            )
+                                        })
+                                    }
+                                </ul>
                             </div>
 
                             <h5 className='sub-title'>Size</h5>
@@ -227,62 +211,13 @@ const OurStore = () => {
                                 </div>
                             </div>
                         </div>
-                        {/* <div className='filter-card mb-3'>
-                            <h3 className='filter-title'>Random Product</h3>
-                            <div>
-                                <div className='random-products mb-3 d-flex'>
-                                    <div className='w-50'>
-                                        <img
-                                            src='images/cabbage.jpg'
-                                            className='img-fluid'
-                                            alt='fruit'
-                                        />
-                                    </div>
-                                    <div className='w-50'>
-                                        <h5>
-                                            Organic Lemon
-                                        </h5>
-                                        <ReactStars
-                                            count={5}
-                                            size={24}
-                                            value={3}
-                                            edit={false}
-                                            activeColor="#ffd700"
-                                        />
-                                        <b className='price'>$20.00</b>
-                                    </div>
-                                </div>
-                                <div className='random-products d-flex'>
-                                    <div className='w-50'>
-                                        <img
-                                            src='images/oninon.jpg'
-                                            className='img-fluid'
-                                            alt='fruit'
-                                        />
-                                    </div>
-                                    <div className='w-50'>
-                                        <h5>
-                                            Organic Lemon
-                                        </h5>
-                                        <ReactStars
-                                            count={5}
-                                            size={24}
-                                            value={3}
-                                            edit={false}
-                                            activeColor="#ffd700"
-                                        />
-                                        <b className='price'>$20.00</b>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> */}
                     </div>
 
                     <div className='col-9'>
                         <div className='filter-sort-grid mb-3'>
                             <div className='d-flex justify-content-between align-items-center px-4'>
                                 <div className='d-flex align-items-center gap-10'>
-                                    <p className='mb-0 sort-by'>Sort By:</p>
+                                    <p className='mb-0 sort-by'>Sort:</p>
                                     <select
                                         name=''
                                         defaultValue={"manula"}
@@ -290,12 +225,8 @@ const OurStore = () => {
                                         id='SortBy'
                                         onChange={(e) => setSort(e.target.value)}
                                     >
-                                        <option className='sort-by-element' value="manula">Best selling</option>
-                                        <option className='sort-by-element' value="popularity">Sort by popularity</option>
-                                        <option className='sort-by-element' value="rating">Sort by average rating</option>
-                                        <option className='sort-by-element' value="date">Sort by latest</option>
-                                        <option className='sort-by-element' value="price">Sort by price: low to high</option>
-                                        <option className='sort-by-element' value="price-desc">Sort by price: high to low</option>
+                                        <option className='sort-by-element' value="price">Price: Low to high</option>
+                                        <option className='sort-by-element' value="price-desc">Price: High to low</option>
                                     </select>
                                 </div>
                                 <div className='d-flex align-items-center gap-10'>

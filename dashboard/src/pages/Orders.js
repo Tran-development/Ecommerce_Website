@@ -40,12 +40,15 @@ const Orders = () => {
     dispatch(getOrders())
   }, [])
 
-  const orderState = useSelector((state) => state?.order?.orders)
+  const orderState = useSelector((state) => state?.order?.orders?.orders)
+  
+  console.log(orderState?.auth);
+  
   const data1 = [];
   for (let i = 0; i < orderState?.length; i++) {
     data1.push({
       key: i + 1,
-        name:  orderState?.user?.firstname + " " + orderState?.user?.lastname,
+        name:  orderState[i]?.user?.firstname + " " + orderState[i]?.user?.lastname,
       product: (
         <Link to={`/admin/orders/${orderState[i]?._id}`}>
           View Orders

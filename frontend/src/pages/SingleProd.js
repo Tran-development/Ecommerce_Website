@@ -63,7 +63,6 @@ const SingleProd = () => {
                 color,
                 price: productState?.price
             }), config2)
-            navigate('/cart')
         }
     }
 
@@ -197,7 +196,7 @@ const SingleProd = () => {
                                         <div className='d-flex gap-10 flex-column mt-2 mb-2'>
                                             <h3 className='prod-heading'>Color : </h3>
                                             <div>
-                                                <Color setColor={setColor} colorData={productState?.color} />
+                                                <Color className="color-item" setColor={setColor} colorData={productState?.color}/>
                                             </div>
                                         </div>
                                     </>

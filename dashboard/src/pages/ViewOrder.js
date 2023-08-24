@@ -48,23 +48,23 @@ const ViewOrder = () => {
   useEffect(() => {
     dispatch(getOrder(orderId));
   }, []);
-  const orderState = useSelector((state) => state?.auth?.singleorder);
-  const products = orderState && orderState.products;
+  const orderState = useSelector((state) => state?.order?.singleorder?.order);
+  const products = orderState && orderState?.products;
   
   console.log(orderState);
   const data1 = [];
-  for (let i = 0; i < orderState?.orderItems.length; i++) {
+  for (let i = 0; i < orderState?.orderItems?.length; i++) {
     const order = orderState[i];
-    const product = order.product;
+    const product = order?.product;
   
     if (product) {
       data1.push({
         key: i + 1,
-        name: orderState?.orderItems[i].product.title,
-        brand: orderState?.orderItems[i].product.brand,
-        count: orderState?.orderItems[i].count,
-        amount: orderState?.orderItems[i].price,
-        color: orderState?.orderItems[i].color,
+        name: orderState?.orderItems[i]?.product.title,
+        brand: orderState?.orderItems[i]?.product.brand,
+        count: orderState?.orderItems[i]?.count,
+        amount: orderState?.orderItems[i]?.price,
+        color: orderState?.orderItems[i]?.color,
         action: (
           <>
             <Link to="/" className=" fs-3 text-danger">
