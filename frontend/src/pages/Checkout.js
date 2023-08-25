@@ -95,10 +95,10 @@ const Checkout = () => {
         let items = []
         for (let index = 0; index < cartState?.length; index++) {
             items.push({
-                product: cartState[index].productId._id,
-                quantity: cartState[index].quantity,
-                color: cartState[index].color._id,
-                price: cartState[index].price,
+                product: cartState[index]?.productId?._id,
+                quantity: cartState[index]?.quantity,
+                color: cartState[index]?.color?._id,
+                price: cartState[index]?.price,
             })
 
         }
@@ -123,7 +123,7 @@ const Checkout = () => {
             key: "rzp_test_tvuysLBFyZba69", // Enter the Key ID generated from the Dashboard
             amount: amount,
             currency: currency,
-            name: "Nguyen Van A",
+            name: "Tran Quoc Tinh",
             description: "Test Transaction",
             order_id: order_id,
             handler: async function (response) {
@@ -154,7 +154,7 @@ const Checkout = () => {
                 contact: "0987654321",
             },
             notes: {
-                address: "TMA solution Binh Dinh",
+                address: "TMA solutions Binh Dinh",
             },
             theme: {
                 color: "#61dafb",

@@ -1,6 +1,7 @@
 .special-product-card {
     padding: 20px 5px;
     border-radius: 10px;
+    width: 50%;
 
     .img-fluid {
         width: 340px;
@@ -8,7 +9,8 @@
         border-radius: 10px;
     }
 
-    .special-product-content {        
+    .special-product-content {  
+        width: 50%;      
 
     .brand {
         font-size: 24px;

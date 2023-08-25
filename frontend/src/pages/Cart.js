@@ -19,7 +19,7 @@ const Cart = () => {
     };
 
     const [prodUpdateDetail, setProdUpdateDetail] = useState(null)
-    const [totalAmount, setTotalAmount] = useState(null)
+    const [totalAmount, setTotalAmount] = useState(0)
     const dispatch = useDispatch()
     const userCartState = useSelector((state) => state?.auth?.cartProducts)
 
@@ -53,6 +53,14 @@ const Cart = () => {
         }
     }, [userCartState])
 
+    useEffect(() => {
+        if (totalAmount === null || totalAmount === 0) {
+            setTotalAmount(0)
+        } else {
+            setTotalAmount(totalAmount)
+        }
+    }, [totalAmount])
+
     return (
         <>
             <Meta title={"Cart"} />
@@ -79,7 +87,6 @@ const Cart = () => {
                                             <div className='w-75'>
                                                 <div className='w-75'>
                                                     <h5>{item?.productId?.title}</h5>
-                                                    {/* <p>Size: ssad</p> */}
                                                     <p className='d-flex gap-3'>Color: <ul className='colors ps-0'>
                                                         <li style={{ backgroundColor: item?.title }}></li>
                                                     </ul></p>
@@ -110,7 +117,7 @@ const Cart = () => {
                                             </div>
                                         </div>
                                         <div className='cart-col-4'>
-                                            <h5 className='price'>$ {item?.productId?.price * item?.quantity}</h5>
+                                            <h5 className='price'>$ {(item?.productId?.price * item?.quantity).toFixed(1)}</h5>
                                         </div>
                                     </div>
                                 )
@@ -128,8 +135,7 @@ const Cart = () => {
                                         Apply coupon
                                     </Link>
                                 </div>
-                                {
-                                    (totalAmount !== null || totalAmount !== 0) &&
+                               
                                     <div className='d-flex flex-column align-items-center'>
                                         <h4>SubTotal: $ {totalAmount?.toFixed(1)}</h4>
                                         <p>Taxes and shipping calculated at checkout</p>
@@ -137,7 +143,7 @@ const Cart = () => {
                                             Checkout
                                         </Link>
                                     </div>
-                                }
+                               
                             </div>
                         </div>
                     </div>

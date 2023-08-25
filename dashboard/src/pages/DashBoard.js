@@ -53,7 +53,6 @@ const DashBoard = () => {
   const yearlyDataState = useSelector((state) => state?.order?.yearlydata)
   const ordersState = useSelector((state) => state?.order?.orders?.orders)
 
-  console.log(monthlyDataState);
 
   useEffect(() => {
     dispatch(getMonthlyData())
@@ -65,51 +64,44 @@ const DashBoard = () => {
     let monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
     let data = []
     let monthlyOrderCount = []
-    for (let index = 0; index < monthlyDataState?.length; index++) {
-      const element = monthlyDataState[index];
+    if (monthlyDataState) {
+      for (let index = 0; index < monthlyDataState?.length; index++) {
+        const element = monthlyDataState[index];
 
-      data.push({ type: monthNames[element?.amount], sales: element?.count })
-      // monthlyOrderCount.push({ type: monthNames[element?._id?]})
+        data.push({ type: monthNames[element?.amount - 1], sales: element?.count });
+        monthlyOrderCount.push({ type: monthNames[element?._id] })
+      }
+      setDataMonthly(data);
     }
-    setDataMonthly(data);
 
   }, [monthlyDataState])
 
   useEffect(() => {
     const data1 = [];
-    for (let i = 0; i < ordersState?.length; i++) {
-      data1.push({
-        key: i,
-        name: ordersState[0]?.shippingInfor?.firstName + " " + ordersState[0]?.shippingInfor?.lastName,
-        product: ordersState[0]?.orderItems?.length,
-        price: ordersState[6]?.totalPrice,
-        dprice: ordersState[6]?.totalPriceAfterDiscount,
-        status: ordersState[6]?.orderStatus,
-      });
+    if (ordersState) {
+      for (let i = 0; i < ordersState.length; i++) {
+        data1.push({
+          key: i,
+          name: ordersState[i]?.user?.firstname + " " + ordersState[i]?.user?.lastname,
+          // product: ordersState[i]?.orderItems?.length,
+          price: ordersState[i]?.totalPrice,
+          dprice: ordersState[i]?.totalPriceAfterDiscount,
+          status: ordersState[i]?.orderStatus,
+        });
+      }
     }
-    setOrderData(data1)
-  }, [ordersState])
+    setOrderData(data1);
+  }, [ordersState]);
 
-  const data = monthlyDataState?.map((item, index) => ({
-    amount: item?.amount,
-    sales: item.count
+  const data = monthlyDataState?.map((item) => ({
+    type: item?.amount,
+    sales: item.count,
+    xfield: `${parseInt(item?._id?.month)}-Month `
   }))
 
-  useEffect(() => {
-    asyncFetch();
-  }, []);
-
-  const asyncFetch = () => {
-    fetch('https://gw.alipayobjects.com/os/bmw-prod/360c3eae-0c73-46f0-a982-4746a6095010.json')
-      .then((response) => response.json())
-      .then((json) => setData(json))
-      .catch((error) => {
-        console.log('fetch data failed', error);
-      });
-  };
   const config = {
     data,
-    xField: 'amount',
+    xField: 'xfield',
     yField: 'sales',
     xAxis: {
       range: [0, 1],

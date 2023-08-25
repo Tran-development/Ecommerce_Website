@@ -2,8 +2,27 @@ import React from 'react'
 import ReactStars from "react-rating-stars-component"
 import { Link } from 'react-router-dom'
 import './SpecialProduct.scss'
+import { useDispatch, useSelector } from 'react-redux'
+import { updateRemainingTime } from '../features/countdown/countdownSlice';
+import { startCountdown } from '../features/countdown/countdownService';
+import { useEffect } from 'react'
+
 
 const SpecialProduct = (props) => {
+
+  const remainingTime = useSelector((state) => state.countdown.remainingTime)
+
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    const targetDate = new Date('2023-08-30T23:59:59')
+
+    const callback = remainingTime => {
+      dispatch(updateRemainingTime(remainingTime))
+    }
+
+    startCountdown(targetDate, callback)
+  }, [dispatch])
 
   const {
     title,
@@ -38,12 +57,12 @@ const SpecialProduct = (props) => {
             </p>
             <div className='discount-till d-flex align-items-center gap-10'>
               <p className='mb-0 d-flex'>
-                <b>7</b> &nbsp;<span>days</span>
+                <b>{remainingTime.days}</b> &nbsp;<span>days</span>
               </p>
               <div className='d-flex gap-10 align-items-center'>
-                <span className='badge rounded-circle p-3 bg-danger'>1</span>:
-                <span className='badge rounded-circle p-3 bg-danger'>1</span>:
-                <span className='badge rounded-circle p-3 bg-danger'>1</span>
+                <span className='badge rounded-circle p-3 bg-danger'>{remainingTime.hours}</span>:
+                <span className='badge rounded-circle p-3 bg-danger'>{remainingTime.minutes}</span>:
+                <span className='badge rounded-circle p-3 bg-danger'>{remainingTime.seconds}</span>
               </div>
             </div>
             <div className='prod-count my-3'>

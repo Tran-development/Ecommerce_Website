@@ -28,7 +28,8 @@ const Header = () => {
   const authState = useSelector((state) => state?.auth)
   const productState = useSelector((state) => state?.product?.product)
 
-  const [total, setTotal] = useState(null)
+  const [total, setTotal] = useState(0)
+  console.log(total);
   const [paginate, setPaginate] = useState(true);
   const [productOpt, setProductOpt] = useState([])
 
@@ -36,6 +37,14 @@ const Header = () => {
     localStorage.clear()
     window.location.reload()
   }
+
+   useEffect(() => {
+        if (total === null || total === 0) {
+          setTotal(0)
+        } else {
+          setTotal(total)
+        }
+    }, [total])
 
   useEffect(() => {
     let sum = 0;
@@ -139,7 +148,7 @@ const Header = () => {
                     <BsFillCartFill className='fs-4' />
                     <div className='d-flex flex-column gap-10'>
                       <span className='badge bg-dark text-white'>{cartState?.length ? cartState?.length : 0}</span>
-                      <p className='mb-0 text-hover'>$ {total ? total?.toFixed(2) : 0}</p>
+                      <p className='mb-0 text-hover'>$ {total !== 0 ? total?.toFixed(2) : 0}</p>
                     </div>
                   </Link>
                 </div>
