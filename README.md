@@ -1,4 +1,4 @@
-Building An Ecommerce Web Application Optimized By Ai - EcoMarket
+## Building An Ecommerce Web Application Optimized By Ai - EcoMarket
 
 This is an ecosystem that allows customers to become sellers and manage their own products. I built an e-commerce website using MERN stack (MongoDB, ExpressJS, React and Node.JS).
 
