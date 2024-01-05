@@ -16,6 +16,7 @@ import { Typeahead } from 'react-bootstrap-typeahead';
 import 'react-bootstrap-typeahead/css/Typeahead.css';
 import { getAProduct } from '../features/products/productSlice'
 import { getUserCart } from '../features/user/userSlice'
+import { toast } from 'react-toastify'
 
 
 
@@ -34,17 +35,19 @@ const Header = () => {
   const [productOpt, setProductOpt] = useState([])
 
   const handleLogout = () => {
-    localStorage.clear()
-    window.location.reload()
+    localStorage.removeItem('token')
+    localStorage.removeItem('customer')
+    window.location.href = '/login';
+    toast.info('Logout Successfully !')
   }
 
-   useEffect(() => {
-        if (total === null || total === 0) {
-          setTotal(0)
-        } else {
-          setTotal(total)
-        }
-    }, [total])
+  useEffect(() => {
+    if (total === null || total === 0) {
+      setTotal(0)
+    } else {
+      setTotal(total)
+    }
+  }, [total])
 
   useEffect(() => {
     let sum = 0;
@@ -58,7 +61,7 @@ const Header = () => {
     let data = []
     for (let index = 0; index < productState.length; index++) {
       const element = productState[index];
-      data.push({ id: index, prod: element?._id, name: element?.title})
+      data.push({ id: index, prod: element?._id, name: element?.title })
     }
     setProductOpt(data)
   }, [productState])
@@ -171,7 +174,7 @@ const Header = () => {
                     >
                       <BsList className='fs-4' /><span className='text-dark me-3 d-inline-block text-hover all-categories'>All Categories</span>
                     </button>
-                    
+
                   </div>
                 </div>
                 <div className='menu-links'>

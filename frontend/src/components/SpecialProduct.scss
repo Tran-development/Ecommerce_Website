@@ -1,7 +1,7 @@
 .special-product-card {
     padding: 20px 5px;
     border-radius: 10px;
-    width: 50%;
+    width: 100%;
 
     .img-fluid {
         width: 340px;
@@ -9,13 +9,19 @@
         border-radius: 10px;
     }
 
-    .special-product-content {  
-        width: 50%;      
+    .special-product-content {
+        width: 50%;
 
-    .brand {
-        font-size: 24px;
-        font-weight: 700;
-        line-height: 32px;
-    }
+        .time-zone {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+        }
+
+        .brand {
+            font-size: 24px;
+            font-weight: 700;
+            line-height: 32px;
+        }
     }
 }

@@ -32,6 +32,11 @@ const MainLayout = () => {
     token: { colorBgContainer },
   } = theme.useToken();
 
+  const handleLogout = () => {
+    localStorage.clear()
+    window.location.reload()
+  }
+
   const navigate = useNavigate()
   return (
     <Layout>
@@ -233,7 +238,7 @@ const MainLayout = () => {
                 <li>
                   <Link className="dropdown-item py-1 mb-1" style={{ height: "auto", lineHeight: "20px" }} href="#">View Account</Link></li>
                 <li>
-                  <Link className="dropdown-item py-1 mb-1" style={{ height: "auto", lineHeight: "20px" }} href="#">Logout</Link></li>
+                  <button onClick={handleLogout} className="dropdown-item py-1 mb-1" style={{ height: "auto", lineHeight: "20px" }} href="#">Logout</button></li>
               </div>
             </div>
           </div>

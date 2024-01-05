@@ -91,7 +91,7 @@ const AddBlogCat = () => {
               <div>{formik.errors.title}</div>
             ) : null}
           </div>
-          <button className='btn btn-success border-0 rounded-3 my-5' type='submit'>{getbCateId !== undefined ? "Edit" : "Add"} Blog Category</button>
+          <button className='btn btn-success border-0 rounded-3 my-5' type='submit'>{getbCateId !== undefined ? "Save" : "Add"} Blog Category</button>
         </form>
       </div>
     </div>

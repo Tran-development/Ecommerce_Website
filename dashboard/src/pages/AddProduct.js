@@ -220,7 +220,7 @@ const AddProduct = () => {
                     <Select
                         mode="multiple"
                         allowClear
-                        className='w-100'
+                        className='w-100' 
                         placeholder="Select colors"
                         defaultValue={colors}
                         onChange={(i) => handleColors(i)}

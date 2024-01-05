@@ -9,7 +9,7 @@ export const getProducts = createAsyncThunk(
         } catch (error) {
             return thunkAPI.rejectWithValue(error);
         }
-    }
+    } 
 );
 
 export const createProducts = createAsyncThunk(

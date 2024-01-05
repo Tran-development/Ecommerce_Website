@@ -221,7 +221,7 @@ export const Home = () => {
             productState?.map((item, index) => {
               if (item.tags === "featured") {
                 return (
-                  <div key={index} className={"col-3"}>
+                  <div key={index} className={"col-3 mb-4"}>
                     <div
                       className='product-card position-relative'
                     >

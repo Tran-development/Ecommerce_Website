@@ -1,0 +1,1 @@
+https://fabric.inc/blog/commerce/ecommerce-database-design-example

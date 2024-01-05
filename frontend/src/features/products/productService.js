@@ -31,7 +31,7 @@ const addToWish = async (prodId) => {
   } catch (error) {
     console.log(error);
   }
-};
+}; 
 
 const rateProduct = async (data) => {
   try {

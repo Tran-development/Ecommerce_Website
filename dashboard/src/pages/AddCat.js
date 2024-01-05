@@ -94,7 +94,7 @@ const AddCat = () => {
                     <button
                         className='btn btn-success border-0 rounded-3 my-5'
                         type='submit'>
-                        {getCateId !== undefined ? "Edit" : "Add"} Category
+                        {getCateId !== undefined ? "Save" : "Add"} Category
                     </button>
                 </form>
             </div>

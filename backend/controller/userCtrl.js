@@ -35,8 +35,6 @@ const createUser = asyncHandler(
 // login a user
 const loginUserCtrl = asyncHandler(async (req, res) => {
     const { email, password } = req.body
-    // console.log("email, passowrd : ", email, password);
-    // check if user exists or not
     const findUser = await User.findOne({ email })
     if (findUser && (await findUser.isPasswordMatched(password))) {
         const refreshToken = await generateRefreshToken(findUser?._id)
@@ -49,13 +47,7 @@ const loginUserCtrl = asyncHandler(async (req, res) => {
                 new: true
             }
         )
-
         const token = generateToken(findUser?.id)
-
-        // res.cookie("refreshToken", refreshToken, {
-        //     httpOnly: true,
-        //     maxAge: 72 * 60 * 60 * 1000,
-        // })
         res.json({
             _id: findUser?._id,
             firstname: findUser?.firstname,
@@ -63,7 +55,6 @@ const loginUserCtrl = asyncHandler(async (req, res) => {
             email: findUser?.email,
             mobile: findUser?.mobile,
             token: token,
-            // refreshToken: refreshToken
         })
     } else {
         throw new Error("Invalid Login Account")
@@ -368,7 +359,13 @@ const updateQuantityProdFromCart = asyncHandler(async (req, res) => {
 })
 
 const createOrder = asyncHandler(async (req, res, next) => {
-    const { shippingInfor, orderItems, totalPrice, totalPriceAfterDiscount, paymentInfor } = req.body;
+    const {
+        shippingInfor,
+        orderItems,
+        totalPrice,
+        totalPriceAfterDiscount,
+        paymentInfor
+    } = req.body;
     const { _id } = req.user;
 
     try {
@@ -386,7 +383,7 @@ const createOrder = asyncHandler(async (req, res, next) => {
             success: true
         });
     } catch (error) {
-        next(error); // Chuyển lỗi đến middleware xử lý lỗi
+        next(error);
     }
 });
 
@@ -423,9 +420,9 @@ const getSingleOrders = asyncHandler(async (req, res) => {
     console.log(id);
     try {
         const order = await Order.findOne({ _id: id })
-            // .populate("product")
-            // .populate("user")
-            // .populate("color")
+        // .populate("product")
+        // .populate("user")
+        // .populate("color")
         res.json({
             order
         })

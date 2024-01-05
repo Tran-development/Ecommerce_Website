@@ -184,7 +184,7 @@ const Addblog = () => {
                         )
                     })}
                 </div>
-                <button type='text' className='btn border-0 my-5'>{getBlogId !== undefined ? "Edit" : "Add"} Blog</button>
+                <button type='text' className='btn border-0 my-5'>{getBlogId !== undefined ? "Save" : "Add"} Blog</button>
             </form>
         </div>
     </div>

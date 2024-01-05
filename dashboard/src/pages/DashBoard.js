@@ -65,7 +65,7 @@ const DashBoard = () => {
     let data = []
     let monthlyOrderCount = []
     if (monthlyDataState) {
-      for (let index = 0; index < monthlyDataState?.length; index++) {
+      for (let index = 0; index < monthlyDataState[index]?.length; index++) {
         const element = monthlyDataState[index];
 
         data.push({ type: monthNames[element?.amount - 1], sales: element?.count });
@@ -79,7 +79,7 @@ const DashBoard = () => {
   useEffect(() => {
     const data1 = [];
     if (ordersState) {
-      for (let i = 0; i < ordersState.length; i++) {
+      for (let i = 0; i < 20; i++) {
         data1.push({
           key: i,
           name: ordersState[i]?.user?.firstname + " " + ordersState[i]?.user?.lastname,

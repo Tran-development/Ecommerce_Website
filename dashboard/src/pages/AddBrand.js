@@ -93,7 +93,7 @@ const AddBrand = () => {
                     <button
                         className='btn btn-success border-0 rounded-3 my-5'
                         type='submit'>
-                        {getBrandId !== undefined ? "Edit" : "Add"} Brand
+                        {getBrandId !== undefined ? "Save" : "Add"} Brand
                     </button>
                 </form>
             </div>

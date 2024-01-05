@@ -15,7 +15,7 @@ const SpecialProduct = (props) => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    const targetDate = new Date('2023-08-30T23:59:59')
+    const targetDate = new Date('2023-09-15T23:59:59')
 
     const callback = remainingTime => {
       dispatch(updateRemainingTime(remainingTime))
@@ -59,10 +59,10 @@ const SpecialProduct = (props) => {
               <p className='mb-0 d-flex'>
                 <b>{remainingTime.days}</b> &nbsp;<span>days</span>
               </p>
-              <div className='d-flex gap-10 align-items-center'>
-                <span className='badge rounded-circle p-3 bg-danger'>{remainingTime.hours}</span>:
-                <span className='badge rounded-circle p-3 bg-danger'>{remainingTime.minutes}</span>:
-                <span className='badge rounded-circle p-3 bg-danger'>{remainingTime.seconds}</span>
+              <div className='d-flex gap-10 align-items-center justify-content-center'>
+                <span className='time-zone badge rounded-circle p-3 bg-danger'>{remainingTime.hours}</span>:
+                <span className='time-zone badge rounded-circle p-3 bg-danger'>{remainingTime.minutes}</span>:
+                <span className='time-zone badge rounded-circle p-3 bg-danger'>{remainingTime.seconds}</span>
               </div>
             </div>
             <div className='prod-count my-3'>

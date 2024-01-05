@@ -111,7 +111,10 @@ const Checkout = () => {
             alert("Razorpay SDK failed to Load")
             return
         }
-        const result = await axios.post("http://localhost:5000/api/user/order/checkout", { amount: totalAmount + 5 }, config)
+        const result = await axios.post(
+            "http://localhost:5000/api/user/order/checkout",
+            { amount: totalAmount + 5 }, config
+        )
         if (!result) {
             alert("Something Went Wrong")
             return
@@ -132,9 +135,10 @@ const Checkout = () => {
                     razorpayPaymentId: response.razorpay_payment_id,
                     razorpayOrderId: response.razorpay_order_id,
                 };
-
-                const result = await axios.post("http://localhost:5000/api/user/order/paymentverification", data, config);
-
+                const result = await axios.post(
+                    "http://localhost:5000/api/user/order/paymentverification",
+                    data, config
+                );
                 setPaymentInfor({
                     razorpayPaymentId: response.razorpay_payment_id,
                     razorpayOrderId: response.razorpay_order_id,
@@ -149,7 +153,6 @@ const Checkout = () => {
             },
             prefill: {
                 name: "Tinh Tran",
-                // example@upi
                 email: "example@upi",
                 contact: "0987654321",
             },
@@ -171,7 +174,6 @@ const Checkout = () => {
                 <div className='row'>
                     <div className='col-7'>
                         <div className='checkout-left-data'>
-                            <h3 className='website-name'>Organic</h3>
                             <nav aria-label="breadcrumb">
                                 <ol className="breadcrumb">
                                     <li className="breadcrumb-item"><Link className='text-dark' to="/cart">Cart</Link></li>

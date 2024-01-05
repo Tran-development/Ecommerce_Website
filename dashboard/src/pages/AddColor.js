@@ -92,7 +92,7 @@ const AddColor = () => {
               <div>{formik.errors.title}</div>
             ) : null}
           </div>
-          <button className='btn btn-success border-0 rounded-3 my-5' type='submit'>{getColorId !== undefined ? "Edit" : "Add"} Color</button>
+          <button className='btn btn-success border-0 rounded-3 my-5' type='submit'>{getColorId !== undefined ? "Save" : "Add"} Color</button>
         </form>
       </div>
     </div>

@@ -36,6 +36,7 @@ const Signup = () => {
     validationSchema: signUpSchema,
     onSubmit: (values) => {
       dispatch(registerUser(values))
+      navigate('/login')
     },
   });
 

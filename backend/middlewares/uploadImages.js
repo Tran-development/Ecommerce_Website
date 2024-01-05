@@ -3,7 +3,7 @@ const sharp = require("sharp");
 const path = require("path");
 const fs = require("fs");
 const storage = multer.diskStorage({
-    // goal folder
+    // goal folder 
     destination: function (req, file, cb) {
         cb(null, path.join(__dirname, "../public/images/"));
     },
